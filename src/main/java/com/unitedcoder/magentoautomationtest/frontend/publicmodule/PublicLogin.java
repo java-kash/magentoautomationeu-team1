@@ -44,9 +44,9 @@ public class PublicLogin {
     public void login(){
         functionPage.waitForElement(accountButton);
         accountButton.click();
-        verifyLoginPageOpened();
         functionPage.waitForElement(loginLink);
         loginLink.click();
+        verifyLoginPageOpened();
         functionPage.waitForElement(emailAddressField);
         emailAddressField.sendKeys(TestBase.readFromConfigProperties(configFile,"public_userEmail"));
         functionPage.waitForElement(passWordField);

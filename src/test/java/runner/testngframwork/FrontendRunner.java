@@ -1,5 +1,6 @@
 package runner.testngframwork;
 
+import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyDashboardPage;
 import com.unitedcoder.magentoautomationtest.frontend.publicmodule.PublicLogin;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 public class FrontendRunner extends TestBase {
     FunctionPage functionPage;
     PublicLogin publicLogin;
+    MyDashboardPage myDashboardPage;
     String configFile = "config-qa.properties";
     String url = readFromConfigProperties(configFile, "frontend_url");
 
@@ -24,7 +26,7 @@ public class FrontendRunner extends TestBase {
     @Test
     public void login() {
         publicLogin.login();
-        Assert.assertTrue(true);
+        Assert.assertTrue(myDashboardPage.verifyLogin());
     }
 
     @AfterClass
