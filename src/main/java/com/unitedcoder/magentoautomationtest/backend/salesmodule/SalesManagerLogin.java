@@ -1,2 +1,4 @@
-package com.unitedcoder.magentoautomationtest.backend.salesmodule;public class SalesManagerLogin {
+package com.unitedcoder.magentoautomationtest.backend.salesmodule;
+
+public class SalesManagerLogin {
 }
