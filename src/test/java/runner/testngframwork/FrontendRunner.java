@@ -5,9 +5,7 @@ import com.unitedcoder.magentoautomationtest.frontend.publicmodule.PublicLogin;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class FrontendRunner extends TestBase {
     FunctionPage functionPage;
@@ -16,23 +14,28 @@ public class FrontendRunner extends TestBase {
     String configFile = "config-qa.properties";
     String url = readFromConfigProperties(configFile, "frontend_url");
 
-    @BeforeClass
+    @BeforeSuite
     public void setUp() {
         browserSetUp(url);
         publicLogin = new PublicLogin(driver);
         functionPage = new FunctionPage(driver);
     }
 
-    @Test
+    @BeforeClass
     public void login() {
         publicLogin.login();
         Assert.assertTrue(true);
     }
 
-    @AfterClass
+    @Test
+    public void userEditItemTest() {
+        myDashboardPage = new MyDashboardPage(driver);
+        myDashboardPage.updateItem();
+        Assert.assertTrue(myDashboardPage.verifyUpdatedItem());
+    }
+
+    @AfterSuite
     public void tearDown() {
         closeBrowser();
     }
-
-
 }
