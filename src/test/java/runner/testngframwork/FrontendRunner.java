@@ -18,6 +18,7 @@ public class FrontendRunner extends TestBase {
         browserSetUp(readFromConfigProperties(configFile, "frontend_url"));
         publicLogin = new PublicLogin(driver);
         functionPage = new FunctionPage(driver);
+        myDashboardPage = new MyDashboardPage(driver);
     }
 
     @BeforeClass
@@ -25,10 +26,14 @@ public class FrontendRunner extends TestBase {
         publicLogin.login();
         Assert.assertTrue(true);
     }
+    @BeforeMethod
+    public void clickToMyAccount(){
+      myDashboardPage.clickOnMyAccountLink();
+      Assert.assertTrue(true);
+    }
 
     @Test
     public void userEditItemTest() {
-        myDashboardPage = new MyDashboardPage(driver);
         myDashboardPage.updateItem();
         Assert.assertTrue(myDashboardPage.verifyUpdatedItem());
     }
