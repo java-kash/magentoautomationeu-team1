@@ -28,6 +28,10 @@ public class MyDashboardPage {
     WebElement myDownloadableProductsLink;
     @FindBy(xpath = "//h1[text()='My Dashboard']")
     WebElement myDashboardTittle;
+    @FindBy(css = ".skip-link.skip-account")
+    WebElement accountButton;
+    @FindBy(css = "a[title=\"My Account\"]")
+    WebElement myAccountLink;
     //Kadirdan
     @FindBy(css = ".skip-link.skip-cart")
     WebElement cartLink;
@@ -38,6 +42,7 @@ public class MyDashboardPage {
     WebElement updateCartButton;
     @FindBy(xpath = "//*[contains(text(),'Slim fit Dobby Oxford Shirt was updated in your shopping cart.')]")
     WebElement successMessage;
+
 
     public MyDashboardPage(WebDriver driver) {
         this.driver = driver;
@@ -76,6 +81,14 @@ public class MyDashboardPage {
         functionPage.waitForElement(newsletterSubscriptionsLink);
         newsletterSubscriptionsLink.click();
     }
+    public void clickOnMyAccountLink(){
+        functionPage.waitForElement(accountButton);
+        accountButton.click();
+        functionPage.waitForElement(myAccountLink);
+        myAccountLink.click();
+    }
+
+
 
     //Kadirdan
     public void updateItem(){
