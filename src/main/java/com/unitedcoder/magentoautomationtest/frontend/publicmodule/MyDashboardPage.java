@@ -38,6 +38,8 @@ public class MyDashboardPage {
     WebElement updateCartButton;
     @FindBy(xpath = "//*[contains(text(),'Slim fit Dobby Oxford Shirt was updated in your shopping cart.')]")
     WebElement successMessage;
+    @FindBy(linkText = "My Product Reviews")
+    WebElement myProductReviewLink;
 
     public MyDashboardPage(WebDriver driver) {
         this.driver = driver;
@@ -75,6 +77,11 @@ public class MyDashboardPage {
     public void clickOnNewsLetterSubscriptions(){
         functionPage.waitForElement(newsletterSubscriptionsLink);
         newsletterSubscriptionsLink.click();
+    }
+    //ayimsa
+    public void clickOnMyProductReviews(){
+        functionPage.waitForElement(myProductReviewLink);
+        myProductReviewLink.click();
     }
 
     //Kadirdan

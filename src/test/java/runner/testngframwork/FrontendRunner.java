@@ -1,6 +1,7 @@
 package runner.testngframwork;
 
 import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyDashboardPage;
+import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyProductReview;
 import com.unitedcoder.magentoautomationtest.frontend.publicmodule.PublicLogin;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -11,6 +12,7 @@ public class FrontendRunner extends TestBase {
     FunctionPage functionPage;
     PublicLogin publicLogin;
     MyDashboardPage myDashboardPage;
+    MyProductReview myProductReview;
     String configFile = "config-qa.properties";
 
     @BeforeSuite
@@ -32,7 +34,14 @@ public class FrontendRunner extends TestBase {
         myDashboardPage.updateItem();
         Assert.assertTrue(myDashboardPage.verifyUpdatedItem());
     }
-
+    @Test(description = "user can see MyProductReview")
+public void productReviewLinkVisible(){
+        Assert.assertTrue(myProductReview.productReviewLinkVisible());
+    }
+@Test(description = "user can see review content")
+public void reviewContentVisible(){
+        Assert.assertTrue(myProductReview.productReviewContentIsVisible());
+}
     @AfterSuite
     public void tearDown() {
         closeBrowser();
