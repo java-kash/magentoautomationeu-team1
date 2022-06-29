@@ -1,10 +1,8 @@
 package com.unitedcoder.magentoautomationtest.utility;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
@@ -13,11 +11,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class TestBase {
-     public static WebDriver driver;
+     public WebDriver driver;
      public static String browserName="chrome";
 
-
-     public static void browserSetUp(String url){
+     public void browserSetUp(String url){
          if((driver)==null){
              if(browserName.equalsIgnoreCase("Chrome")){
                  WebDriverManager.chromedriver().setup();
@@ -32,8 +29,8 @@ public class TestBase {
              }
          }
      }
-     public static void closeBrowser(){
-         driver.close();
+     public void closeBrowser(){
+         //driver.close();
          driver.quit();
      }
     public static String readFromConfigProperties(String fileName, String key) {
@@ -49,8 +46,6 @@ public class TestBase {
         System.out.println(String.format("%s=%s",key,value));
         return value;
     }
-
-
 
     }
 

@@ -12,11 +12,10 @@ public class FrontendRunner extends TestBase {
     PublicLogin publicLogin;
     MyDashboardPage myDashboardPage;
     String configFile = "config-qa.properties";
-    String url = readFromConfigProperties(configFile, "frontend_url");
 
     @BeforeSuite
     public void setUp() {
-        browserSetUp(url);
+        browserSetUp(readFromConfigProperties(configFile, "frontend_url"));
         publicLogin = new PublicLogin(driver);
         functionPage = new FunctionPage(driver);
     }
