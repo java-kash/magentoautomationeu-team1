@@ -8,8 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MyDashboardPage {
     WebDriver driver;
-
     FunctionPage functionPage;
+
     @FindBy(xpath = "//strong[contains(text(),'Account Dashboard')]")
     WebElement accountDashboardLink;
     @FindBy(css = ".skip-content>.links>ul>.first>a")
@@ -28,6 +28,16 @@ public class MyDashboardPage {
     WebElement myDownloadableProductsLink;
     @FindBy(xpath = "//h1[text()='My Dashboard']")
     WebElement myDashboardTittle;
+    //Kadirdan
+    @FindBy(css = ".skip-link.skip-cart")
+    WebElement cartLink;
+    @FindBy(xpath = "//*[@title='Slim fit Dobby Oxford Shirt']" +
+            "/following::div/descendant::table/following::a[@title='Edit item']")
+    WebElement editItemLink;
+    @FindBy(xpath = "//*[@title='Update Cart']")
+    WebElement updateCartButton;
+    @FindBy(xpath = "//*[contains(text(),'Slim fit Dobby Oxford Shirt was updated in your shopping cart.')]")
+    WebElement successMessage;
 
     public MyDashboardPage(WebDriver driver) {
         this.driver = driver;
@@ -65,5 +75,19 @@ public class MyDashboardPage {
     public void clickOnNewsLetterSubscriptions(){
         functionPage.waitForElement(newsletterSubscriptionsLink);
         newsletterSubscriptionsLink.click();
+    }
+
+    //Kadirdan
+    public void updateItem(){
+        functionPage.waitForElement(cartLink);
+        cartLink.click();
+        functionPage.waitForElement(editItemLink);
+        editItemLink.click();
+        functionPage.waitForElement(updateCartButton);
+        updateCartButton.click();
+    }
+    public boolean verifyUpdatedItem(){
+        functionPage.waitForElement(successMessage);
+        return successMessage.isDisplayed();
     }
 }
