@@ -1,6 +1,7 @@
 package com.unitedcoder.magentoautomationtest.frontend.publicmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class MyDashboardPage {
     WebDriver driver;
     FunctionPage functionPage;
-
+//(xpath = "//a[text()='My Wishlist']")
     @FindBy(xpath = "//strong[contains(text(),'Account Dashboard')]")
     WebElement accountDashboardLink;
     @FindBy(css = ".skip-content>.links>ul>.first>a")
@@ -20,7 +21,7 @@ public class MyDashboardPage {
     WebElement addressBookLink;
     @FindBy(xpath = "//a[contains(text(),'My Orders')]")
     WebElement myOrdersLink;
-    @FindBy(xpath = "//a[text()='My Wishlist']")
+    @FindBy(xpath = "//*[@id='top']/body/div[1]/div[2]/div[2]/div/div[1]/div/div[2]/ul/li[9]/a")
     WebElement myWishListLink;
     @FindBy(xpath ="//a[contains(text(),'Newsletter Subscriptions')] ")
     WebElement  newsletterSubscriptionsLink;
@@ -53,7 +54,7 @@ public class MyDashboardPage {
     public boolean verifyLogin(){
         functionPage.waitForElement(myDashboardTittle);
         if(myDashboardTittle.isDisplayed()){
-            System.out.println("My Dashboard Page Openend");
+            Log4j.info("MyDashBoard page Opened");
         }
         return true;
     }

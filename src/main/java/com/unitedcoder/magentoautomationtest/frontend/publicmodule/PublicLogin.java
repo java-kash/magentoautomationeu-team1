@@ -1,6 +1,7 @@
 package com.unitedcoder.magentoautomationtest.frontend.publicmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,10 +35,11 @@ public class PublicLogin {
     public boolean verifyLoginPageOpened() {
         functionPage.waitForElement(loginButton);
         if (loginButton.isDisplayed()) {
-            System.out.println("login ok");
+
+            Log4j.info("Login page Opened Successfully");
             return true;
         } else {
-            System.out.println("Logen not ok");
+            Log4j.error("Login page Opened Fail");
             return false;
         }
     }
