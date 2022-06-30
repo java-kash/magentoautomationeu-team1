@@ -43,10 +43,10 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(myDashboardPage.verifyUpdatedItem());
     }
     @Test
-    public void myWishtList(){
+    public void myWishList(){
         myDashboardPage.clickOnMyWishList();
-        myWishPage.myWishtList();
-        Assert.assertTrue(myWishPage.myWishtList());
+        myWishPage.myWishList();
+        Assert.assertTrue(myWishPage.myWishList());
 
     }
 
