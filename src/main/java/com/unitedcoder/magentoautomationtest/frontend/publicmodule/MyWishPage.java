@@ -40,11 +40,9 @@ public class MyWishPage {
         actions.moveToElement(navSaleDrownList).click(viewAllSale).perform();
         List<WebElement> list = Collections.singletonList(addToLinks);
         list.get(0).click();
-
-
     }
 
-    public boolean myWishtList() {
+    public boolean myWishList() {
         addMyWishList();
 
         List<WebElement> links = Collections.singletonList(onTheMyWishListProduct);
