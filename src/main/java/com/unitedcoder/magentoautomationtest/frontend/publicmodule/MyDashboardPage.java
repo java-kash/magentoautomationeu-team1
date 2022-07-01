@@ -43,7 +43,9 @@ public class MyDashboardPage {
     WebElement updateCartButton;
     @FindBy(xpath = "//*[contains(text(),'Slim fit Dobby Oxford Shirt was updated in your shopping cart.')]")
     WebElement successMessage;
-
+    //ayimsa
+    @FindBy(xpath = "//a[text()='My Product Reviews']")
+    WebElement myProductReviewLink;
 
     public MyDashboardPage(WebDriver driver) {
         this.driver = driver;
@@ -89,8 +91,6 @@ public class MyDashboardPage {
         myAccountLink.click();
     }
 
-
-
     //Kadirdan
     public void updateItem(){
         functionPage.waitForElement(cartLink);
@@ -104,4 +104,17 @@ public class MyDashboardPage {
         functionPage.waitForElement(successMessage);
         return successMessage.isDisplayed();
     }
+    public boolean productReviewLinkVisible() {
+        functionPage.waitForElement(myProductReviewLink);
+        if (myProductReviewLink.isDisplayed()) {
+            Log4j.info("My Product Reviews link is visible");
+            return true;
+        } else
+        Log4j.error("My Product Reviews link is not visible");
+        return false;
+    }
+public void clickOnMyProductReviewLink(){
+        functionPage.waitForElement(myProductReviewLink);
+        myProductReviewLink.click();
+}
 }

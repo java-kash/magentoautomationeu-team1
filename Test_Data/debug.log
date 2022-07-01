@@ -170,3 +170,15 @@
 2022-06-30 22:05:56  [ main:4741 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
 2022-06-30 22:06:02  [ main:10768 ] - [ INFO ]  [42;30;4mUser able to view My Wish list [0m
 2022-06-30 22:06:05  [ main:13901 ] - [ INFO ]  [42;30;4mUser able to view My Wish list [0m
+2022-07-01 09:00:23  [ main:0 ] - [ INFO ]  -----------------------------------------------------------------------------------------------
+2022-07-01 09:00:23  [ main:4 ] - [ INFO ]  ***************************  [42;30;4mMagentoAutomationTestStart[0m**************************
+2022-07-01 09:00:28  [ main:5162 ] - [ INFO ]  [42;30;4mLogin page Opened Successfully[0m
+2022-07-01 09:00:32  [ main:9370 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 09:00:34  [ main:11111 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 09:00:34  [ main:11169 ] - [ INFO ]  [42;30;4mMy Product Reviews link is visible[0m
+2022-07-01 09:01:18  [ main:0 ] - [ INFO ]  -----------------------------------------------------------------------------------------------
+2022-07-01 09:01:18  [ main:4 ] - [ INFO ]  ***************************  [42;30;4mMagentoAutomationTestStart[0m**************************
+2022-07-01 09:01:23  [ main:4797 ] - [ INFO ]  [42;30;4mLogin page Opened Successfully[0m
+2022-07-01 09:01:26  [ main:7262 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 09:01:27  [ main:8674 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 09:01:28  [ main:9828 ] - [ INFO ]  [42;30;4mReview content is visible[0m

@@ -1,6 +1,7 @@
 package runner.testngframwork;
 
 import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyDashboardPage;
+import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyProductReviewPage;
 import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyWishPage;
 import com.unitedcoder.magentoautomationtest.frontend.publicmodule.PublicLogin;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
@@ -14,6 +15,7 @@ public class FrontendRunner extends TestBase {
     PublicLogin publicLogin;
     MyDashboardPage myDashboardPage;
     MyWishPage myWishPage;
+    MyProductReviewPage myProductReviewPage;
     String configFile = "config-qa.properties";
 
     @BeforeSuite
@@ -23,6 +25,7 @@ public class FrontendRunner extends TestBase {
         functionPage = new FunctionPage(driver);
         myDashboardPage = new MyDashboardPage(driver);
         myWishPage=new MyWishPage(driver);
+        myProductReviewPage=new MyProductReviewPage(driver);
         Log4j.startTestCase("MagentoAutomationTestStart");
     }
 
@@ -48,6 +51,16 @@ public class FrontendRunner extends TestBase {
         myWishPage.myWishList();
         Assert.assertTrue(myWishPage.myWishList());
 
+    }
+    //ayimsa
+    @Test(description = "A user should see \"My Product Reviews\" link ")
+    public void productReviewLinkVisible(){
+       Assert.assertTrue(myDashboardPage.productReviewLinkVisible());
+    }
+    @Test(description = "A user should see \"My Product Reviews\" contents. ")
+    public void productReviewContentVisible(){
+      myDashboardPage.clickOnMyProductReviewLink();
+      Assert.assertTrue(myProductReviewPage.productReviewContentIsVisible());
     }
 
     @AfterSuite
