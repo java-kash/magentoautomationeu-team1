@@ -182,3 +182,40 @@
 2022-07-01 09:01:26  [ main:7262 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
 2022-07-01 09:01:27  [ main:8674 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
 2022-07-01 09:01:28  [ main:9828 ] - [ INFO ]  [42;30;4mReview content is visible[0m
+2022-07-01 13:43:08  [ main:0 ] - [ INFO ]  -----------------------------------------------------------------------------------------------
+2022-07-01 13:43:08  [ main:3 ] - [ INFO ]  ***************************  [42;30;4mMagentoAutomationTestStart[0m**************************
+2022-07-01 13:43:09  [ main:1210 ] - [ INFO ]  [42;30;4mLogin page Opened Successfully[0m
+2022-07-01 13:43:12  [ main:3975 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 13:43:14  [ main:5604 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 13:47:07  [ main:0 ] - [ INFO ]  -----------------------------------------------------------------------------------------------
+2022-07-01 13:47:07  [ main:4 ] - [ INFO ]  ***************************  [42;30;4mMagentoAutomationTestStart[0m**************************
+2022-07-01 13:47:08  [ main:1284 ] - [ INFO ]  [42;30;4mLogin page Opened Successfully[0m
+2022-07-01 13:47:12  [ main:4734 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 13:47:13  [ main:6389 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:21:59  [ main:0 ] - [ INFO ]  -----------------------------------------------------------------------------------------------
+2022-07-01 14:21:59  [ main:4 ] - [ INFO ]  ***************************  [42;30;4mMagentoAutomationTestStart[0m**************************
+2022-07-01 14:22:01  [ main:1137 ] - [ INFO ]  [42;30;4mLogin page Opened Successfully[0m
+2022-07-01 14:22:03  [ main:3942 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:22:05  [ main:5376 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:26:28  [ main:0 ] - [ INFO ]  -----------------------------------------------------------------------------------------------
+2022-07-01 14:26:28  [ main:3 ] - [ INFO ]  ***************************  [42;30;4mMagentoAutomationTestStart[0m**************************
+2022-07-01 14:26:30  [ main:1268 ] - [ INFO ]  [42;30;4mLogin page Opened Successfully[0m
+2022-07-01 14:26:33  [ main:4358 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:26:36  [ main:7209 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:26:37  [ main:8811 ] - [ INFO ]  [42;30;4mUser able to check out the order [0m
+2022-07-01 14:26:37  [ main:8837 ] - [ INFO ]  [42;30;4mUser able to check out the order [0m
+2022-07-01 14:27:57  [ main:0 ] - [ INFO ]  -----------------------------------------------------------------------------------------------
+2022-07-01 14:27:57  [ main:3 ] - [ INFO ]  ***************************  [42;30;4mMagentoAutomationTestStart[0m**************************
+2022-07-01 14:27:58  [ main:1177 ] - [ INFO ]  [42;30;4mLogin page Opened Successfully[0m
+2022-07-01 14:28:01  [ main:3763 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:28:03  [ main:5839 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:28:05  [ main:8225 ] - [ INFO ]  [42;30;4mUser able to check out the order [0m
+2022-07-01 14:28:05  [ main:8252 ] - [ INFO ]  [42;30;4mUser able to check out the order [0m
+2022-07-01 14:28:07  [ main:10064 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:28:14  [ main:17394 ] - [ INFO ]  [42;30;4mUser able to view My Wish list [0m
+2022-07-01 14:28:18  [ main:21365 ] - [ INFO ]  [42;30;4mUser able to view My Wish list [0m
+2022-07-01 14:28:20  [ main:22955 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:28:22  [ main:24886 ] - [ INFO ]  [42;30;4mReview content is visible[0m
+2022-07-01 14:28:23  [ main:26616 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m
+2022-07-01 14:28:23  [ main:26678 ] - [ INFO ]  [42;30;4mMy Product Reviews link is visible[0m
+2022-07-01 14:28:27  [ main:30025 ] - [ INFO ]  [42;30;4mMyDashBoard page Opened[0m

@@ -1,9 +1,6 @@
 package runner.testngframwork;
 
-import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyDashboardPage;
-import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyProductReviewPage;
-import com.unitedcoder.magentoautomationtest.frontend.publicmodule.MyWishPage;
-import com.unitedcoder.magentoautomationtest.frontend.publicmodule.PublicLogin;
+import com.unitedcoder.magentoautomationtest.frontend.publicmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -16,6 +13,7 @@ public class FrontendRunner extends TestBase {
     MyDashboardPage myDashboardPage;
     MyWishPage myWishPage;
     MyProductReviewPage myProductReviewPage;
+    MyOrdersPage myOrdersPage;
     String configFile = "config-qa.properties";
 
     @BeforeSuite
@@ -26,6 +24,7 @@ public class FrontendRunner extends TestBase {
         myDashboardPage = new MyDashboardPage(driver);
         myWishPage=new MyWishPage(driver);
         myProductReviewPage=new MyProductReviewPage(driver);
+        myOrdersPage=new MyOrdersPage(driver);
         Log4j.startTestCase("MagentoAutomationTestStart");
     }
 
@@ -61,6 +60,13 @@ public class FrontendRunner extends TestBase {
     public void productReviewContentVisible(){
       myDashboardPage.clickOnMyProductReviewLink();
       Assert.assertTrue(myProductReviewPage.productReviewContentIsVisible());
+    }
+    //EsmaNur
+    @Test
+    public void checkOutOrders(){
+        myDashboardPage.clickOnMyOrdersLink();
+        myOrdersPage.checkOutOrders();
+        Assert.assertTrue(myOrdersPage.checkOutOrders());
     }
 
     @AfterSuite
