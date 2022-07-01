@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class TestBase {
-     public WebDriver driver;
+     public static WebDriver driver;
      public static String browserName="chrome";
 
      public void browserSetUp(String url){
@@ -46,6 +46,7 @@ public class TestBase {
         System.out.println(String.format("%s=%s",key,value));
         return value;
     }
+
 
     }
 

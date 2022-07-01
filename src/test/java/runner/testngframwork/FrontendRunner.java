@@ -22,10 +22,10 @@ public class FrontendRunner extends TestBase {
         publicLogin = new PublicLogin(driver);
         functionPage = new FunctionPage(driver);
         myDashboardPage = new MyDashboardPage(driver);
-        myWishPage=new MyWishPage(driver);
-        myProductReviewPage=new MyProductReviewPage(driver);
-        myOrdersPage=new MyOrdersPage(driver);
-        Log4j.startTestCase("MagentoAutomationTestStart");
+        myWishPage = new MyWishPage(driver);
+        myProductReviewPage = new MyProductReviewPage(driver);
+        myOrdersPage = new MyOrdersPage(driver);
+        Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
     }
 
     @BeforeClass
@@ -33,39 +33,39 @@ public class FrontendRunner extends TestBase {
         publicLogin.login();
         Assert.assertTrue(myDashboardPage.verifyLogin());
     }
+
     @BeforeMethod
-    public void clickToMyAccount(){
-      myDashboardPage.clickOnMyAccountLink();
-      Assert.assertTrue(myDashboardPage.verifyLogin());
+    public void clickToMyAccount() {
+        myDashboardPage.clickOnMyAccountLink();
+        Assert.assertTrue(myDashboardPage.verifyLogin());
     }
 
-    @Test
+    @Test(description = "A user should be able to update shopping cart ")
     public void userEditItemTest() {
         myDashboardPage.updateItem();
         Assert.assertTrue(myDashboardPage.verifyUpdatedItem());
     }
-    @Test
-    public void myWishList(){
+
+    @Test(description = "A user should be able to view My wish list ")
+    public void myWishList() {
         myDashboardPage.clickOnMyWishList();
         myWishPage.myWishList();
         Assert.assertTrue(myWishPage.myWishList());
 
     }
-    //ayimsa
-    @Test(description = "A user should see \"My Product Reviews\" link ")
-    public void productReviewLinkVisible(){
-       Assert.assertTrue(myDashboardPage.productReviewLinkVisible());
+
+
+    @Test(description = "A user should see My Product Reviews contents. ")
+    public void productReviewContentVisible() {
+        myDashboardPage.productReviewLinkVisible();
+        myDashboardPage.clickOnMyProductReviewLink();
+        Assert.assertTrue(myProductReviewPage.productReviewContentIsVisible());
     }
-    @Test(description = "A user should see \"My Product Reviews\" contents. ")
-    public void productReviewContentVisible(){
-      myDashboardPage.clickOnMyProductReviewLink();
-      Assert.assertTrue(myProductReviewPage.productReviewContentIsVisible());
-    }
-    //EsmaNur
-    @Test
-    public void checkOutOrders(){
+
+
+    @Test(description = "A user should be able to check out the order ")
+    public void checkOutOrders() {
         myDashboardPage.clickOnMyOrdersLink();
-        myOrdersPage.checkOutOrders();
         Assert.assertTrue(myOrdersPage.checkOutOrders());
     }
 
