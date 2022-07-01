@@ -21,4 +21,6 @@ public  class FunctionPage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+
+
 }

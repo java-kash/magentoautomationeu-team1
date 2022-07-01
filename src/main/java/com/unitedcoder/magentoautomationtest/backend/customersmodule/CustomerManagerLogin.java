@@ -1,6 +1,8 @@
 package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.Log4j;
+import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,33 +13,50 @@ public class CustomerManagerLogin {
     FunctionPage functionPage;
     String configFile = "config-qa.properties";
 
-    @FindBy(css = "#username")
+    public CustomerManagerLogin(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionPage = new FunctionPage(driver);
+
+    }
+
+    @FindBy(id = "username")
     WebElement usernameField;
     @FindBy(css = "#login")
     WebElement passwordField;
     @FindBy(css = "[type='submit']")
     WebElement loginButton;
+    @FindBy(css = ".link-logout")
+    WebElement logOutButton;
 
-    public CustomerManagerLogin(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionPage=new FunctionPage(driver);
-    }
-    public boolean verifyLoginPageOpened(){
+
+    public boolean verifyLoginPageOpened() {
         functionPage.waitForElement(loginButton);
-        if (loginButton.isDisplayed()){
-
+        if (loginButton.isDisplayed()) {
+            Log4j.info("Login Page Opened Successfully");
+            return true;
+        } else {
+            Log4j.error("Login Page Opened Fail");
+            return false;
         }
-        return true;
     }
-    public void login(){
+
+    public boolean login() {
         functionPage.waitForElement(usernameField);
         usernameField.click();
-        usernameField.sendKeys(configFile,"customer_username");
+        usernameField.sendKeys(TestBase.readFromConfigProperties(configFile,"customer_username"));
         functionPage.waitForElement(passwordField);
         passwordField.click();
-        passwordField.sendKeys(configFile,"customer_password");
+        passwordField.sendKeys(TestBase.readFromConfigProperties(configFile,"customer_password"));
         functionPage.waitForElement(loginButton);
         loginButton.click();
+        functionPage.waitForElement(logOutButton);
+        if (logOutButton.isDisplayed()){
+            Log4j.info("Dashboard Page Opened Successfully");
+            return true;
+        }else
+            Log4j.error("Dashboard Page Opened Failed");
+            return false;
+
     }
 }
