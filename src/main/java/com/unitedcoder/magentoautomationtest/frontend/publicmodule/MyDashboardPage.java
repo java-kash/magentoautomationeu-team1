@@ -46,6 +46,9 @@ public class MyDashboardPage {
     //ayimsa
     @FindBy(xpath = "//a[text()='My Product Reviews']")
     WebElement myProductReviewLink;
+    //Zulfikar
+    @FindBy(xpath = "//*[@id=\"subscription\"]")
+    WebElement generalSubsIsChecked;
 
     public MyDashboardPage(WebDriver driver) {
         this.driver = driver;
@@ -83,6 +86,18 @@ public class MyDashboardPage {
     public void clickOnNewsLetterSubscriptions(){
         functionPage.waitForElement(newsletterSubscriptionsLink);
         newsletterSubscriptionsLink.click();
+    }
+    //Zulfikar
+    public boolean generalSubsIsChecked(){
+        functionPage.waitForElement(generalSubsIsChecked);
+        if (generalSubsIsChecked.isEnabled()) {
+            Log4j.info("General Subscription is Checked");
+            return true;
+        }else
+        {
+            Log4j.info("General Subscription is Not Checked");
+        return false;
+                }
     }
     public void clickOnMyAccountLink(){
         functionPage.waitForElement(accountButton);

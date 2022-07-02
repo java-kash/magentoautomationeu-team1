@@ -69,6 +69,15 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(myOrdersPage.checkOutOrders());
     }
 
+    @Test(description = "A user should see newsletter subscription link and content")
+    public void generalSubsIsChecked(){
+        myDashboardPage.clickOnNewsLetterSubscriptions();
+        myDashboardPage.generalSubsIsChecked();
+        Assert.assertTrue(myDashboardPage.generalSubsIsChecked());
+    }
+
+
+
     @AfterSuite
     public void tearDown() {
         closeBrowser();
