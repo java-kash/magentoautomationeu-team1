@@ -14,6 +14,7 @@ public class FrontendRunner extends TestBase {
     MyWishPage myWishPage;
     MyProductReviewPage myProductReviewPage;
     MyOrdersPage myOrdersPage;
+    MyNewsletterSubsPage myNewsletterSubsPage;
     String configFile = "config-qa.properties";
 
     @BeforeSuite
@@ -25,6 +26,7 @@ public class FrontendRunner extends TestBase {
         myWishPage = new MyWishPage(driver);
         myProductReviewPage = new MyProductReviewPage(driver);
         myOrdersPage = new MyOrdersPage(driver);
+        myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
         Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
     }
 
@@ -71,9 +73,9 @@ public class FrontendRunner extends TestBase {
 
     @Test(description = "A user should see newsletter subscription link and content")
     public void generalSubsIsChecked(){
-        myDashboardPage.clickOnNewsLetterSubscriptions();
-        myDashboardPage.generalSubsIsChecked();
-        Assert.assertTrue(myDashboardPage.generalSubsIsChecked());
+        myNewsletterSubsPage.clickOnNewsLetterSubs();
+        myNewsletterSubsPage.generalSubsIsChecked();
+        Assert.assertTrue(myNewsletterSubsPage.generalSubsIsChecked());
     }
 
 
