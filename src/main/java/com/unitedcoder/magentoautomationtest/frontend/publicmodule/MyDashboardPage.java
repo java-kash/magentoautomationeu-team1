@@ -87,19 +87,7 @@ public class MyDashboardPage {
         functionPage.waitForElement(newsletterSubscriptionsLink);
         newsletterSubscriptionsLink.click();
     }
-    //Zulfikar
-    public boolean generalSubsIsChecked(){
-        functionPage.waitForElement(generalSubsIsChecked);
-        if (generalSubsIsChecked.isEnabled()) {
-            Log4j.info("General Subscription is Checked");
-            return true;
-        }else
-        {
-            Log4j.info("General Subscription is Not Checked");
-        return false;
-                }
-    }
-    public void clickOnMyAccountLink(){
+        public void clickOnMyAccountLink(){
         functionPage.waitForElement(accountButton);
         accountButton.click();
         functionPage.waitForElement(myAccountLink);
