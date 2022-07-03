@@ -21,7 +21,7 @@ public class AccountInformationPage {
      WebElement pageTitle;
     public boolean verifypage(){
         functionPage.waitForElement(pageTitle);
-        if (pageTitle.isEnabled()){
+        if (pageTitle.isDisplayed()){
             Log4j.info("Account Information is display");
             return true;
         }

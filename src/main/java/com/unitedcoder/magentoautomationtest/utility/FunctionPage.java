@@ -32,7 +32,7 @@ public  class FunctionPage {
     }
     public String generateEmail(){
         String email=faker.internet().emailAddress();
-        return generateEmail();
+        return email;
     }
 
 

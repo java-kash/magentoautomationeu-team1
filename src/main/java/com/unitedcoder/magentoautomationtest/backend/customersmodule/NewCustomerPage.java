@@ -1,6 +1,5 @@
 package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
-import com.github.javafaker.Faker;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.WebDriver;
@@ -29,8 +28,10 @@ public class NewCustomerPage {
     @FindBy(id = "_accountpassword")
     WebElement managementPassword;
 
-    @FindBy(xpath = " //*[@title='Save and Continue Edit']")
+    @FindBy(xpath = " //div[@id='anchor-content']//p/button[3]")
     WebElement saveButton;
+    @FindBy(xpath = "//*[text()='The customer has been saved.']")
+    WebElement successfullyMessages;
 
     public void addNewCustomerPage(){
         functionPage.waitForElement(firstName);
@@ -47,8 +48,13 @@ public class NewCustomerPage {
         managementPassword.sendKeys( TestBase.readFromConfigProperties(configFile,"customer_password"));
         functionPage.waitForElement(saveButton);
         saveButton.click();
-
-
+    }
+    public boolean verifyAddNewCustomer(){
+         functionPage.waitForElement(successfullyMessages);
+        if (successfullyMessages.isDisplayed()){
+            return true;
+        }else
+            return false;
 
     }
 }
