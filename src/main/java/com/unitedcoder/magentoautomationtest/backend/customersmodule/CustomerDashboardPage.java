@@ -15,7 +15,8 @@ public class CustomerDashboardPage {
         PageFactory.initElements(driver,this);
         functionPage=new FunctionPage(driver);
     }
-
+    @FindBy(css = "#messages+.content-header>table>tbody>tr>td+td>button")
+    WebElement aadNewCustomerButton;
     @FindBy(xpath ="//span[text()='Customers']" )
     WebElement CustomersLink;
 
@@ -39,6 +40,13 @@ public class CustomerDashboardPage {
 
     @FindBy(xpath = "//span[text()='Products']")
     WebElement productsLink;
+
+
+    public void clickOnAddNewCustomerButton(){
+        functionPage.waitForElement(aadNewCustomerButton);
+        aadNewCustomerButton.click();
+
+    }
 
 
 
