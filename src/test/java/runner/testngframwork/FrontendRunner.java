@@ -15,6 +15,7 @@ public class FrontendRunner extends TestBase {
     MyProductReviewPage myProductReviewPage;
     MyOrdersPage myOrdersPage;
     MyNewsletterSubsPage myNewsletterSubsPage;
+    EditAccountInformation editAccountInformation;
     String configFile = "config-qa.properties";
 
     @BeforeSuite
@@ -27,6 +28,7 @@ public class FrontendRunner extends TestBase {
         myProductReviewPage = new MyProductReviewPage(driver);
         myOrdersPage = new MyOrdersPage(driver);
         myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
+        editAccountInformation=new EditAccountInformation(driver);
         Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
     }
 
@@ -77,10 +79,25 @@ public class FrontendRunner extends TestBase {
         myNewsletterSubsPage.generalSubsIsChecked();
         Assert.assertTrue(myNewsletterSubsPage.generalSubsIsChecked());
     }
+//@Test(description ="user should be able to edit and view account information",dataProvider = "editAccountInfo")
+//public void editAccountInformation(){
+//        myDashboardPage.clickOnAccountInformationLink();
+//        editAccountInformation.clickOnMiddleNameField();
+//        editAccountInformation.editAccountInformation();
+//        editAccountInformation.clickOnSaveButton();
+//Assert.assertTrue(editAccountInformation.verifySuccessfullyEdit());
+
+//}
 
 
-
-    @AfterSuite
+    @DataProvider
+    public Object[][] editAccountInfo(){
+        Object[][] myData=new Object[][]{
+        {"Team1","q1w2e3r4"}
+    };
+     return myData;
+    }
+   // @AfterSuite
     public void tearDown() {
         closeBrowser();
     }
