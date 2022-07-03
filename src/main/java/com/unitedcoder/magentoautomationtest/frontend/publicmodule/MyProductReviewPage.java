@@ -23,10 +23,8 @@ public class MyProductReviewPage {
     public boolean productReviewContentIsVisible() {
         functionPage.waitForElement(myReviewsTable);
         if (myReviewsTable.isDisplayed()) {
-            Log4j.info("Review content is visible");
             return true;
         } else
-        Log4j.error("Review content is not visible");
         return false;
     }
 

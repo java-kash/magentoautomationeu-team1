@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.Random;
+
 
 public class AddressBookPage {
     WebDriver driver;
@@ -34,32 +34,26 @@ public class AddressBookPage {
         actions = new Actions(driver);
 
     }
-//    public static String getRandomString(int size) {
-//
-//        String rand = "";
-//        String chars = "qwertyuiopQWERTYUIOPasdfghjklASDFGHJKLzxcvbnmZXCVBNM";
-//        for (int i = 0; i < size; i++) {
-//            rand += chars.toCharArray()[new Random().nextInt(chars.length())];
-//        }
-//        return rand;
-//    }
+
 
     public void UpdateAddress(){
-        functionPage.waitForElement(manageAddressLink);
-        manageAddressLink.click();
         functionPage.waitForElement(changeAddressLink);
         changeAddressLink.click();
 
         functionPage.waitForElement(cityField);
-        cityField.sendKeys("a");
+        cityField.clear();
+        cityField.sendKeys(functionPage.generateCityName());
         functionPage.waitForElement(saveAddressButton);
         saveAddressButton.click();
 
     }
 
 
-        public boolean verifyUpdateAddress(){
-        functionPage.waitForElement(successMsg);
-            return successMsg.isDisplayed();
+        public boolean verifyUpdateAddress() {
+            functionPage.waitForElement(successMsg);
+            if (successMsg.isDisplayed()) {
+                return true;
+            } else
+                return false;
         }
 }

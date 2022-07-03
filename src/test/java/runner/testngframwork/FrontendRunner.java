@@ -4,9 +4,11 @@ import com.unitedcoder.magentoautomationtest.frontend.publicmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
+import com.unitedcoder.magentoautomationtest.utility.TestNGResultListener;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
-
+@Listeners(TestNGResultListener.class)
 public class FrontendRunner extends TestBase {
     FunctionPage functionPage;
     PublicLogin publicLogin;
@@ -20,8 +22,9 @@ public class FrontendRunner extends TestBase {
     AccountInformationPage accountInformationPage;
     AddShoppingCartPage addShoppingCartPage;
     AddressBookPage addressBookPage;
+
     @BeforeSuite
-    public void setUp() {
+    public void setUp(ITestContext context) {
         browserSetUp(readFromConfigProperties(configFile, "frontend_url"));
         publicLogin = new PublicLogin(driver);
         functionPage = new FunctionPage(driver);
@@ -34,6 +37,8 @@ public class FrontendRunner extends TestBase {
         Log4j.startTestCase("Magento_PublicModule_Automation_TestStart");
         accountInformationPage=new AccountInformationPage(driver);
         addShoppingCartPage=new AddShoppingCartPage(driver);
+        addressBookPage=new AddressBookPage(driver);
+        context.setAttribute("driver",driver);
     }
 
     @BeforeClass
@@ -61,7 +66,6 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(myWishPage.myWishList());
 
     }
-
 
     @Test(description = "A user should see My Product Reviews contents. ")
     public void productReviewContentVisible() {
@@ -110,8 +114,6 @@ public class FrontendRunner extends TestBase {
         addShoppingCartPage.addToShoppingCart();
         addShoppingCartPage.verification();
        functionPage.implicitlyWait();
-
-
    }
 
 

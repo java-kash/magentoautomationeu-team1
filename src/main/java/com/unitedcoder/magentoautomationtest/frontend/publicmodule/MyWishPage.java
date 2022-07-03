@@ -47,11 +47,11 @@ public class MyWishPage {
 
         List<WebElement> links = Collections.singletonList(onTheMyWishListProduct);
         if (links.size() > 0) {
-            Log4j.info("User able to view My Wish list ");
+
             return true;
 
         } else
-            Log4j.error("Test Failed");
+
         return false;
     }
 
