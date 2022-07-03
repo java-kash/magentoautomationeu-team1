@@ -1,5 +1,6 @@
 package runner.testngframwork;
 
+import com.thoughtworks.qdox.model.expression.Add;
 import com.unitedcoder.magentoautomationtest.frontend.publicmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
@@ -18,7 +19,7 @@ public class FrontendRunner extends TestBase {
     EditAccountInformation editAccountInformation;
     String configFile = "config-qa.properties";
     AccountInformationPage accountInformationPage;
-
+    AddShoppingCartPage addShoppingCartPage;
     @BeforeSuite
     public void setUp() {
         browserSetUp(readFromConfigProperties(configFile, "frontend_url"));
@@ -32,6 +33,7 @@ public class FrontendRunner extends TestBase {
         editAccountInformation = new EditAccountInformation(driver);
         Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
         accountInformationPage=new AccountInformationPage(driver);
+        addShoppingCartPage=new AddShoppingCartPage(driver);
     }
 
     @BeforeClass
@@ -97,6 +99,14 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(editAccountInformation.verifySuccessfullyEdit());
 
     }
+   @Test(description = "A user should successfully add products to his/her shopping cart")
+   public void searchProducts() throws InterruptedException {
+        addShoppingCartPage.addToShoppingCart();
+        addShoppingCartPage.verification();
+       functionPage.implicitlyWait();
+
+
+   }
 
 
     @AfterSuite
