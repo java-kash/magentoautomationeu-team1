@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class TestBase {
-     public static WebDriver driver;
+     public  WebDriver driver;
      public static String browserName="chrome";
 
      public void browserSetUp(String url){

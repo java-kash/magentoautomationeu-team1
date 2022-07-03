@@ -31,7 +31,7 @@ public class FrontendRunner extends TestBase {
         myOrdersPage = new MyOrdersPage(driver);
         myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
         editAccountInformation = new EditAccountInformation(driver);
-        Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
+        Log4j.startTestCase("Magento_PublicModule_Automation_TestStart");
         accountInformationPage=new AccountInformationPage(driver);
         addShoppingCartPage=new AddShoppingCartPage(driver);
     }
