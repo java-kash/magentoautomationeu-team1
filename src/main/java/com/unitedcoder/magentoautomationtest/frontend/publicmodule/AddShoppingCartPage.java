@@ -1,6 +1,7 @@
 package com.unitedcoder.magentoautomationtest.frontend.publicmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -15,7 +16,7 @@ public class AddShoppingCartPage {
     WebDriver driver;
 
     FunctionPage functionPage;
-
+    String configFile="config-qa.properties";
 
     @FindBy(id = "search")
     WebElement searchBox;
@@ -45,7 +46,7 @@ public class AddShoppingCartPage {
         functionPage.waitForElement(clickSearchButton);
         clickSearchButton.click();
         dropdownOptions.get(0).click();
-
+     //   TestBase.readFromConfigProperties(configFile,"public_search_name")
         functionPage.implicitlyWait();
         addToCartButton.click();
         functionPage.implicitlyWait();
