@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class MyDashboardPage {
     WebDriver driver;
     FunctionPage functionPage;
-//(xpath = "//a[text()='My Wishlist']")
+    //(xpath = "//a[text()='My Wishlist']")
     @FindBy(xpath = "//strong[contains(text(),'Account Dashboard')]")
     WebElement accountDashboardLink;
     @FindBy(css = ".skip-content>.links>ul>.first>a")
@@ -23,8 +23,8 @@ public class MyDashboardPage {
     WebElement myOrdersLink;
     @FindBy(xpath = "//*[@id='top']/body/div[1]/div[2]/div[2]/div/div[1]/div/div[2]/ul/li[9]/a")
     WebElement myWishListLink;
-    @FindBy(xpath ="//a[contains(text(),'Newsletter Subscriptions')] ")
-    WebElement  newsletterSubscriptionsLink;
+    @FindBy(xpath = "//a[contains(text(),'Newsletter Subscriptions')] ")
+    WebElement newsletterSubscriptionsLink;
     @FindBy(xpath = "//a[contains(text(),'My Downloadable Products')]")
     WebElement myDownloadableProductsLink;
     @FindBy(xpath = "//h1[text()='My Dashboard']")
@@ -50,44 +50,53 @@ public class MyDashboardPage {
     @FindBy(xpath = "//*[@id=\"subscription\"]")
     WebElement generalSubsIsChecked;
 
+
     public MyDashboardPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
 
     }
-    public boolean verifyLogin(){
+
+    public boolean verifyLogin() {
         functionPage.waitForElement(myDashboardTittle);
-        if(myDashboardTittle.isDisplayed()){
+        if (myDashboardTittle.isDisplayed()) {
             Log4j.info("MyDashBoard page Opened");
         }
         return true;
     }
-    public void clickOnAccountDashboardLink(){
+
+    public void clickOnAccountDashboardLink() {
         functionPage.waitForElement(accountDashboardLink);
         accountDashboardLink.click();
     }
-    public void clickOnAccountInformationLink(){
+
+    public void clickOnAccountInformationLink() {
         functionPage.waitForElement(accountInformationLink);
         accountInformationLink.click();
     }
-    public void clickOnAddressBookLink(){
+
+    public void clickOnAddressBookLink() {
         functionPage.waitForElement(addressBookLink);
         addressBookLink.click();
     }
-    public void clickOnMyOrdersLink(){
+
+    public void clickOnMyOrdersLink() {
         functionPage.waitForElement(myOrdersLink);
         myOrdersLink.click();
     }
-    public void clickOnMyWishList(){
+
+    public void clickOnMyWishList() {
         functionPage.waitForElement(myWishListLink);
         myWishListLink.click();
     }
-    public void clickOnNewsLetterSubscriptions(){
+
+    public void clickOnNewsLetterSubscriptions() {
         functionPage.waitForElement(newsletterSubscriptionsLink);
         newsletterSubscriptionsLink.click();
     }
-        public void clickOnMyAccountLink(){
+
+    public void clickOnMyAccountLink() {
         functionPage.waitForElement(accountButton);
         accountButton.click();
         functionPage.waitForElement(myAccountLink);
@@ -95,7 +104,7 @@ public class MyDashboardPage {
     }
 
     //Kadirdan
-    public void updateItem(){
+    public void updateItem() {
         functionPage.waitForElement(cartLink);
         cartLink.click();
         functionPage.waitForElement(editItemLink);
@@ -103,21 +112,26 @@ public class MyDashboardPage {
         functionPage.waitForElement(updateCartButton);
         updateCartButton.click();
     }
-    public boolean verifyUpdatedItem(){
+
+    public boolean verifyUpdatedItem() {
         functionPage.waitForElement(successMessage);
         return successMessage.isDisplayed();
     }
+
     public boolean productReviewLinkVisible() {
         functionPage.waitForElement(myProductReviewLink);
         if (myProductReviewLink.isDisplayed()) {
             Log4j.info("My Product Reviews link is visible");
             return true;
         } else
-        Log4j.error("My Product Reviews link is not visible");
+            Log4j.error("My Product Reviews link is not visible");
         return false;
     }
-public void clickOnMyProductReviewLink(){
+
+    public void clickOnMyProductReviewLink() {
         functionPage.waitForElement(myProductReviewLink);
         myProductReviewLink.click();
-}
+    }
+
+
 }

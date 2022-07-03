@@ -15,6 +15,7 @@ public class FrontendRunner extends TestBase {
     MyProductReviewPage myProductReviewPage;
     MyOrdersPage myOrdersPage;
     MyNewsletterSubsPage myNewsletterSubsPage;
+    EditAccountInformation editAccountInformation;
     String configFile = "config-qa.properties";
     AccountInformationPage accountInformationPage;
     AddressBookPage addressBookPage;
@@ -29,7 +30,8 @@ public class FrontendRunner extends TestBase {
         myProductReviewPage = new MyProductReviewPage(driver);
         myOrdersPage = new MyOrdersPage(driver);
         myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
-        Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
+        editAccountInformation = new EditAccountInformation(driver);
+        Log4j.startTestCase("Magento_PublicModule_Automation_TestStart");
         accountInformationPage=new AccountInformationPage(driver);
         addressBookPage= new AddressBookPage(driver);
     }
@@ -76,7 +78,7 @@ public class FrontendRunner extends TestBase {
     }
 
     @Test(description = "A user should see newsletter subscription link and content")
-    public void generalSubsIsChecked(){
+    public void generalSubsIsChecked() {
         myNewsletterSubsPage.clickOnNewsLetterSubs();
         myNewsletterSubsPage.generalSubsIsChecked();
         Assert.assertTrue(myNewsletterSubsPage.generalSubsIsChecked());
@@ -94,6 +96,15 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(addressBookPage.verifyUpdateAddress());
     }
 
+    @Test(description = "user should be able to edit and view account information")
+    public void editAccountInformation() {
+        myDashboardPage.clickOnAccountInformationLink();
+        editAccountInformation.clickOnMiddleNameField();
+        editAccountInformation.editAccountInformation();
+        editAccountInformation.clickOnSaveButton();
+        Assert.assertTrue(editAccountInformation.verifySuccessfullyEdit());
+
+    }
 
 
     @AfterSuite
