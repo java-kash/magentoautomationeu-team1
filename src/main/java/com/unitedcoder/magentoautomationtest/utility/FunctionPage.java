@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public  class FunctionPage {
     WebDriver driver;
     static  String  configFile="config-qa.properties";
@@ -20,6 +22,10 @@ public  class FunctionPage {
     public void waitForElement(WebElement element){
         WebDriverWait wait=new WebDriverWait(driver,timeout);
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public void implicitlyWait(){
+        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+
     }
 
     public String generateFirstName(){

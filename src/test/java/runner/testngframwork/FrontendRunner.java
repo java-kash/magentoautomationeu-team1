@@ -18,8 +18,8 @@ public class FrontendRunner extends TestBase {
     EditAccountInformation editAccountInformation;
     String configFile = "config-qa.properties";
     AccountInformationPage accountInformationPage;
+    AddShoppingCartPage addShoppingCartPage;
     AddressBookPage addressBookPage;
-
     @BeforeSuite
     public void setUp() {
         browserSetUp(readFromConfigProperties(configFile, "frontend_url"));
@@ -33,7 +33,7 @@ public class FrontendRunner extends TestBase {
         editAccountInformation = new EditAccountInformation(driver);
         Log4j.startTestCase("Magento_PublicModule_Automation_TestStart");
         accountInformationPage=new AccountInformationPage(driver);
-        addressBookPage= new AddressBookPage(driver);
+        addShoppingCartPage=new AddShoppingCartPage(driver);
     }
 
     @BeforeClass
@@ -105,6 +105,14 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(editAccountInformation.verifySuccessfullyEdit());
 
     }
+   @Test(description = "A user should successfully add products to his/her shopping cart")
+   public void searchProducts() throws InterruptedException {
+        addShoppingCartPage.addToShoppingCart();
+        addShoppingCartPage.verification();
+       functionPage.implicitlyWait();
+
+
+   }
 
 
     @AfterSuite
