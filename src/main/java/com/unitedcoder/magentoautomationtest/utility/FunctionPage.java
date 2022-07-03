@@ -1,5 +1,6 @@
 package com.unitedcoder.magentoautomationtest.utility;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -20,6 +21,16 @@ public  class FunctionPage {
         WebDriverWait wait=new WebDriverWait(driver,timeout);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+
+    public  String generateMiddleName(){
+        Faker faker=new Faker();
+        String  middleName=faker.name().username();
+        return middleName;
+    }
+
+
+
 
 
 

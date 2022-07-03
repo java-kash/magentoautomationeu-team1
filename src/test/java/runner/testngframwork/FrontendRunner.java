@@ -28,7 +28,7 @@ public class FrontendRunner extends TestBase {
         myProductReviewPage = new MyProductReviewPage(driver);
         myOrdersPage = new MyOrdersPage(driver);
         myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
-        editAccountInformation=new EditAccountInformation(driver);
+        editAccountInformation = new EditAccountInformation(driver);
         Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
     }
 
@@ -74,30 +74,24 @@ public class FrontendRunner extends TestBase {
     }
 
     @Test(description = "A user should see newsletter subscription link and content")
-    public void generalSubsIsChecked(){
+    public void generalSubsIsChecked() {
         myNewsletterSubsPage.clickOnNewsLetterSubs();
         myNewsletterSubsPage.generalSubsIsChecked();
         Assert.assertTrue(myNewsletterSubsPage.generalSubsIsChecked());
     }
-//@Test(description ="user should be able to edit and view account information",dataProvider = "editAccountInfo")
-//public void editAccountInformation(){
-//        myDashboardPage.clickOnAccountInformationLink();
-//        editAccountInformation.clickOnMiddleNameField();
-//        editAccountInformation.editAccountInformation();
-//        editAccountInformation.clickOnSaveButton();
-//Assert.assertTrue(editAccountInformation.verifySuccessfullyEdit());
 
-//}
+    @Test(description = "user should be able to edit and view account information")
+    public void editAccountInformation() {
+        myDashboardPage.clickOnAccountInformationLink();
+        editAccountInformation.clickOnMiddleNameField();
+        editAccountInformation.editAccountInformation();
+        editAccountInformation.clickOnSaveButton();
+        Assert.assertTrue(editAccountInformation.verifySuccessfullyEdit());
 
-
-    @DataProvider
-    public Object[][] editAccountInfo(){
-        Object[][] myData=new Object[][]{
-        {"Team1","q1w2e3r4"}
-    };
-     return myData;
     }
-   // @AfterSuite
+
+
+    @AfterSuite
     public void tearDown() {
         closeBrowser();
     }

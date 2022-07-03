@@ -15,7 +15,7 @@ public class MyDashboardPage {
     WebElement accountDashboardLink;
     @FindBy(css = ".skip-content>.links>ul>.first>a")
     WebElement myAccountButton;
-    @FindBy(xpath = "//strong[contains(text(),'Account Information')]")
+    @FindBy(xpath = "//a[contains(text(),'Account Information')]")
     WebElement accountInformationLink;
     @FindBy(xpath = "//a[contains(text(),'Address Book')]")
     WebElement addressBookLink;
