@@ -37,5 +37,15 @@ public  class FunctionPage {
 
 
 
+    public  String generateMiddleName(){
+        Faker faker=new Faker();
+        String  middleName=faker.name().username();
+        return middleName;
+    }
+
+
+
+
+
 
 }
