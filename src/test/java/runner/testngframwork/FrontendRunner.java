@@ -17,6 +17,7 @@ public class FrontendRunner extends TestBase {
     MyNewsletterSubsPage myNewsletterSubsPage;
     EditAccountInformation editAccountInformation;
     String configFile = "config-qa.properties";
+    AccountInformationPage accountInformationPage;
 
     @BeforeSuite
     public void setUp() {
@@ -30,6 +31,7 @@ public class FrontendRunner extends TestBase {
         myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
         editAccountInformation = new EditAccountInformation(driver);
         Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
+        accountInformationPage=new AccountInformationPage(driver);
     }
 
     @BeforeClass
@@ -79,6 +81,12 @@ public class FrontendRunner extends TestBase {
         myNewsletterSubsPage.generalSubsIsChecked();
         Assert.assertTrue(myNewsletterSubsPage.generalSubsIsChecked());
     }
+    @Test(description = "A user should be able to view account information")
+    public void accountInformation(){
+        myDashboardPage.clickOnAccountInformationLink();
+        Assert.assertTrue(accountInformationPage.verifypage());
+    }
+
 
     @Test(description = "user should be able to edit and view account information")
     public void editAccountInformation() {
