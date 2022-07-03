@@ -31,13 +31,10 @@ public MyNewsletterSubsPage(WebDriver driver){
     public boolean generalSubsIsChecked(){
         functionPage.waitForElement(generalSubsIsChecked);
         if (generalSubsIsChecked.isEnabled()) {
-            Log4j.info("General Subscription is Checked");
             return true;
         }else
-        {
-            Log4j.info("General Subscription is Not Checked");
             return false;
-        }
+
     }
 
 

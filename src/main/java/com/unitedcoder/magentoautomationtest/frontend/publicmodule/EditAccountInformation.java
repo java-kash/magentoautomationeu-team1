@@ -37,7 +37,9 @@ public class EditAccountInformation {
     }
     public void editAccountInformation(){
         functionPage.waitForElement(middleNameField);
+        middleNameField.clear();
         middleNameField.sendKeys(functionPage.generateMiddleName());
+        functionPage.waitForElement(currentPasswordField);
         currentPasswordField.sendKeys(password);
     }
 
@@ -49,10 +51,8 @@ public class EditAccountInformation {
     public boolean verifySuccessfullyEdit() {
         functionPage.waitForElement(successfullyEditMessage);
         if (successfullyEditMessage.isDisplayed()) {
-            Log4j.info("Account Information edited successfully!");
             return true;
         } else
-            Log4j.info("Account Information is not edited");
         return false;
     }
 

@@ -22,11 +22,9 @@ public class AccountInformationPage {
     public boolean verifypage(){
         functionPage.waitForElement(pageTitle);
         if (pageTitle.isDisplayed()){
-            Log4j.info("Account Information is display");
             return true;
         }
         else{
-            Log4j.error("Account Information not display");
             return false;
         }
     }

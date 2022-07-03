@@ -31,11 +31,10 @@ public class MyOrdersPage {
     public boolean checkOutOrders() {
         functionPage.waitForElement(allOrderTable);
         if (ordersNumber.size() > 0) {
-            Log4j.info("User able to check out the order ");
             return true;
 
         } else
-            Log4j.error("Test Failed");
+
         return false;
     }
 }

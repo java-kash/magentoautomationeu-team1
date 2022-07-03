@@ -40,6 +40,10 @@ public  class FunctionPage {
         String email=faker.internet().emailAddress();
         return email;
     }
+    public String generateCityName(){
+        String cityName=faker.address().city();
+        return cityName;
+    }
 
 
 
