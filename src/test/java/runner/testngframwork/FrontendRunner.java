@@ -17,6 +17,7 @@ public class FrontendRunner extends TestBase {
     MyNewsletterSubsPage myNewsletterSubsPage;
     String configFile = "config-qa.properties";
     AccountInformationPage accountInformationPage;
+    AddressBookPage addressBookPage;
 
     @BeforeSuite
     public void setUp() {
@@ -30,6 +31,7 @@ public class FrontendRunner extends TestBase {
         myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
         Log4j.startTestCase("MagentoPublicModuleAutomationTestStart");
         accountInformationPage=new AccountInformationPage(driver);
+        addressBookPage= new AddressBookPage(driver);
     }
 
     @BeforeClass
@@ -85,6 +87,12 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(accountInformationPage.verifypage());
     }
 
+    @Test(description = "A user should be able to update and view address book-abdukerim")
+    public void UpdateAddress(){
+        myDashboardPage.clickOnAddressBookLink();
+        addressBookPage.UpdateAddress();
+        Assert.assertTrue(addressBookPage.verifyUpdateAddress());
+    }
 
 
 
