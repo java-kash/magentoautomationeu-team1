@@ -86,6 +86,13 @@ public class MyDashboardPage {
         myOrdersLink.click();
     }
 
+    public void clickOnMyDownloadableProductsLink(){
+        functionPage.waitForElement(myDownloadableProductsLink);
+        myDownloadableProductsLink.click();
+    }
+
+
+
     public void clickOnMyWishList() {
         functionPage.waitForElement(myWishListLink);
         myWishListLink.click();
