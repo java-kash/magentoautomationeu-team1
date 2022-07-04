@@ -110,11 +110,15 @@ public class FrontendRunner extends TestBase {
 
     }
    @Test(description = "A user should successfully add products to his/her shopping cart")
-   public void searchProducts() throws InterruptedException {
+   public void searchProducts(){
         addShoppingCartPage.addToShoppingCart();
-        addShoppingCartPage.verification();
-       functionPage.implicitlyWait();
+        Assert.assertTrue(addShoppingCartPage.verification());
    }
+//   @AfterClass
+//   public void logOUt(){
+//        publicLogin.logOut();
+//        Assert.assertTrue(true);
+//   }
 
 
     @AfterSuite

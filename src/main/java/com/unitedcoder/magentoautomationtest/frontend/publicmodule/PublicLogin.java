@@ -31,6 +31,8 @@ public class PublicLogin {
     WebElement passWordField;
     @FindBy(css = "#send2")
     WebElement loginButton;
+    @FindBy(xpath = "//a[text()='Log Out']")
+    WebElement logOutButton;
 
     public boolean verifyLoginPageOpened() {
         functionPage.waitForElement(loginButton);
@@ -56,4 +58,17 @@ public class PublicLogin {
         functionPage.waitForElement(loginButton);
         loginButton.click();
     }
+    // I need verify
+    public boolean logOut(){
+        functionPage.waitForElement(accountButton);
+        accountButton.click();
+        functionPage.waitForElement(logOutButton);
+        logOutButton.click();
+        functionPage.waitForElement(loginButton);
+        if (loginButton.isDisplayed()){
+            return true;
+        }else
+            return false;
+        }
+
 }
