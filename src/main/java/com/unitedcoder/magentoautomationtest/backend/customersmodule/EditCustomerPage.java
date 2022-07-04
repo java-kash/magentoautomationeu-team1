@@ -10,13 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 public class EditCustomerPage {
     WebDriver driver;
     FunctionPage functionPage;
-
-    public EditCustomerPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionPage=new FunctionPage(driver);
-    }
-
     @FindBy(xpath = "//a[@id='customer_info_tabs_account' and @class='tab-item-link'][1]")
     WebElement accountInformation;
     @FindBy(xpath = "//input[@id='_accountmiddlename'][1]")
@@ -25,6 +18,11 @@ public class EditCustomerPage {
     WebElement saveAndContinueButton;
     @FindBy(xpath = "//*[text()='The customer has been saved.']")
     WebElement successMessages;
+    public EditCustomerPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver,this);
+        functionPage=new FunctionPage(driver);
+    }
 
     public boolean editCustomerInformation(){
         functionPage.waitForElement(accountInformation);
