@@ -22,6 +22,7 @@ public class FrontendRunner extends TestBase {
     AccountInformationPage accountInformationPage;
     AddShoppingCartPage addShoppingCartPage;
     AddressBookPage addressBookPage;
+    ViewDownloadableOrdersPage viewDownloadableOrdersPage;
 
     @BeforeSuite
     public void setUp(ITestContext context) {
@@ -39,6 +40,7 @@ public class FrontendRunner extends TestBase {
         addShoppingCartPage=new AddShoppingCartPage(driver);
         addressBookPage=new AddressBookPage(driver);
         context.setAttribute("driver",driver);
+        viewDownloadableOrdersPage=new ViewDownloadableOrdersPage(driver);
     }
 
     @BeforeClass
@@ -114,6 +116,16 @@ public class FrontendRunner extends TestBase {
         addShoppingCartPage.addToShoppingCart();
         Assert.assertTrue(addShoppingCartPage.verification());
    }
+
+
+    @Test
+    public void viewDownloadableOrders(){
+        myDashboardPage.clickOnMyDownloadableProductsLink();
+        Assert.assertTrue(viewDownloadableOrdersPage.verifyDownloadableOrders());
+    }
+
+
+
 //   @AfterClass
 //   public void logOUt(){
 //        publicLogin.logOut();
