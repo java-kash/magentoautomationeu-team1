@@ -80,7 +80,14 @@ public class FrontendRunner extends TestBase {
         myDashboardPage.clickOnMyOrdersLink();
         Assert.assertTrue(myOrdersPage.checkOutOrders());
     }
+    @Test(description ="A user should be able to see his/her orders ")
+    public void viewOrder() {
+        myDashboardPage.clickOnMyOrdersLink();
+        myOrdersPage.viewOrder();
+        Assert.assertTrue(myOrdersPage.viewOrder());
 
+
+    }
     @Test(description = "A user should see newsletter subscription link and content")
     public void generalSubsIsChecked() {
         myNewsletterSubsPage.clickOnNewsLetterSubs();
