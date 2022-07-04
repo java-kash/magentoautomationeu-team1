@@ -52,10 +52,8 @@ public class CustomerManagerLogin {
         loginButton.click();
         functionPage.waitForElement(logOutButton);
         if (logOutButton.isDisplayed()){
-            Log4j.info("Dashboard Page Opened Successfully");
             return true;
         }else
-            Log4j.error("Dashboard Page Opened Failed");
             return false;
 
     }

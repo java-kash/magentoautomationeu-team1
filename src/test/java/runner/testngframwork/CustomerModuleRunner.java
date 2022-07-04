@@ -35,6 +35,10 @@ public class CustomerModuleRunner extends TestBase {
     public void loginCustomerModule(){
         Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
         customerManagerLogin.login();
+    }
+    @BeforeMethod
+    public void backToDashboard(){
+        customerDashboardPage.clickOnMagentoLogoBackDashboard();
 
     }
     @Test
@@ -45,9 +49,9 @@ public class CustomerModuleRunner extends TestBase {
 
 
     }
-//    @AfterSuite
-//    public void tearDown() {
-//        closeBrowser();
-//    }
+    @AfterSuite
+    public void tearDown() {
+        closeBrowser();
+    }
 
 }
