@@ -5,8 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public  class FunctionPage {
@@ -24,8 +27,15 @@ public  class FunctionPage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
     public void implicitlyWait(){
-        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-
+        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+    }
+    public  void fluentWait(WebElement element){
+        Wait<WebDriver> wait=new FluentWait<>(driver)
+   //     Wait<WebDriver> wait=new FluentWait<>(driver)
+                .withTimeout(20,TimeUnit.SECONDS)
+                .pollingEvery(100,TimeUnit.MILLISECONDS)
+                .ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public String generateFirstName(){

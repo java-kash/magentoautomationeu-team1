@@ -52,6 +52,8 @@ public class CustomerDashboardPage {
         @FindBy(xpath = "//a[text()='Edit']")
     )
     List<WebElement> cutomerEditIcon;
+    @FindBy(xpath = "//*[text()='Customer Information'][1]")
+    WebElement editPageTitle;
 
 
     public void clickOnAddNewCustomerButton(){
@@ -67,13 +69,16 @@ public class CustomerDashboardPage {
         }else
             return false;
     }
-    public boolean clickOnCustomerEditIcon(){
-        functionPage.waitForElement((WebElement) cutomerEditIcon);
-        cutomerEditIcon.get(1).click();
-        return true;
+    // i need verify Add
+    public boolean clickOnCustomerEditIcon() {
+        WebElement firstListCustomer = cutomerEditIcon.get(1);
+        functionPage.waitForElement(firstListCustomer);
+        firstListCustomer.click();
+        if (editPageTitle.isDisplayed()) {
+            return true;
+        } else
+            return false;
     }
 
 
-
-
-}
+            }

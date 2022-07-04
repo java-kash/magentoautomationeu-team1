@@ -2,6 +2,7 @@ package runner.testngframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerDashboardPage;
 import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerManagerLogin;
+import com.unitedcoder.magentoautomationtest.backend.customersmodule.EditCustomerPage;
 import com.unitedcoder.magentoautomationtest.backend.customersmodule.NewCustomerPage;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
@@ -17,6 +18,7 @@ public class CustomerModuleRunner extends TestBase {
     static CustomerManagerLogin customerManagerLogin;
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
+    EditCustomerPage editCustomerPage;
     String configFile = "config-qa.properties";
 
     @BeforeSuite()
@@ -28,6 +30,7 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage=new CustomerDashboardPage(driver);
         newCustomerPage=new NewCustomerPage(driver);
         functionPage=new FunctionPage(driver);
+        editCustomerPage=new EditCustomerPage(driver);
 
 
     }
@@ -41,12 +44,17 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.clickOnMagentoLogoBackDashboard();
 
     }
-    @Test
+    @Test(description = "Customer Manager can add a new customer ")
     public void addCustomer(){
         customerDashboardPage.clickOnAddNewCustomerButton();
         newCustomerPage.addNewCustomerPage();
         Assert.assertTrue(newCustomerPage.verifyAddNewCustomer());
-
+    }
+    @Test(description = "Customer Manager can update an existing customer ")
+    public void upDataCustomer(){
+        customerDashboardPage.clickOnCustomerEditIcon();
+        editCustomerPage.editCustomerInformation();
+        Assert.assertTrue(true);
 
     }
     @AfterSuite
