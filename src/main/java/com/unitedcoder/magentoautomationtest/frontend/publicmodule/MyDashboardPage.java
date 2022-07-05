@@ -2,14 +2,19 @@ package com.unitedcoder.magentoautomationtest.frontend.publicmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+import java.util.Random;
+
 public class MyDashboardPage {
     WebDriver driver;
     FunctionPage functionPage;
+    String productsName;
     //(xpath = "//a[text()='My Wishlist']")
     @FindBy(xpath = "//strong[contains(text(),'Account Dashboard')]")
     WebElement accountDashboardLink;
@@ -36,13 +41,15 @@ public class MyDashboardPage {
     //Kadirdan
     @FindBy(css = ".skip-link.skip-cart")
     WebElement cartLink;
-    @FindBy(xpath = "//*[@title='Slim fit Dobby Oxford Shirt']" +
-            "/following::div/descendant::table/following::a[@title='Edit item']")
-    WebElement editItemLink;
     @FindBy(xpath = "//*[@title='Update Cart']")
     WebElement updateCartButton;
-    @FindBy(xpath = "//*[contains(text(),'Slim fit Dobby Oxford Shirt was updated in your shopping cart.')]")
+
+    @FindBy(xpath = "//ul[@class='messages']//span")
     WebElement successMessage;
+
+    @FindBy(css = ".product-name>span")
+    WebElement productName;
+
     //ayimsa
     @FindBy(xpath = "//a[text()='My Product Reviews']")
     WebElement myProductReviewLink;
@@ -56,6 +63,14 @@ public class MyDashboardPage {
         PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
 
+    }
+
+    public String getProductsName() {
+        return this.productsName;
+    }
+
+    public void setProductsName(String productsName) {
+        this.productsName = productsName;
     }
 
     public boolean verifyLogin() {
@@ -86,11 +101,10 @@ public class MyDashboardPage {
         myOrdersLink.click();
     }
 
-    public void clickOnMyDownloadableProductsLink(){
+    public void clickOnMyDownloadableProductsLink() {
         functionPage.waitForElement(myDownloadableProductsLink);
         myDownloadableProductsLink.click();
     }
-
 
 
     public void clickOnMyWishList() {
@@ -114,15 +128,24 @@ public class MyDashboardPage {
     public void updateItem() {
         functionPage.waitForElement(cartLink);
         cartLink.click();
-        functionPage.waitForElement(editItemLink);
-        editItemLink.click();
+        Random random = new Random();
+        List<WebElement> listInCard = driver.findElements(By.xpath("//*[@title='Edit item']"));
+        int list = random.nextInt(listInCard.size());
+        listInCard.get(list).click();
+        functionPage.waitForElement(productName);
+        setProductsName(productName.getText());
         functionPage.waitForElement(updateCartButton);
         updateCartButton.click();
     }
 
     public boolean verifyUpdatedItem() {
         functionPage.waitForElement(successMessage);
-        return successMessage.isDisplayed();
+        if (successMessage.getText().toLowerCase().contains(getProductsName().toLowerCase() + " was updated in your shopping cart.")) {
+            Log4j.info("Shopping cart updated successfully!");
+            return true;
+        } else
+            Log4j.info("Shopping cart  updated failed!");
+        return false;
     }
 
     public boolean productReviewLinkVisible() {
