@@ -31,6 +31,8 @@ public class CustomerDashboardPage extends TestBase {
         functionPage=new FunctionPage(driver);
         actions=new Actions(driver);
     }
+
+
     @FindBy(css = "(//span[text()='Add New Customer'])[1]")
     WebElement aadNewCustomerButton;
 
