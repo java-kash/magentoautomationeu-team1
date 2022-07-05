@@ -28,6 +28,12 @@ public class MyOrdersPage {
     @FindBy(xpath ="//*[@id=\"my-orders-table\"]")
     WebElement allOrderTable;
 
+    @FindBy(xpath ="//*[@class='number']")
+    WebElement viewOrder;
+
+    @FindBy (id="my-orders-table")
+    List<WebElement> myOrdersTable;
+
     public boolean checkOutOrders() {
         functionPage.waitForElement(allOrderTable);
         if (ordersNumber.size() > 0) {
@@ -36,6 +42,14 @@ public class MyOrdersPage {
         } else
 
         return false;
+    }
+    public boolean viewOrder() {
+        functionPage.waitForElement(viewOrder);
+        viewOrder.click();
+        if (myOrdersTable.size() > 0) {
+            return true;
+        } else
+            return false;
     }
 }
 

@@ -22,6 +22,7 @@ public class FrontendRunner extends TestBase {
     AccountInformationPage accountInformationPage;
     AddShoppingCartPage addShoppingCartPage;
     AddressBookPage addressBookPage;
+    ViewDownloadableOrdersPage viewDownloadableOrdersPage;
 
     @BeforeSuite
     public void setUp(ITestContext context) {
@@ -39,6 +40,7 @@ public class FrontendRunner extends TestBase {
         addShoppingCartPage=new AddShoppingCartPage(driver);
         addressBookPage=new AddressBookPage(driver);
         context.setAttribute("driver",driver);
+        viewDownloadableOrdersPage=new ViewDownloadableOrdersPage(driver);
     }
 
     @BeforeClass
@@ -80,7 +82,14 @@ public class FrontendRunner extends TestBase {
         myDashboardPage.clickOnMyOrdersLink();
         Assert.assertTrue(myOrdersPage.checkOutOrders());
     }
+    @Test(description ="A user should be able to see his/her orders ")
+    public void viewOrder() {
+        myDashboardPage.clickOnMyOrdersLink();
+        myOrdersPage.viewOrder();
+        Assert.assertTrue(myOrdersPage.viewOrder());
 
+
+    }
     @Test(description = "A user should see newsletter subscription link and content")
     public void generalSubsIsChecked() {
         myNewsletterSubsPage.clickOnNewsLetterSubs();
@@ -114,6 +123,16 @@ public class FrontendRunner extends TestBase {
         addShoppingCartPage.addToShoppingCart();
         Assert.assertTrue(addShoppingCartPage.verification());
    }
+
+
+    @Test
+    public void viewDownloadableOrders(){
+        myDashboardPage.clickOnMyDownloadableProductsLink();
+        Assert.assertTrue(viewDownloadableOrdersPage.verifyDownloadableOrders());
+    }
+
+
+
 //   @AfterClass
 //   public void logOUt(){
 //        publicLogin.logOut();
