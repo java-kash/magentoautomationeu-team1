@@ -22,10 +22,10 @@ public class CustomerDashboardPage {
         functionPage=new FunctionPage(driver);
         actions=new Actions(driver);
     }
-    @FindBy(css = "#messages+.content-header>table>tbody>tr>td+td>button")
+    @FindBy(css = "(//span[text()='Add New Customer'])[1]")
     WebElement aadNewCustomerButton;
 
-    @FindBy(xpath ="//*[@id=\"nav\"]/li[1]/a/span" )
+    @FindBy(xpath ="//span[text()='Customers']" )
     WebElement CustomersLink;
 
     @FindBy(xpath ="//span[text()='Manage Customers']")

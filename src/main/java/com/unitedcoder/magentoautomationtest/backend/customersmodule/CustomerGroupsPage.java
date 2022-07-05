@@ -2,6 +2,8 @@ package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestHelper;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +35,9 @@ public class CustomerGroupsPage {
 
     @FindBy(xpath ="//span[text()='The customer group has been saved.']")
     WebElement successMessage;
+
+    @FindBy(xpath = "(//button[@class='scalable delete']/span/span/span)[1]")
+    WebElement deleteCustomerGroupButton;
 
 
 
@@ -67,6 +72,19 @@ public class CustomerGroupsPage {
         clickOnSaveCustomerGroupsButton();
 
     }
+    public void clickOnExistingCustomerGroup(TestHelper testHelper){
+        WebElement existingGroupName=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",testHelper.getCustomerGroupName())));
+        functionPage.waitForElement(existingGroupName);
+        existingGroupName.click();
+    }
+    public void clickOnDeleteCustomerGroupButton() {
+        functionPage.waitForElement(deleteCustomerGroupButton);
+        deleteCustomerGroupButton.click();
+        functionPage.waitForAlertPresent();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+    }
+
     public boolean verifyAddNewCustomerGroups(){
         functionPage.waitForElement(successMessage);
         if (successMessage.getText().contains("saved")){
@@ -77,6 +95,40 @@ public class CustomerGroupsPage {
             return false;
         }
     }
+    public void updateExistingCustomerGroups(TestHelper testHelper) {
+        clickOnExistingCustomerGroup(testHelper);
+        clickOnTexClassDropDown();
+        selectTexClassDropDownList(2);
+       clickOnSaveCustomerGroupsButton();
+    }
 
+    public boolean verifyUpdateExistingCustomerGroups() {
+      functionPage.waitForElement(successMessage);
+        if (successMessage.getText().contains("saved")) {
+            System.out.println("Customer Manager update existing customer groups Test Passed! ");
+            return true;
+        } else {
+            System.out.println("Customer Manager update existing customer groups Test Failed! ");
+            return false;
+        }
+    }
+
+    public void deleteExistingCustomerGroups(TestHelper testHelper) {
+        clickOnExistingCustomerGroup(testHelper);
+        clickOnDeleteCustomerGroupButton();
+    }
+
+    public boolean verifyDeleteExistingCustomerGroups() {
+       functionPage.waitForElement(successMessage);
+        if (successMessage.getText().contains("deleted")) {
+            System.out.println("Customer Manager delete existing customer groups Test Passed! ");
+            return true;
+        } else {
+            System.out.println("Customer Manager delete existing customer groups Test Failed! ");
+            return false;
+        }
+    }
 }
+
+
 

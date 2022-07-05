@@ -70,16 +70,29 @@ public class CustomerModuleRunner extends TestBase {
     }
 
 
-    @Test(dataProvider = "customerGroupInfo", description = "Customer Manager can add new customer groups.")
+    @Test(dataProvider = "customerGroupInfo",description = "Customer Manager can add new customer groups.")
     public void addCustomerGroups(TestHelper testHelper) {
         customerDashboardPage.clickCustomerGroupsLink();
         customerGroupsPage.addNewCustomerGroups(testHelper);
         Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
     }
+    @Test(dataProvider ="customerGroupInfo",description = "Customer Manager can  update existing customer groups.",dependsOnMethods = "addCustomerGroups")
+    public void updateExistingCustomerGroups(TestHelper testHelper){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.updateExistingCustomerGroups(testHelper);
+        Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
+    }
+    @Test(dataProvider = "customerGroupInfo",description = "Customer Manager Can Delete Existing Customer Groups.",dependsOnMethods = "updateExistingCustomerGroups")
+    public void deleteExistingCustomerGroups(TestHelper testHelper){
+        customerGroupsPage.deleteExistingCustomerGroups(testHelper);
+        Assert.assertTrue(customerGroupsPage.verifyDeleteExistingCustomerGroups());
+    }
+
+
 
     @DataProvider
-    public Object[][] customerGroupInfo() {
-        Object[] data = new Object[]{new TestHelper("master")};
+    public Object[][] customerGroupInfo(){
+        Object[] data=new Object[]{new TestHelper("master")};
         return (Object[][]) data;
     }
 
