@@ -79,6 +79,11 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.filterCustomerByState();
     }
 
+    @Test(description = " Customer manager should be able to filter by email")
+    public void FilterCustomerByEmails(){
+        customerDashboardPage.filteredByEmails();
+    }
+
     @AfterSuite
     public void tearDown() {
         closeBrowser();

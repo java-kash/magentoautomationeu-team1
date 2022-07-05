@@ -89,6 +89,9 @@ public class CustomerDashboardPage extends TestBase {
     List<WebElement> filteredTableListRow;
     @FindBy(xpath = "//*[@title='Reset Filter']")
     WebElement resetFilterButton;
+    //Zulfikar
+    @FindBy(xpath = "//*[@id=\"customerGrid_filter_email\"]")
+    WebElement emailFilterField;
 
     public void exportCustomers() {
         functionPage.waitForElement(SelectAll);
@@ -173,5 +176,15 @@ public class CustomerDashboardPage extends TestBase {
         List<WebElement> allWebSiteValue = driver.findElements(By.xpath("//table[@id=\"customerGrid_table\"]/tbody/tr" +
                 "/td[contains(text(),'" + verifiedWebSite + "')]"));
         Assert.assertEquals(allWebSiteValue.size(), filteredTableListRow.size());
+    }
+
+    public void filteredByEmails(){
+        functionPage.waitForElement(emailFilterField);
+        emailFilterField.sendKeys("johnnytrigger@gmail.com");
+        functionPage.waitForElement(searchButton);
+        searchButton.click();
+
+
+
     }
 }
