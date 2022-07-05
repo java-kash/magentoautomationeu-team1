@@ -26,6 +26,12 @@ public class CustomerModuleRunner extends TestBase {
         newCustomerPage = new NewCustomerPage(driver);
         functionPage = new FunctionPage(driver);
         editCustomerPage = new EditCustomerPage(driver);
+        context.setAttribute("driver", driver);
+        customerManagerLogin = new CustomerManagerLogin(driver);
+        customerDashboardPage = new CustomerDashboardPage(driver);
+        newCustomerPage = new NewCustomerPage(driver);
+        functionPage = new FunctionPage(driver);
+        editCustomerPage = new EditCustomerPage(driver);
         customerGroupsPage=new CustomerGroupsPage(driver);
 
     }
@@ -36,11 +42,11 @@ public class CustomerModuleRunner extends TestBase {
         customerManagerLogin.login();
     }
 
-    @BeforeMethod
+    /*@BeforeMethod
     public void backToDashboard() {
         customerDashboardPage.clickOnMagentoLogoBackDashboard();
 
-    }
+    }*/
 
     @Test(description = "Customer Manager can add a new customer ")
     public void addCustomer() {
@@ -68,6 +74,15 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.exportCustomers();
         Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
     }
+
+    @Test(description = "Customer Manager should be able to filter Customer by country, state and website")
+    public void filterCustomersByCountryWebsiteState() {
+        customerDashboardPage.filterCustomerByCountry();
+        customerDashboardPage.filterCustomerByWebsite();
+        customerDashboardPage.filterCustomerByState();
+    }
+
+
 
 
     @Test(dataProvider = "customerGroupInfo",description = "Customer Manager can add new customer groups.")

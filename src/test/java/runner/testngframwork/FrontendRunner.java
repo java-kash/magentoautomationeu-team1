@@ -8,6 +8,7 @@ import com.unitedcoder.magentoautomationtest.utility.TestNGResultListener;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+
 @Listeners(TestNGResultListener.class)
 public class FrontendRunner extends TestBase {
     FunctionPage functionPage;
@@ -36,11 +37,11 @@ public class FrontendRunner extends TestBase {
         myNewsletterSubsPage = new MyNewsletterSubsPage(driver);
         editAccountInformation = new EditAccountInformation(driver);
         Log4j.startTestCase("Magento_PublicModule_Automation_TestStart");
-        accountInformationPage=new AccountInformationPage(driver);
-        addShoppingCartPage=new AddShoppingCartPage(driver);
-        addressBookPage=new AddressBookPage(driver);
-        context.setAttribute("driver",driver);
-        viewDownloadableOrdersPage=new ViewDownloadableOrdersPage(driver);
+        accountInformationPage = new AccountInformationPage(driver);
+        addShoppingCartPage = new AddShoppingCartPage(driver);
+        addressBookPage = new AddressBookPage(driver);
+        context.setAttribute("driver", driver);
+        viewDownloadableOrdersPage = new ViewDownloadableOrdersPage(driver);
     }
 
     @BeforeClass
@@ -82,7 +83,8 @@ public class FrontendRunner extends TestBase {
         myDashboardPage.clickOnMyOrdersLink();
         Assert.assertTrue(myOrdersPage.checkOutOrders());
     }
-    @Test(description ="A user should be able to see his/her orders ")
+
+    @Test(description = "A user should be able to see his/her orders ")
     public void viewOrder() {
         myDashboardPage.clickOnMyOrdersLink();
         myOrdersPage.viewOrder();
@@ -90,20 +92,22 @@ public class FrontendRunner extends TestBase {
 
 
     }
+
     @Test(description = "A user should see newsletter subscription link and content")
     public void generalSubsIsChecked() {
         myNewsletterSubsPage.clickOnNewsLetterSubs();
         myNewsletterSubsPage.generalSubsIsChecked();
         Assert.assertTrue(myNewsletterSubsPage.generalSubsIsChecked());
     }
+
     @Test(description = "A user should be able to view account information")
-    public void accountInformation(){
+    public void accountInformation() {
         myDashboardPage.clickOnAccountInformationLink();
         Assert.assertTrue(accountInformationPage.verifypage());
     }
 
     @Test(description = "A user should be able to update and view address book-abdukerim")
-    public void UpdateAddress(){
+    public void UpdateAddress() {
         myDashboardPage.clickOnAddressBookLink();
         addressBookPage.UpdateAddress();
         Assert.assertTrue(addressBookPage.verifyUpdateAddress());
@@ -118,19 +122,19 @@ public class FrontendRunner extends TestBase {
         Assert.assertTrue(editAccountInformation.verifySuccessfullyEdit());
 
     }
-   @Test(description = "A user should successfully add products to his/her shopping cart")
-   public void searchProducts(){
+
+    @Test(description = "A user should successfully add products to his/her shopping cart")
+    public void searchProducts() {
         addShoppingCartPage.addToShoppingCart();
         Assert.assertTrue(addShoppingCartPage.verification());
-   }
+    }
 
 
     @Test
-    public void viewDownloadableOrders(){
+    public void viewDownloadableOrders() {
         myDashboardPage.clickOnMyDownloadableProductsLink();
         Assert.assertTrue(viewDownloadableOrdersPage.verifyDownloadableOrders());
     }
-
 
 
 //   @AfterClass
