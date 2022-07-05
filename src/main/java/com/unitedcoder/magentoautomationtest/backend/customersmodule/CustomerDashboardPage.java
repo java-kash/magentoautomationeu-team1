@@ -58,12 +58,12 @@ public class CustomerDashboardPage {
 
     //kerim
     @FindBy(xpath ="//a[text()='Select All']")
-    WebElement selectAll;
+    WebElement SelectAll;
     @FindBy(xpath = "//span[text()='Export']")
     WebElement exportBtn;
     public void exportCustomers(){
-        functionPage.waitForElement(selectAll);
-        selectAll.click();
+        functionPage.waitForElement(SelectAll);
+        SelectAll.click();
         functionPage.waitForElement(exportBtn);
         exportBtn.click();
 

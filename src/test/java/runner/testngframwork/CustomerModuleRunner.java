@@ -58,7 +58,7 @@ public class CustomerModuleRunner extends TestBase {
 
     }
     @Test (description = "Customer Manager can export customers -abdukerim")
-    public void exoprtCustomers(){
+    public void exportCustomers(){
         customerDashboardPage.exportCustomers();
         Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
         }
