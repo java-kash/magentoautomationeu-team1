@@ -79,6 +79,18 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.filterCustomerByState();
     }
 
+    @Test(description = " Customer manager should be able to filter by email")
+    public void FilterCustomerByEmails(){
+        customerDashboardPage.filteredByEmails();
+    }
+
+    @Test(description = "Customer manager should be able to filtered by Email")
+    public void custFilteredByEmail(){
+        customerDashboardPage.filteredByEmails();
+        customerDashboardPage.verifyCustByEmail();
+        Assert.assertTrue(customerDashboardPage.verifyCustByEmail());
+    }
+
     @AfterSuite
     public void tearDown() {
         closeBrowser();
