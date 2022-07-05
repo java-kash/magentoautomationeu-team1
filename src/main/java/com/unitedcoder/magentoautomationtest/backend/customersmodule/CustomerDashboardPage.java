@@ -3,6 +3,7 @@ package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -13,15 +14,18 @@ import java.util.List;
 public class CustomerDashboardPage {
     WebDriver driver;
     FunctionPage functionPage;
+    Actions actions;
 
     public CustomerDashboardPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionPage=new FunctionPage(driver);
+        actions=new Actions(driver);
     }
     @FindBy(css = "#messages+.content-header>table>tbody>tr>td+td>button")
     WebElement aadNewCustomerButton;
-    @FindBy(xpath ="//span[text()='Customers']" )
+
+    @FindBy(xpath ="//*[@id=\"nav\"]/li[1]/a/span" )
     WebElement CustomersLink;
 
     @FindBy(xpath ="//span[text()='Manage Customers']")
@@ -89,6 +93,14 @@ public class CustomerDashboardPage {
         }else
             return false;
     }
+    public void clickCustomerGroupsLink(){
+        functionPage.waitForElement(CustomersLink);
+        actions.moveToElement(CustomersLink).perform();
+        functionPage.waitForElement(customerGroupsLink);
+        customerGroupsLink.click();
+
+        }
+
     // i need verify Add
     public boolean clickOnCustomerEditIcon() {
         WebElement firstListCustomer = cutomerEditIcon.get(1);
