@@ -1,9 +1,6 @@
 package runner.testngframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerDashboardPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerManagerLogin;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.EditCustomerPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.NewCustomerPage;
+import com.unitedcoder.magentoautomationtest.backend.customersmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -20,6 +17,8 @@ public class CustomerModuleRunner extends TestBase {
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
     String configFile = "config-qa.properties";
+    FilterCustomersPage filterCustomersPage;
+
 
     @BeforeSuite()
     public void setUp(ITestContext context){
@@ -31,6 +30,7 @@ public class CustomerModuleRunner extends TestBase {
         newCustomerPage=new NewCustomerPage(driver);
         functionPage=new FunctionPage(driver);
         editCustomerPage=new EditCustomerPage(driver);
+        filterCustomersPage=new FilterCustomersPage(driver);
 
 
     }
@@ -56,6 +56,10 @@ public class CustomerModuleRunner extends TestBase {
         editCustomerPage.editCustomerInformation();
         Assert.assertTrue(true);
 
+    }
+    @Test(description = "Customer Manager can filter customers by Group")
+    public void CustomersGroup(){
+        filterCustomersPage.ManagerFilter();
     }
     @AfterSuite
     public void tearDown() {

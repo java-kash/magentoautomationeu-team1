@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.List;
 
 public class CustomerDashboardPage {
@@ -18,6 +17,7 @@ public class CustomerDashboardPage {
         PageFactory.initElements(driver,this);
         functionPage=new FunctionPage(driver);
     }
+
     @FindBy(css = "#messages+.content-header>table>tbody>tr>td+td>button")
     WebElement aadNewCustomerButton;
     @FindBy(xpath ="//span[text()='Customers']" )
