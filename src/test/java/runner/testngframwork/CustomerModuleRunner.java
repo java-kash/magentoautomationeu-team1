@@ -1,9 +1,6 @@
 package runner.testngframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerDashboardPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerManagerLogin;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.EditCustomerPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.NewCustomerPage;
+import com.unitedcoder.magentoautomationtest.backend.customersmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -19,20 +16,22 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
+    AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
 
     @BeforeSuite()
     public void setUp(ITestContext context) {
         browserSetUp(readFromConfigProperties(configFile, "backend_url"));
         Log4j.startTestCase("Magento_Customer_Module_Automation_Test_Start");
-        context.setAttribute("driver", driver);
-        customerManagerLogin = new CustomerManagerLogin(driver);
-        customerDashboardPage = new CustomerDashboardPage(driver);
-        newCustomerPage = new NewCustomerPage(driver);
-        functionPage = new FunctionPage(driver);
-        editCustomerPage = new EditCustomerPage(driver);
-    }
+        context.setAttribute("driver",driver);
+        customerManagerLogin=new CustomerManagerLogin(driver);
+        customerDashboardPage=new CustomerDashboardPage(driver);
+        newCustomerPage=new NewCustomerPage(driver);
+        functionPage=new FunctionPage(driver);
+        editCustomerPage=new EditCustomerPage(driver);
+        addNewAddressPage=new AddNewAddressPage(driver);
 
+    }
     @BeforeClass
     public void loginCustomerModule() {
         Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
@@ -66,8 +65,18 @@ public class CustomerModuleRunner extends TestBase {
 
     }
 
-    @Test(description = "Customer Manager can export customers -abdukerim")
-    public void exportCustomers() {
+
+    @Test(description = "Customer Manager can add a new address for a customer")
+    public void addNewAddress(){
+        addNewAddressPage.selectCustomer();
+        addNewAddressPage.addNewAddress();
+        Assert.assertTrue(addNewAddressPage.verifyAddAddress());
+    }
+
+
+
+    @Test (description = "Customer Manager can export customers -abdukerim")
+    public void exportCustomers(){
         customerDashboardPage.exportCustomers();
         Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
     }
