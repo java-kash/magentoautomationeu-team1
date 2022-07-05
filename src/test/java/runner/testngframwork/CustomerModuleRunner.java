@@ -57,6 +57,11 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(true);
 
     }
+    @Test (description = "Customer Manager can export customers -abdukerim")
+    public void exportCustomers(){
+        customerDashboardPage.exportCustomers();
+        Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
+        }
     @AfterSuite
     public void tearDown() {
         closeBrowser();
