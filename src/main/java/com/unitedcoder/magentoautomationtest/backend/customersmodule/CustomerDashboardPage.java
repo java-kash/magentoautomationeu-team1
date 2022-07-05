@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 import java.util.List;
 
 public class CustomerDashboardPage {
@@ -55,6 +56,25 @@ public class CustomerDashboardPage {
     @FindBy(xpath = "//*[text()='Customer Information'][1]")
     WebElement editPageTitle;
 
+    //kerim
+    @FindBy(xpath ="//a[text()='Select All']")
+    WebElement SelectAll;
+    @FindBy(xpath = "//span[text()='Export']")
+    WebElement exportBtn;
+    public void exportCustomers(){
+        functionPage.waitForElement(SelectAll);
+        SelectAll.click();
+        functionPage.waitForElement(exportBtn);
+        exportBtn.click();
+
+    }
+    public boolean verifyExportCustpmers(){
+        if(exportBtn.isEnabled()){
+            return true;
+        }
+        else
+            return false;
+    }
 
     public void clickOnAddNewCustomerButton(){
         functionPage.waitForElement(aadNewCustomerButton);

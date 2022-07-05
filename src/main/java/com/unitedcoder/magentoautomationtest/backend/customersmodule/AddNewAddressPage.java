@@ -1,6 +1,5 @@
 package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
-
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import org.openqa.selenium.By;
@@ -14,11 +13,10 @@ import org.testng.Assert;
 
 import java.util.List;
 
-
 public class AddNewAddressPage {
 
 
-//customer module --  Customer Manager can add a new address for a customer
+//customer module -- Customer Manager can add a new address for a customer
 
     WebDriver customerDriver;
     FunctionPage functionPage;
