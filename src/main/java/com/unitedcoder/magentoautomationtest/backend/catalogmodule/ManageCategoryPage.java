@@ -48,25 +48,32 @@ public class ManageCategoryPage {
 
 
 
-    public void manageCategoriesLink() {
+    public void manageCategoriesLink() throws InterruptedException {
         functionPage.waitForElement(catalogLink);
         actions.moveToElement(catalogLink).click(manageCategoriesLink).perform();
+        Thread.sleep(3000);
         functionPage.waitForElement(rootCatNameField);
+        functionPage.implicitlyWait();
         rootCatNameField.sendKeys("Team1Test");
         functionPage.waitForElement(isActive);
         Select sel = new Select(isActive);
         sel.selectByIndex(1);
         functionPage.waitForElement(descriptionField);
         descriptionField.sendKeys("This is our Team1 Add Root Category Test");
-        //saveCategoryButton.click();
-
-
+        saveCategoryButton.click();
 
     }
 
         public boolean verifySuccessMessage () {
             functionPage.waitForElement(successMessage);
-            return successMessage.isDisplayed();
+            if (successMessage.getText().contains("The category has been saved")){
+                System.out.println("Test Passed");
+                return true;
+            }else{
+                System.out.println("Test Failed");
+                return false;
+            }
+
         }
 
 
