@@ -1,9 +1,6 @@
 package runner.testngframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerDashboardPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerManagerLogin;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.EditCustomerPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.NewCustomerPage;
+import com.unitedcoder.magentoautomationtest.backend.customersmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -19,6 +16,7 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
+    AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
 
     @BeforeSuite()
@@ -31,7 +29,7 @@ public class CustomerModuleRunner extends TestBase {
         newCustomerPage=new NewCustomerPage(driver);
         functionPage=new FunctionPage(driver);
         editCustomerPage=new EditCustomerPage(driver);
-
+        addNewAddressPage=new AddNewAddressPage(driver);
 
     }
     @BeforeClass
@@ -57,6 +55,16 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(true);
 
     }
+
+    @Test(description = "Customer Manager can add a new address for a customer")
+    public void addNewAddress(){
+        addNewAddressPage.selectCustomer();
+        addNewAddressPage.addNewAddress();
+        Assert.assertTrue(addNewAddressPage.verifyAddAddress());
+    }
+
+
+
     @AfterSuite
     public void tearDown() {
         closeBrowser();
