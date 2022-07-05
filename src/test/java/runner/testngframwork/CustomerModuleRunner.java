@@ -55,6 +55,11 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.clickOnCustomerEditIcon();
         editCustomerPage.editCustomerInformation();
         Assert.assertTrue(true);
+    }
+    @Test
+    public void deleteCustomer(){
+        editCustomerPage.deleteCustomer();
+        Assert.assertTrue(true);
 
     }
     @Test (description = "Customer Manager can export customers -abdukerim")
