@@ -97,6 +97,7 @@ public class CustomerDashboardPage extends TestBase {
     @FindBy(xpath = "//*[@title='Reset Filter']")
     WebElement resetFilterButton;
 
+
     public void exportCustomers() {
         functionPage.waitForElement(SelectAll);
         SelectAll.click();
@@ -189,4 +190,6 @@ public class CustomerDashboardPage extends TestBase {
                 "/td[contains(text(),'" + verifiedWebSite + "')]"));
         Assert.assertEquals(allWebSiteValue.size(), filteredTableListRow.size());
     }
+
+
 }

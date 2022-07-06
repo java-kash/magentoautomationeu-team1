@@ -66,6 +66,23 @@ public  class FunctionPage {
         return cityName;
     }
 
+    public String generateStreetName(){
+        String streetName=faker.address().streetName();
+        return streetName;
+    }
+
+
+    public String generateZipCode(){
+        String zipCode=faker.address().zipCode();
+        return zipCode;
+    }
+
+    public String  generateTelephoneNumber(){
+        String telephoneNumber=faker.phoneNumber().cellPhone();
+        return telephoneNumber;
+    }
+
+
 
 
     public  String generateMiddleName(){
@@ -73,10 +90,5 @@ public  class FunctionPage {
         String  middleName=faker.name().username();
         return middleName;
     }
-
-
-
-
-
 
 }
