@@ -38,14 +38,6 @@ public  class FunctionPage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void sleep(int second){
-        try {
-            Thread.sleep(second*2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public String generateFirstName(){
         String firstName=faker.name().firstName();
         return firstName;
@@ -63,6 +55,25 @@ public  class FunctionPage {
         return cityName;
     }
 
+    public String generateStreetName(){
+        String streetName=faker.address().streetName();
+        return streetName;
+    }
+
+
+    public String generateZipCode(){
+        String zipCode=faker.address().zipCode();
+        return zipCode;
+    }
+
+    public String  generateTelephoneNumber(){
+        String telephoneNumber=faker.phoneNumber().cellPhone();
+        return telephoneNumber;
+    }
+
+
+
+
     public  String generateMiddleName(){
         Faker faker=new Faker();
         String  middleName=faker.name().username();
@@ -70,8 +81,11 @@ public  class FunctionPage {
     }
 
 
-
-
-
-
+    public void sleep(int second){
+        try {
+            Thread.sleep(second*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

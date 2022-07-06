@@ -89,9 +89,7 @@ public class CustomerDashboardPage extends TestBase {
     List<WebElement> filteredTableListRow;
     @FindBy(xpath = "//*[@title='Reset Filter']")
     WebElement resetFilterButton;
-    //Zulfikar
-    @FindBy(xpath = "//*[@id=\"customerGrid_filter_email\"]")
-    WebElement emailFilterField;
+
 
     public void exportCustomers() {
         functionPage.waitForElement(SelectAll);

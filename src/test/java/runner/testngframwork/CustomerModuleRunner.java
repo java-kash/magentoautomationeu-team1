@@ -1,9 +1,6 @@
 package runner.testngframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerDashboardPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerManagerLogin;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.EditCustomerPage;
-import com.unitedcoder.magentoautomationtest.backend.customersmodule.NewCustomerPage;
+import com.unitedcoder.magentoautomationtest.backend.customersmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -32,7 +29,6 @@ public class CustomerModuleRunner extends TestBase {
         functionPage = new FunctionPage(driver);
         editCustomerPage = new EditCustomerPage(driver);
     }
-
     @BeforeClass
     public void loginCustomerModule() {
         Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
@@ -66,8 +62,18 @@ public class CustomerModuleRunner extends TestBase {
 
     }
 
-    @Test(description = "Customer Manager can export customers -abdukerim")
-    public void exportCustomers() {
+
+    @Test(description = "Customer Manager can add a new address for a customer")
+    public void addNewAddress(){
+        addNewAddressPage.selectCustomer();
+        addNewAddressPage.addNewAddress();
+        Assert.assertTrue(addNewAddressPage.verifyAddAddress());
+    }
+
+
+
+    @Test (description = "Customer Manager can export customers -abdukerim")
+    public void exportCustomers(){
         customerDashboardPage.exportCustomers();
         Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
     }
@@ -78,6 +84,8 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.filterCustomerByWebsite();
         customerDashboardPage.filterCustomerByState();
     }
+
+
 
     @AfterSuite
     public void tearDown() {
