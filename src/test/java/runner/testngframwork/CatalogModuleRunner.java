@@ -6,6 +6,7 @@ import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -33,17 +34,23 @@ public class CatalogModuleRunner extends TestBase {
     }
 
     @Test
-    public void addRootCategories() {
-        manageCategoryPage.manageCategoriesLink();
-        //Assert.assertTrue(true);
+    public void addRootCategory() {
+        manageCategoryPage.addRootCategory();
+        Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
 
     }
 
+    @Test
+    public void editRootCategory(){
+        manageCategoryPage.editRootCategory();
+        Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
+    }
 
-//    @AfterSuite
-//    public void tearDown() {
-//        closeBrowser();
-//    }
+
+    @AfterSuite
+    public void tearDown() {
+        closeBrowser();
+    }
 
 }
 

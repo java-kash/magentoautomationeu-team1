@@ -38,6 +38,14 @@ public  class FunctionPage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void sleep(int second){
+        try {
+            Thread.sleep(second*2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String generateFirstName(){
         String firstName=faker.name().firstName();
         return firstName;
@@ -54,8 +62,6 @@ public  class FunctionPage {
         String cityName=faker.address().city();
         return cityName;
     }
-
-
 
     public  String generateMiddleName(){
         Faker faker=new Faker();

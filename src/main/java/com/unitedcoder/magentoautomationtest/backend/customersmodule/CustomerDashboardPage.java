@@ -178,13 +178,5 @@ public class CustomerDashboardPage extends TestBase {
         Assert.assertEquals(allWebSiteValue.size(), filteredTableListRow.size());
     }
 
-    public void filteredByEmails(){
-        functionPage.waitForElement(emailFilterField);
-        emailFilterField.sendKeys("johnnytrigger@gmail.com");
-        functionPage.waitForElement(searchButton);
-        searchButton.click();
 
-
-
-    }
 }
