@@ -91,6 +91,11 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.verifyCustByEmail();
         Assert.assertTrue(customerDashboardPage.verifyCustByEmail());
     }
+    @Test(description = "Customer Manager can filter customers by Grou")
+    public void CustomerMangerGroup(){
+       filterCustomersPage.ManagerFilter();
+        filterCustomersPage.verifyGroups();
+    }
 
     @AfterSuite
     public void tearDown() {
