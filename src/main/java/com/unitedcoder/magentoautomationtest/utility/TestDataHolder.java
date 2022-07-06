@@ -1,10 +1,10 @@
 package com.unitedcoder.magentoautomationtest.utility;
 
-public class TestHelper {
+public class TestDataHolder {
     private String customerGroupName;
 
 
-    public TestHelper(String customerGroupName) {
+    public TestDataHolder(String customerGroupName) {
         this.customerGroupName = customerGroupName;
     }
 

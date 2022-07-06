@@ -1,7 +1,7 @@
 package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.TestHelper;
+import com.unitedcoder.magentoautomationtest.utility.TestDataHolder;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -45,9 +45,9 @@ public class CustomerGroupsPage {
         functionPage.waitForElement(addNewCustomerGroupLink);
         addNewCustomerGroupLink.click();
     }
-    public void clickOnCustomerGroupNameField(TestHelper testHelper){
+    public void clickOnCustomerGroupNameField(TestDataHolder testDataHolder){
         functionPage.waitForElement(customerGroupNameField);
-        customerGroupNameField.sendKeys(testHelper.getCustomerGroupName());
+        customerGroupNameField.sendKeys(testDataHolder.getCustomerGroupName());
     }
     public void clickOnTexClassDropDown(){
         functionPage.waitForElement(taxClassDropDown);
@@ -64,16 +64,16 @@ public class CustomerGroupsPage {
 
     }
 
-    public void addNewCustomerGroups(TestHelper testHelper){
+    public void addNewCustomerGroups(TestDataHolder testDataHolder){
         clickOnAddNewCustomerGroupButton();
-        clickOnCustomerGroupNameField(testHelper);
+        clickOnCustomerGroupNameField(testDataHolder);
         clickOnTexClassDropDown();
         selectTexClassDropDownList(2);
         clickOnSaveCustomerGroupsButton();
 
     }
-    public void clickOnExistingCustomerGroup(TestHelper testHelper){
-        WebElement existingGroupName=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",testHelper.getCustomerGroupName())));
+    public void clickOnExistingCustomerGroup(TestDataHolder testDataHolder){
+        WebElement existingGroupName=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",testDataHolder.getCustomerGroupName())));
         functionPage.waitForElement(existingGroupName);
         existingGroupName.click();
     }
@@ -95,8 +95,8 @@ public class CustomerGroupsPage {
             return false;
         }
     }
-    public void updateExistingCustomerGroups(TestHelper testHelper) {
-        clickOnExistingCustomerGroup(testHelper);
+    public void updateExistingCustomerGroups(TestDataHolder testDataHolder) {
+        clickOnExistingCustomerGroup(testDataHolder);
         clickOnTexClassDropDown();
         selectTexClassDropDownList(2);
        clickOnSaveCustomerGroupsButton();
@@ -113,8 +113,8 @@ public class CustomerGroupsPage {
         }
     }
 
-    public void deleteExistingCustomerGroups(TestHelper testHelper) {
-        clickOnExistingCustomerGroup(testHelper);
+    public void deleteExistingCustomerGroups(TestDataHolder testDataHolder) {
+        clickOnExistingCustomerGroup(testDataHolder);
         clickOnDeleteCustomerGroupButton();
     }
 

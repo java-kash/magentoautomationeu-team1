@@ -42,11 +42,11 @@ public class CustomerModuleRunner extends TestBase {
         customerManagerLogin.login();
     }
 
-    /*@BeforeMethod
+    @BeforeMethod
     public void backToDashboard() {
         customerDashboardPage.clickOnMagentoLogoBackDashboard();
 
-    }*/
+    }
 
     @Test(description = "Customer Manager can add a new customer ")
     public void addCustomer() {
@@ -62,7 +62,7 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(true);
     }
 
-    @Test
+    @Test(enabled = false)
     public void deleteCustomer() {
         editCustomerPage.deleteCustomer();
         Assert.assertTrue(true);
@@ -86,20 +86,20 @@ public class CustomerModuleRunner extends TestBase {
 
 
     @Test(dataProvider = "customerGroupInfo",description = "Customer Manager can add new customer groups.")
-    public void addCustomerGroups(TestHelper testHelper) {
+    public void addCustomerGroups(TestDataHolder testDataHolder) {
         customerDashboardPage.clickCustomerGroupsLink();
-        customerGroupsPage.addNewCustomerGroups(testHelper);
+        customerGroupsPage.addNewCustomerGroups(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
     }
     @Test(dataProvider ="customerGroupInfo",description = "Customer Manager can  update existing customer groups.",dependsOnMethods = "addCustomerGroups")
-    public void updateExistingCustomerGroups(TestHelper testHelper){
+    public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
         customerDashboardPage.clickCustomerGroupsLink();
-        customerGroupsPage.updateExistingCustomerGroups(testHelper);
+        customerGroupsPage.updateExistingCustomerGroups(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
     }
     @Test(dataProvider = "customerGroupInfo",description = "Customer Manager Can Delete Existing Customer Groups.",dependsOnMethods = "updateExistingCustomerGroups")
-    public void deleteExistingCustomerGroups(TestHelper testHelper){
-        customerGroupsPage.deleteExistingCustomerGroups(testHelper);
+    public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerGroupsPage.deleteExistingCustomerGroups(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyDeleteExistingCustomerGroups());
     }
 
@@ -107,7 +107,7 @@ public class CustomerModuleRunner extends TestBase {
 
     @DataProvider
     public Object[][] customerGroupInfo(){
-        Object[] data=new Object[]{new TestHelper("master")};
+        Object[] data=new Object[]{new TestDataHolder("master")};
         return (Object[][]) data;
     }
 
