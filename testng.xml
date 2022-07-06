@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Magento_UI_Automation">
+    <test verbose="2" preserve-order="true"  name="Frontend_Module_Test">
+        <classes>
+            <class name="runner.testngframwork.FrontendRunner"/>
+        </classes>
+    </test>
+</suite>
