@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import java.util.Iterator;
+
 @Listeners(TestNGResultListener.class)
 public class CustomerModuleRunner extends TestBase {
     FunctionPage functionPage;
@@ -13,8 +15,8 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
-    CustomerGroupsPage customerGroupsPage;
     String configFile = "config-qa.properties";
+
 
     @BeforeSuite()
     public void setUp(ITestContext context) {
@@ -32,15 +34,13 @@ public class CustomerModuleRunner extends TestBase {
         newCustomerPage = new NewCustomerPage(driver);
         functionPage = new FunctionPage(driver);
         editCustomerPage = new EditCustomerPage(driver);
-        customerGroupsPage=new CustomerGroupsPage(driver);
 
     }
-
-    @BeforeClass
-    public void loginCustomerModule() {
-        Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
-        customerManagerLogin.login();
-    }
+        @BeforeClass
+        public void loginCustomerModule () {
+            Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
+            customerManagerLogin.login();
+        }
 
     @BeforeMethod
     public void backToDashboard() {
@@ -48,72 +48,45 @@ public class CustomerModuleRunner extends TestBase {
 
     }
 
-    @Test(description = "Customer Manager can add a new customer ")
-    public void addCustomer() {
-        customerDashboardPage.clickOnAddNewCustomerButton();
-        newCustomerPage.addNewCustomerPage();
-        Assert.assertTrue(newCustomerPage.verifyAddNewCustomer());
+        @Test(description = "Customer Manager can add a new customer ")
+        public void addCustomer () {
+            customerDashboardPage.clickOnAddNewCustomerButton();
+            newCustomerPage.addNewCustomerPage();
+            Assert.assertTrue(newCustomerPage.verifyAddNewCustomer());
+        }
+
+        @Test(description = "Customer Manager can update an existing customer ")
+        public void upDataCustomer () {
+            customerDashboardPage.clickOnCustomerEditIcon();
+            editCustomerPage.editCustomerInformation();
+            Assert.assertTrue(true);
+        }
+
+        @Test(enabled = false)
+        public void deleteCustomer () {
+            editCustomerPage.deleteCustomer();
+            Assert.assertTrue(true);
+
+        }
+
+        @Test(description = "Customer Manager can export customers -abdukerim")
+        public void exportCustomers () {
+            customerDashboardPage.exportCustomers();
+            Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
+        }
+
+        @Test(description = "Customer Manager should be able to filter Customer by country, state and website")
+        public void filterCustomersByCountryWebsiteState () {
+            customerDashboardPage.filterCustomerByCountry();
+            customerDashboardPage.filterCustomerByWebsite();
+            customerDashboardPage.filterCustomerByState();
+        }
+
+
+
+        @AfterSuite
+        public void tearDown () {
+            closeBrowser();
+        }
+
     }
-
-    @Test(description = "Customer Manager can update an existing customer ")
-    public void upDataCustomer() {
-        customerDashboardPage.clickOnCustomerEditIcon();
-        editCustomerPage.editCustomerInformation();
-        Assert.assertTrue(true);
-    }
-
-    @Test(enabled = false)
-    public void deleteCustomer() {
-        editCustomerPage.deleteCustomer();
-        Assert.assertTrue(true);
-
-    }
-
-    @Test(description = "Customer Manager can export customers -abdukerim")
-    public void exportCustomers() {
-        customerDashboardPage.exportCustomers();
-        Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
-    }
-
-    @Test(description = "Customer Manager should be able to filter Customer by country, state and website")
-    public void filterCustomersByCountryWebsiteState() {
-        customerDashboardPage.filterCustomerByCountry();
-        customerDashboardPage.filterCustomerByWebsite();
-        customerDashboardPage.filterCustomerByState();
-    }
-
-
-
-
-    @Test(dataProvider = "customerGroupInfo",description = "Customer Manager can add new customer groups.")
-    public void addCustomerGroups(TestDataHolder testDataHolder) {
-        customerDashboardPage.clickCustomerGroupsLink();
-        customerGroupsPage.addNewCustomerGroups(testDataHolder);
-        Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
-    }
-    @Test(dataProvider ="customerGroupInfo",description = "Customer Manager can  update existing customer groups.",dependsOnMethods = "addCustomerGroups")
-    public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
-        customerDashboardPage.clickCustomerGroupsLink();
-        customerGroupsPage.updateExistingCustomerGroups(testDataHolder);
-        Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
-    }
-    @Test(dataProvider = "customerGroupInfo",description = "Customer Manager Can Delete Existing Customer Groups.",dependsOnMethods = "updateExistingCustomerGroups")
-    public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
-        customerGroupsPage.deleteExistingCustomerGroups(testDataHolder);
-        Assert.assertTrue(customerGroupsPage.verifyDeleteExistingCustomerGroups());
-    }
-
-
-
-    @DataProvider
-    public Object[][] customerGroupInfo(){
-        Object[] data=new Object[]{new TestDataHolder("master")};
-        return (Object[][]) data;
-    }
-
-    @AfterSuite
-    public void tearDown() {
-        closeBrowser();
-    }
-
-}

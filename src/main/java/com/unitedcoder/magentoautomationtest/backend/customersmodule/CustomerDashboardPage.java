@@ -36,13 +36,13 @@ public class CustomerDashboardPage extends TestBase {
     @FindBy(css = "(//span[text()='Add New Customer'])[1]")
     WebElement aadNewCustomerButton;
 
-    @FindBy(xpath ="//span[text()='Customers']" )
-    WebElement CustomersLink;
+    @FindBy(xpath ="//a[@class='active']" ) ////span[text()='Customers']
+    WebElement customersLink;
 
     @FindBy(xpath ="//span[text()='Manage Customers']")
     WebElement manageCustomersLink;
 
-    @FindBy(xpath = "xpath = (//div[@class='content-header']//button)[1])")
+    @FindBy(xpath = "//span[text()='Customer Groups']")
     WebElement customerGroupsLink;
 
     @FindBy(xpath = "//span[text()='Online Customers']")
@@ -113,7 +113,7 @@ public class CustomerDashboardPage extends TestBase {
     }
 
     public void clickOnAddNewCustomerButton() {
-        functionPage.waitForElement(aadNewCustomerButton);
+       functionPage.waitForElement(aadNewCustomerButton);
         aadNewCustomerButton.click();
     }
 
@@ -127,11 +127,7 @@ public class CustomerDashboardPage extends TestBase {
             return false;
     }
     public void clickCustomerGroupsLink(){
-        functionPage.waitForElement(CustomersLink);
-        actions.moveToElement(CustomersLink).click().perform();
-        functionPage.sleep(2);
-        functionPage.waitForElement(customerGroupsLink);
-        customerGroupsLink.click();
+
 
         }
 
