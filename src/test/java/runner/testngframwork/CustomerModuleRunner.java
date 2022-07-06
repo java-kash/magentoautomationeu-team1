@@ -16,6 +16,7 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
+    AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
 
     @BeforeSuite()
