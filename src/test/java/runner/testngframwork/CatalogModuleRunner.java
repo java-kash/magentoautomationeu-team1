@@ -36,8 +36,8 @@ public class CatalogModuleRunner extends TestBase {
     }
 
     @Test
-    public void addRootCategories() throws InterruptedException {
-        manageCategoryPage.manageCategoriesLink();
+    public void addRootCategory() {
+        manageCategoryPage.addRootCategory();
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
 
     }
@@ -50,6 +50,13 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue(filterProductsByCategoryPage.verify());
     }
 
+
+
+    @Test
+    public void editRootCategory(){
+        manageCategoryPage.editRootCategory();
+        Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
+    }
 
 
     @AfterSuite

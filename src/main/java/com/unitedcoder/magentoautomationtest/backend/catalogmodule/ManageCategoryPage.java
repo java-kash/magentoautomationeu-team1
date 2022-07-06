@@ -1,6 +1,8 @@
 package com.unitedcoder.magentoautomationtest.backend.catalogmodule;
 import com.github.javafaker.Faker;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.Log4j;
+import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +17,7 @@ public class ManageCategoryPage {
     WebDriver driver;
     FunctionPage functionPage;
     Actions actions;
+    String configFile = "config-qa.properties";
 
 
     public ManageCategoryPage(WebDriver driver) {
@@ -29,7 +32,7 @@ public class ManageCategoryPage {
     WebElement catalogLink;
     @FindBy(xpath ="//span[text()='Manage Categories']")
     WebElement manageCategoriesLink;
-    @FindBy(css = "#add_root_category_button")
+    @FindBy(css = "#add_root_category_button")// we are already in the category page so we do not need to click again
     WebElement addRootCategory;
     @FindBy(xpath = "//*[@id=\"group_4name\"]")
     WebElement rootCatNameField;
@@ -41,40 +44,66 @@ public class ManageCategoryPage {
     WebElement saveCategoryButton;
     @FindBy(xpath = "//*[contains(text(),'The category has been saved.')]")
     WebElement successMessage;
-    @FindBy(xpath = "(//select[@id='store_switcher'])[1]")
-    WebElement storeSwitcher;
+    @FindBy(xpath = "//*[@id=\"group_4meta_title\"]")
+    WebElement editPageTitle;
+    @FindBy(xpath = "//*[@id=\"extdd-176\"]")
+    WebElement selectCategory;
+    @FindBy(xpath = "//span[text()='Save Category']")
+    WebElement editSaveCatButton;
 
 
 
 
 
-    public void manageCategoriesLink() throws InterruptedException {
+    public void addRootCategory() {
         functionPage.waitForElement(catalogLink);
         actions.moveToElement(catalogLink).click(manageCategoriesLink).perform();
-        Thread.sleep(3000);
-        functionPage.waitForElement(rootCatNameField);
-        functionPage.implicitlyWait();
-        rootCatNameField.sendKeys("Team1Test");
+        functionPage.sleep(1);
+        rootCatNameField.sendKeys(TestBase.readFromConfigProperties(configFile, "addRootName"));
         functionPage.waitForElement(isActive);
         Select sel = new Select(isActive);
-        sel.selectByIndex(1);
-        functionPage.waitForElement(descriptionField);
-        descriptionField.sendKeys("This is our Team1 Add Root Category Test");
+        sel.selectByValue("1");
+        descriptionField.sendKeys(TestBase.readFromConfigProperties(configFile, "addRootDescription"));
         saveCategoryButton.click();
 
     }
 
-        public boolean verifySuccessMessage () {
-            functionPage.waitForElement(successMessage);
-            if (successMessage.getText().contains("The category has been saved")){
-                System.out.println("Test Passed");
-                return true;
-            }else{
-                System.out.println("Test Failed");
-                return false;
-            }
+    public boolean verifySuccessMessage(){
+        functionPage.waitForElement(successMessage);
+        if(successMessage.isDisplayed()){
+            Log4j.info("Test Passed");
+            return true;
 
-        }
+        }else
+            Log4j.error("Test Failed!!!");
+           return false;
+
+    }
+
+    public void editRootCategory(){
+        functionPage.waitForElement(catalogLink);
+        actions.moveToElement(catalogLink).click(manageCategoriesLink).perform();
+        //functionPage.sleep(1);
+        functionPage.waitForElement(selectCategory);
+        selectCategory.click();
+        functionPage.sleep(1);
+        editPageTitle.sendKeys(TestBase.readFromConfigProperties(configFile,"pageTitle"));
+        editSaveCatButton.click();
+
+    }
+
+    public boolean verifyEditSuccessMessage(){
+        functionPage.waitForElement(successMessage);
+        if(successMessage.isDisplayed()){
+            Log4j.info("Test Passed");
+            return true;
+
+        }else
+            Log4j.error("Test Failed!!!");
+        return false;
+
+    }
+
 
 
 
