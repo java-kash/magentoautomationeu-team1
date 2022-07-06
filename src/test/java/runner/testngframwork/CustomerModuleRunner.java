@@ -15,6 +15,7 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
+    CustomerGroupsPage customerGroupsPage;
     String configFile = "config-qa.properties";
 
 
@@ -34,6 +35,7 @@ public class CustomerModuleRunner extends TestBase {
         newCustomerPage = new NewCustomerPage(driver);
         functionPage = new FunctionPage(driver);
         editCustomerPage = new EditCustomerPage(driver);
+        customerGroupsPage=new CustomerGroupsPage(driver);
 
     }
         @BeforeClass
@@ -82,6 +84,22 @@ public class CustomerModuleRunner extends TestBase {
             customerDashboardPage.filterCustomerByState();
         }
 
+        @Test(description = "Customer Manager Can Add New Customer Groups",dataProvider = "customerGroupInfo")
+        public void addCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.clickOnAddNewCustomerGroup(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
+
+        }
+
+
+        @DataProvider
+        public Object[][] customerGroupInfo(){
+        Object[][] data=new Object[][]{
+                {new TestDataHolder("master")}
+        };
+         return data;
+        }
 
 
         @AfterSuite

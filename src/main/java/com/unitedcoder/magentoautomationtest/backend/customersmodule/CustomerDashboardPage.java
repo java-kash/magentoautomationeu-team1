@@ -36,7 +36,7 @@ public class CustomerDashboardPage extends TestBase {
     @FindBy(css = "(//span[text()='Add New Customer'])[1]")
     WebElement aadNewCustomerButton;
 
-    @FindBy(xpath ="//a[@class='active']" ) ////span[text()='Customers']
+    @FindBy(xpath ="//span[text()='Customers']" )
     WebElement customersLink;
 
     @FindBy(xpath ="//span[text()='Manage Customers']")
@@ -127,6 +127,10 @@ public class CustomerDashboardPage extends TestBase {
             return false;
     }
     public void clickCustomerGroupsLink(){
+        functionPage.waitForElement(customersLink);
+        actions.moveToElement(customersLink).perform();
+        functionPage.waitForElement(customerGroupsLink);
+        customerGroupsLink.click();
 
 
         }
