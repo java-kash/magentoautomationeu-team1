@@ -23,14 +23,12 @@ public class CustomerModuleRunner extends TestBase {
     public void setUp(ITestContext context) {
         browserSetUp(readFromConfigProperties(configFile, "backend_url"));
         Log4j.startTestCase("Magento_Customer_Module_Automation_Test_Start");
-        context.setAttribute("driver",driver);
-        customerManagerLogin=new CustomerManagerLogin(driver);
-        customerDashboardPage=new CustomerDashboardPage(driver);
-        newCustomerPage=new NewCustomerPage(driver);
-        functionPage=new FunctionPage(driver);
-        editCustomerPage=new EditCustomerPage(driver);
-        addNewAddressPage=new AddNewAddressPage(driver);
-
+        context.setAttribute("driver", driver);
+        customerManagerLogin = new CustomerManagerLogin(driver);
+        customerDashboardPage = new CustomerDashboardPage(driver);
+        newCustomerPage = new NewCustomerPage(driver);
+        functionPage = new FunctionPage(driver);
+        editCustomerPage = new EditCustomerPage(driver);
     }
     @BeforeClass
     public void loginCustomerModule() {
@@ -88,17 +86,7 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.filterCustomerByState();
     }
 
-    @Test(description = " Customer manager should be able to filter by email")
-    public void FilterCustomerByEmails(){
-        customerDashboardPage.filteredByEmails();
-    }
 
-    @Test(description = "Customer manager should be able to filtered by Email")
-    public void custFilteredByEmail(){
-        customerDashboardPage.filteredByEmails();
-        customerDashboardPage.verifyCustByEmail();
-        Assert.assertTrue(customerDashboardPage.verifyCustByEmail());
-    }
 
     @AfterSuite
     public void tearDown() {
