@@ -1,6 +1,7 @@
 package runner.testngframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.catalogmodule.CatalogManagerLogInPage;
+import com.unitedcoder.magentoautomationtest.backend.catalogmodule.FilterProductsByCategoryPage;
 import com.unitedcoder.magentoautomationtest.backend.catalogmodule.ManageCategoryPage;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
@@ -16,6 +17,7 @@ public class CatalogModuleRunner extends TestBase {
     static CatalogManagerLogInPage catalogManagerLogInPage;
     String configFile = "config-qa.properties";
     ManageCategoryPage manageCategoryPage;
+    FilterProductsByCategoryPage filterProductsByCategoryPage;
 
     @BeforeSuite
     public void setUp(){
@@ -24,7 +26,7 @@ public class CatalogModuleRunner extends TestBase {
         catalogManagerLogInPage = new CatalogManagerLogInPage(driver);
         functionPage=new FunctionPage(driver);
         manageCategoryPage =new ManageCategoryPage(driver);
-
+        filterProductsByCategoryPage=new FilterProductsByCategoryPage(driver);
 
     }
     @BeforeClass
@@ -39,6 +41,16 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
 
     }
+
+    @Test
+    public void filterProductsByCategory(){
+        filterProductsByCategoryPage.openCategoryList();
+        filterProductsByCategoryPage.viewLimit();
+        filterProductsByCategoryPage.filterByCategoryName();
+        Assert.assertTrue(filterProductsByCategoryPage.verify());
+    }
+
+
 
     @Test
     public void editRootCategory(){
