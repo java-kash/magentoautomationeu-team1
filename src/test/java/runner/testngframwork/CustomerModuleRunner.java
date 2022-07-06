@@ -16,13 +16,14 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
+    AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
     FilterCustomersPage filterCustomersPage;
 
 
     @BeforeSuite()
-    public void setUp(ITestContext context){
-        browserSetUp(readFromConfigProperties(configFile,"backend_url"));
+    public void setUp(ITestContext context) {
+        browserSetUp(readFromConfigProperties(configFile, "backend_url"));
         Log4j.startTestCase("Magento_Customer_Module_Automation_Test_Start");
         context.setAttribute("driver",driver);
         customerManagerLogin=new CustomerManagerLogin(driver);
@@ -30,9 +31,8 @@ public class CustomerModuleRunner extends TestBase {
         newCustomerPage=new NewCustomerPage(driver);
         functionPage=new FunctionPage(driver);
         editCustomerPage=new EditCustomerPage(driver);
+        addNewAddressPage=new AddNewAddressPage(driver);
         filterCustomersPage=new FilterCustomersPage(driver);
-
-
     }
     @BeforeClass
     public void loginCustomerModule(){
@@ -67,8 +67,18 @@ public class CustomerModuleRunner extends TestBase {
 
     }
 
-    @Test(description = "Customer Manager can export customers -abdukerim")
-    public void exportCustomers() {
+
+    @Test(description = "Customer Manager can add a new address for a customer")
+    public void addNewAddress(){
+        addNewAddressPage.selectCustomer();
+        addNewAddressPage.addNewAddress();
+        Assert.assertTrue(addNewAddressPage.verifyAddAddress());
+    }
+
+
+
+    @Test (description = "Customer Manager can export customers -abdukerim")
+    public void exportCustomers(){
         customerDashboardPage.exportCustomers();
         Assert.assertTrue(customerDashboardPage.verifyExportCustpmers());
     }
