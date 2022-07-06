@@ -1,7 +1,6 @@
 package com.unitedcoder.magentoautomationtest.backend.storemodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

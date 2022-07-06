@@ -9,10 +9,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
 
 
-public class StoreModule extends TestBase {
+public class StoreModuleRunner extends TestBase {
     FunctionPage functionPage;
     static StoreModuleLogin storeModuleLogin;
     String configFile = "config-qa.properties";
