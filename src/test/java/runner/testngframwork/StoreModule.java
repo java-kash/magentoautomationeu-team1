@@ -23,7 +23,7 @@ public class StoreModule extends TestBase {
       storeModuleLogin=new StoreModuleLogin(driver);
 
   }
-  @Test
+  @BeforeClass
     public void loginStoreManagerModule(){
       Assert.assertTrue(storeModuleLogin.verifyLoginPageOpened());
       storeModuleLogin.login();
