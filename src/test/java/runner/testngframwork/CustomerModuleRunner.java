@@ -18,20 +18,24 @@ public class CustomerModuleRunner extends TestBase {
     EditCustomerPage editCustomerPage;
     AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
+    FilterCustomersPage filterCustomersPage;
+
 
     @BeforeSuite()
     public void setUp(ITestContext context) {
         browserSetUp(readFromConfigProperties(configFile, "backend_url"));
         Log4j.startTestCase("Magento_Customer_Module_Automation_Test_Start");
-        context.setAttribute("driver", driver);
-        customerManagerLogin = new CustomerManagerLogin(driver);
-        customerDashboardPage = new CustomerDashboardPage(driver);
-        newCustomerPage = new NewCustomerPage(driver);
-        functionPage = new FunctionPage(driver);
-        editCustomerPage = new EditCustomerPage(driver);
+        context.setAttribute("driver",driver);
+        customerManagerLogin=new CustomerManagerLogin(driver);
+        customerDashboardPage=new CustomerDashboardPage(driver);
+        newCustomerPage=new NewCustomerPage(driver);
+        functionPage=new FunctionPage(driver);
+        editCustomerPage=new EditCustomerPage(driver);
+        addNewAddressPage=new AddNewAddressPage(driver);
+        filterCustomersPage=new FilterCustomersPage(driver);
     }
     @BeforeClass
-    public void loginCustomerModule() {
+    public void loginCustomerModule(){
         Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
         customerManagerLogin.login();
     }
@@ -43,14 +47,14 @@ public class CustomerModuleRunner extends TestBase {
     }*/
 
     @Test(description = "Customer Manager can add a new customer ")
-    public void addCustomer() {
+    public void addCustomer(){
         customerDashboardPage.clickOnAddNewCustomerButton();
         newCustomerPage.addNewCustomerPage();
         Assert.assertTrue(newCustomerPage.verifyAddNewCustomer());
     }
 
     @Test(description = "Customer Manager can update an existing customer ")
-    public void upDataCustomer() {
+    public void upDataCustomer(){
         customerDashboardPage.clickOnCustomerEditIcon();
         editCustomerPage.editCustomerInformation();
         Assert.assertTrue(true);
@@ -87,6 +91,11 @@ public class CustomerModuleRunner extends TestBase {
     }
 
 
+    @Test(description = "Customer Manager can filter customers by Group")
+    public void CustomerMangerGroup(){
+       filterCustomersPage.ManagerFilter();
+        filterCustomersPage.verifyGroups();
+    }
 
     @AfterSuite
     public void tearDown() {

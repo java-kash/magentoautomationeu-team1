@@ -106,21 +106,19 @@ public class CustomerDashboardPage extends TestBase {
             return false;
     }
 
-    public void clickOnAddNewCustomerButton() {
+    public void clickOnAddNewCustomerButton(){
         functionPage.waitForElement(aadNewCustomerButton);
         aadNewCustomerButton.click();
     }
-
-    public boolean clickOnMagentoLogoBackDashboard() {
+    public boolean clickOnMagentoLogoBackDashboard(){
         functionPage.waitForElement(customerMagentoDashboard);
         customerMagentoDashboard.click();
         functionPage.waitForElement(manageCustomersTable);
-        if (manageCustomersTable.isDisplayed()) {
+        if(manageCustomersTable.isDisplayed()){
             return true;
-        } else
+        }else
             return false;
     }
-
     // i need verify Add
     public boolean clickOnCustomerEditIcon() {
         WebElement firstListCustomer = cutomerEditIcon.get(1);
