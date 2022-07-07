@@ -3,55 +3,62 @@ package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
+
+import java.util.List;
 
 public class FilterCustomersPage {
     WebDriver driver;
     FunctionPage functionPage;
-    public FilterCustomersPage(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
-        functionPage=new FunctionPage(driver);
+
+    public FilterCustomersPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionPage = new FunctionPage(driver);
     }
 
-        @FindBy (xpath ="//*[@id='customerGrid_filter_group'][1]")
-        WebElement Groups;
-        @FindBy(xpath="//*[text()='Search']")
-        WebElement SearchButton;
-        @FindBy(xpath =" //*[@id='customerGrid_table']/tbody/tr/td[5]" )
-        WebElement Groupnaam;
+    @FindBy(xpath = "//*[@id='customerGrid_filter_group'][1]")
+    WebElement Groups;
+    @FindBy(xpath = "//*[text()='Search']")
+    WebElement SearchButton;
+    @FindAll(
+            @FindBy(xpath = " //*[@id='customerGrid_table']/tbody/tr"))
+    List<WebElement> Groupnaams;
+    String name = CustomerDropDownSelect.Private.toString();
 
-    public void ManagerFilter(){
+    public void ManagerFilter() {
         functionPage.waitForElement(Groups);
         Groups.click();
-        Select select=new Select(Groups);
-        select.selectByVisibleText("Private");
+        Select select = new Select(Groups);
+        select.selectByVisibleText(CustomerDropDownSelect.Private.name());
         functionPage.waitForElement(SearchButton);
         SearchButton.click();
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    }
+
+    public boolean verifyGroups() {
+         functionPage.sleep(1);
+        System.out.println("name                                               is"+name );
+        int count1 = Groupnaams.size();
+        int count = 0;
+        for (WebElement list : Groupnaams) {
+            list.getText();
+            System.out.println(list.getText());
+
+            if (name == list.getText()) {
+                System.out.println(name);
+                count++;
+            }
+        }
+        if (count == count1) {
+            return true;
+        } else
+            return false;
         }
 
 
-
-    }
-    public boolean verifyGroups(){
-        functionPage.waitForElement(Groups);
-        functionPage.waitForElement(Groupnaam);
-        if(Groups==Groupnaam){
-            return true;
-        }else
-            return false;
-
     }
 
-
-
-
-}

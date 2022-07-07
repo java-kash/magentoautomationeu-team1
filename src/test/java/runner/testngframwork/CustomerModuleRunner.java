@@ -91,7 +91,7 @@ public class CustomerModuleRunner extends TestBase {
     }
 
 
-    @Test(description = "Customer Manager can filter customers by Grou")
+    @Test(description = "Customer Manager can filter customers by Group")
     public void CustomerMangerGroup(){
        filterCustomersPage.ManagerFilter();
         filterCustomersPage.verifyGroups();
