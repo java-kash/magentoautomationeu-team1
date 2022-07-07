@@ -1,7 +1,6 @@
 package com.unitedcoder.magentoautomationtest.frontend.publicmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;

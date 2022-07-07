@@ -1,8 +1,6 @@
 package runner.testngframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.catalogmodule.CatalogManagerLogInPage;
-import com.unitedcoder.magentoautomationtest.backend.catalogmodule.FilterProductsByCategoryPage;
-import com.unitedcoder.magentoautomationtest.backend.catalogmodule.ManageCategoryPage;
+import com.unitedcoder.magentoautomationtest.backend.catalogmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -18,6 +16,9 @@ public class CatalogModuleRunner extends TestBase {
     String configFile = "config-qa.properties";
     ManageCategoryPage manageCategoryPage;
     FilterProductsByCategoryPage filterProductsByCategoryPage;
+    CatalogDashboardPage catalogDashboardPage;
+    ManagerAttributesPage managerAttributesPage;
+    NewProductAttributePage newProductAttributePage;
 
     @BeforeSuite
     public void setUp(){
@@ -27,6 +28,9 @@ public class CatalogModuleRunner extends TestBase {
         functionPage=new FunctionPage(driver);
         manageCategoryPage =new ManageCategoryPage(driver);
         filterProductsByCategoryPage=new FilterProductsByCategoryPage(driver);
+        catalogDashboardPage = new CatalogDashboardPage(driver);
+        managerAttributesPage = new ManagerAttributesPage(driver);
+        newProductAttributePage = new NewProductAttributePage(driver);
 
     }
     @BeforeClass
@@ -56,6 +60,16 @@ public class CatalogModuleRunner extends TestBase {
     public void editRootCategory(){
         manageCategoryPage.editRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
+    }
+
+    //Kadirdan
+    @Test
+    public void addNewAttribute(){
+        catalogDashboardPage.navigateToManageAttributesPage();
+        managerAttributesPage.clickOnAddNewAttributeButton();
+        newProductAttributePage.enterOrSelectValidValues();
+        Assert.assertTrue(newProductAttributePage.verifyNewAttributeSuccessMessages());
+        Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList());
     }
 
 

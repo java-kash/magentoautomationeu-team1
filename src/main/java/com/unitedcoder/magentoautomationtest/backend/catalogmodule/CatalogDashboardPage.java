@@ -3,7 +3,9 @@ package com.unitedcoder.magentoautomationtest.backend.catalogmodule;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CatalogDashboardPage {
     WebDriver driver;
@@ -11,6 +13,8 @@ public class CatalogDashboardPage {
 
     public CatalogDashboardPage(WebDriver driver) {
         this.driver = driver;
+        functionPage = new FunctionPage(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath ="//span[text()='Catalog']")
@@ -64,6 +68,23 @@ public class CatalogDashboardPage {
     @FindBy(xpath ="//span[text()='Products Reviews']")
     WebElement productsReviewsLink;
 
+    //Kadirdan
+    @FindBy(xpath = "//*[@class='active']")
+    WebElement catalogTab;
+    @FindBy(linkText = "Attributes")
+    WebElement attributesOption;
+    @FindBy(linkText = "Manage Attributes")
+    WebElement manageAttributesOption;
 
+    //Kadirdan
+    public void navigateToManageAttributesPage() {
+        Actions actions = new Actions(driver);
+        functionPage.waitForElement(catalogTab);
+        actions.moveToElement(catalogTab).perform();
+        functionPage.waitForElement(attributesOption);
+        actions.moveToElement(attributesOption).perform();
+        functionPage.waitForElement(manageAttributesOption);
+        actions.moveToElement(manageAttributesOption).click().perform();
+    }
 
 }
