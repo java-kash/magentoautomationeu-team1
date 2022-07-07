@@ -52,9 +52,7 @@ public class MyDashboardPage {
     @FindBy(css = ".product-name>span")
     WebElement productName;
 
-    //ayimsa
-    @FindBy(xpath = "//a[text()='My Product Reviews']")
-    WebElement myProductReviewLink;
+
     //Zulfikar
     @FindBy(xpath = "//*[@id=\"subscription\"]")
     WebElement generalSubsIsChecked;

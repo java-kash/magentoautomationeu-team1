@@ -50,6 +50,22 @@ public class ManageCategoryPage {
     WebElement selectCategory;
     @FindBy(xpath = "//span[text()='Save Category']")
     WebElement editSaveCatButton;
+    @FindBy(xpath = "//span[text()='Add Subcategory']")
+    WebElement addSubCategoryLink;
+    @FindBy(css = "input[name='general[name]']")
+    WebElement subcategoryName;
+    @FindBy(id = "group_4is_active")
+    WebElement isActiveSub;
+    @FindBy(id = "group_4meta_title")
+    WebElement pageTitleField;
+    @FindBy(id = "group_4meta_keywords")
+    WebElement metaKeywordsField;
+    @FindBy(css = "#group_4include_in_menu")
+    WebElement includeInNavigationField;
+    @FindBy(xpath = "//span[text()='Save Category']")
+    WebElement saveCategorySub;
+    @FindBy(css = "#messages")
+    WebElement subCategorySavedMessage;
 
 
 
@@ -104,6 +120,36 @@ public class ManageCategoryPage {
 
     }
 
+    public boolean addSubcategory() throws InterruptedException {
+        // functionPage.waitForElement(catalogLink);
+        // actions.moveToElement(catalogLink).click(manageCategoriesLink).perform();
+        WebElement rootCategoriesLink=driver.findElement
+                (By.xpath(String.format("//span[contains(text(),'%s (0)')]",TestBase.readFromConfigProperties(configFile,"rootcategory-name"))));
+        functionPage.waitForElement(rootCategoriesLink);
+        rootCategoriesLink.click();
+        functionPage.waitForElement(addSubCategoryLink);
+        actions.moveToElement(addSubCategoryLink).click().perform();
+        Thread.sleep(3000);
+        functionPage.waitForElement(subcategoryName);
+        subcategoryName.sendKeys(TestBase.readFromConfigProperties(configFile, "subcategory_name"));
+        functionPage.waitForElement(isActiveSub);
+        Select selectIsActive = new Select(isActiveSub);
+        selectIsActive.selectByIndex(1);
+        functionPage.waitForElement(descriptionField);
+        descriptionField.sendKeys(TestBase.readFromConfigProperties(configFile, "subcategory_description"));
+        functionPage.waitForElement(pageTitleField);
+        descriptionField.sendKeys(TestBase.readFromConfigProperties(configFile, "subcategory_pagetitle"));
+        functionPage.waitForElement(metaKeywordsField);
+        descriptionField.sendKeys(TestBase.readFromConfigProperties(configFile, "subcategory_metakeyword"));
+        functionPage.waitForElement(saveCategorySub);
+        saveCategorySub.click();
+        functionPage.waitForElement(subCategorySavedMessage);
+        if (subCategorySavedMessage.getText().contains("The category has been saved."))
+            return true;
+        else
+            return false;
+
+    }
 
 
 
