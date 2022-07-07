@@ -5,6 +5,7 @@ import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -20,11 +21,15 @@ public class CustomerDashboardPage extends TestBase {
     String configFile = "config-qa.properties";
     String webSite;
     String countryName;
+    Actions actions;
 
     public CustomerDashboardPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
+        PageFactory.initElements(driver,this);
+        functionPage=new FunctionPage(driver);
+        actions=new Actions(driver);
     }
 
     @FindBy(css = "#messages+.content-header>table>tbody>tr>td+td>button")
@@ -89,11 +94,7 @@ public class CustomerDashboardPage extends TestBase {
     List<WebElement> filteredTableListRow;
     @FindBy(xpath = "//*[@title='Reset Filter']")
     WebElement resetFilterButton;
-    //Zulfikar
-    @FindBy(xpath = "//*[@id=\"customerGrid_filter_email\"]")
-    WebElement emailFilterField;
-    @FindBy(css = "tr>td:nth-child(4)")
-    WebElement custEmail;
+
 
     public void exportCustomers() {
         functionPage.waitForElement(SelectAll);
@@ -124,6 +125,14 @@ public class CustomerDashboardPage extends TestBase {
         } else
             return false;
     }
+    public void clickCustomerGroupsLink(){
+        functionPage.waitForElement(CustomersLink);
+        actions.moveToElement(CustomersLink).perform();
+        functionPage.waitForElement(customerGroupsLink);
+        customerGroupsLink.click();
+
+
+        }
 
     // i need verify Add
     public boolean clickOnCustomerEditIcon() {
@@ -180,22 +189,5 @@ public class CustomerDashboardPage extends TestBase {
         Assert.assertEquals(allWebSiteValue.size(), filteredTableListRow.size());
     }
 
-    public void filteredByEmails() {
-        functionPage.waitForElement(emailFilterField);
-        emailFilterField.sendKeys("johnnytrigger@gmail.com");
-        functionPage.waitForElement(searchButton);
-        searchButton.click();
-    }
 
-    public boolean verifyCustByEmail() {
-        functionPage.waitForElement(custEmail);
-        if (driver.getPageSource().contains(custEmail.getText())) {
-            System.out.println("Test Passed");
-            return true;
-        } else{
-            System.out.println("Test Failed");
-            return false;
-        }
-
-    }
 }

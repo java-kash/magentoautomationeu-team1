@@ -1,10 +1,7 @@
 package runner.testngframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.customersmodule.*;
-import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.Log4j;
-import com.unitedcoder.magentoautomationtest.utility.TestBase;
-import com.unitedcoder.magentoautomationtest.utility.TestNGResultListener;
+import com.unitedcoder.magentoautomationtest.utility.*;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -16,8 +13,11 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
+    CustomerGroupsPage customerGroupsPage;
     AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
+    FilterCustomersPage filterCustomersPage;
+
 
     @BeforeSuite()
     public void setUp(ITestContext context) {
@@ -30,7 +30,7 @@ public class CustomerModuleRunner extends TestBase {
         functionPage=new FunctionPage(driver);
         editCustomerPage=new EditCustomerPage(driver);
         addNewAddressPage=new AddNewAddressPage(driver);
-
+        filterCustomersPage=new FilterCustomersPage(driver);
     }
     @BeforeClass
     public void loginCustomerModule() {
@@ -58,10 +58,10 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(true);
     }
 
-    @Test
-    public void deleteCustomer() {
-        editCustomerPage.deleteCustomer();
-        Assert.assertTrue(true);
+        @Test(enabled = false)
+        public void deleteCustomer () {
+            editCustomerPage.deleteCustomer();
+            Assert.assertTrue(true);
 
     }
 
@@ -88,16 +88,27 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.filterCustomerByState();
     }
 
-    @Test(description = " Customer manager should be able to filter by email")
-    public void FilterCustomerByEmails(){
-        customerDashboardPage.filteredByEmails();
-    }
+        @Test(description = "Customer Manager Can Add New Customer Groups",dataProvider = "customerGroupInfo")
+        public void addCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.clickOnAddNewCustomerGroup(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
 
-    @Test(description = "Customer manager should be able to filtered by Email")
-    public void custFilteredByEmail(){
-        customerDashboardPage.filteredByEmails();
-        customerDashboardPage.verifyCustByEmail();
-        Assert.assertTrue(customerDashboardPage.verifyCustByEmail());
+        }
+
+
+        @DataProvider
+        public Object[][] customerGroupInfo(){
+        Object[][] data=new Object[][]{
+                {new TestDataHolder("master")}
+        };
+         return data;
+        }
+
+    @Test(description = "Customer Manager can filter customers by Group")
+    public void CustomerMangerGroup(){
+       filterCustomersPage.ManagerFilter();
+        filterCustomersPage.verifyGroups();
     }
 
     @AfterSuite
