@@ -1,6 +1,5 @@
 package runner.testngframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.catalogmodule.CatalogDashboardPage;
 import com.unitedcoder.magentoautomationtest.backend.catalogmodule.CatalogManagerLogInPage;
 import com.unitedcoder.magentoautomationtest.backend.catalogmodule.FilterProductsByCategoryPage;
 import com.unitedcoder.magentoautomationtest.backend.catalogmodule.ManageCategoryPage;
@@ -19,7 +18,7 @@ public class CatalogModuleRunner extends TestBase {
     String configFile = "config-qa.properties";
     ManageCategoryPage manageCategoryPage;
     FilterProductsByCategoryPage filterProductsByCategoryPage;
-    CatalogDashboardPage catalogDashboardPage;
+
     @BeforeSuite
     public void setUp(){
         browserSetUp(readFromConfigProperties(configFile,"backend_url"));
@@ -28,7 +27,6 @@ public class CatalogModuleRunner extends TestBase {
         functionPage=new FunctionPage(driver);
         manageCategoryPage =new ManageCategoryPage(driver);
         filterProductsByCategoryPage=new FilterProductsByCategoryPage(driver);
-        catalogDashboardPage=new CatalogDashboardPage(driver);
 
     }
     @BeforeClass
@@ -43,11 +41,6 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
 
     }
-    @Test(description = "add subcategory")
-    public void addSubcategoryTest() throws InterruptedException {
-        catalogDashboardPage.clickOnManageCategories();
-        Assert.assertTrue( manageCategoryPage.addSubcategory());
-    }
 
     @Test
     public void filterProductsByCategory(){
@@ -56,7 +49,6 @@ public class CatalogModuleRunner extends TestBase {
         filterProductsByCategoryPage.filterByCategoryName();
         Assert.assertTrue(filterProductsByCategoryPage.verify());
     }
-
 
 
 

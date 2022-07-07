@@ -3,19 +3,14 @@ package com.unitedcoder.magentoautomationtest.backend.catalogmodule;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class CatalogDashboardPage {
     WebDriver driver;
     FunctionPage functionPage;
-    Actions actions;
+
     public CatalogDashboardPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        actions=new Actions(driver);
-        functionPage=new FunctionPage(driver);
     }
 
     @FindBy(xpath ="//span[text()='Catalog']")
@@ -69,12 +64,6 @@ public class CatalogDashboardPage {
     @FindBy(xpath ="//span[text()='Products Reviews']")
     WebElement productsReviewsLink;
 
-    public void clickOnManageCategories()  {
-        functionPage.waitForElement(catalogLink);
-        catalogLink.click();
-        functionPage.waitForElement(manageCategoriesLink);
-        manageCategoriesLink.click();
-    }
 
 
 }
