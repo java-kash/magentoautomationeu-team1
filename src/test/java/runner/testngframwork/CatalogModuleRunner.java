@@ -4,12 +4,11 @@ import com.unitedcoder.magentoautomationtest.backend.catalogmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
+import com.unitedcoder.magentoautomationtest.utility.TestNGResultListener;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
+@Listeners(TestNGResultListener.class)
 public class CatalogModuleRunner extends TestBase {
     FunctionPage functionPage;
     static CatalogManagerLogInPage catalogManagerLogInPage;
@@ -55,11 +54,26 @@ public class CatalogModuleRunner extends TestBase {
     }
 
 
-
-    @Test
+    @Test()
     public void editRootCategory(){
         manageCategoryPage.editRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
+    }
+
+    @Test(description = "add subcategory")
+    public void addSubcategoryTest() throws InterruptedException {
+        catalogDashboardPage.clickOnManageCategories();
+        Assert.assertTrue( manageCategoryPage.addSubcategory());
+    }
+
+    @Test(description = "edit subcategory",dependsOnMethods = "addSubcategoryTest")
+    public void editSubCategoryTest(){
+        catalogDashboardPage.clickOnManageCategories();
+        Assert.assertTrue(manageCategoryPage.editSubCategory());
+    }
+    @Test(description = "delete subcategory test",dependsOnMethods = "editSubCategoryTest")
+    public void deleteSubcategoryTest(){
+        Assert.assertTrue(manageCategoryPage.deleteSubcategory());
     }
 
     //Kadirdan
