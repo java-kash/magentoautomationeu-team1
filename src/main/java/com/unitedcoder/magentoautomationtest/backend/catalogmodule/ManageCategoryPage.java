@@ -50,6 +50,8 @@ public class ManageCategoryPage {
     WebElement selectCategory;
     @FindBy(xpath = "//span[text()='Save Category']")
     WebElement editSaveCatButton;
+    @FindBy(xpath = "//*[contains(text(), 'Team1test-Zulfikar')]")
+    WebElement allStores;
 
 
 
@@ -83,12 +85,13 @@ public class ManageCategoryPage {
     public void editRootCategory(){
         functionPage.waitForElement(catalogLink);
         actions.moveToElement(catalogLink).click(manageCategoriesLink).perform();
-        //functionPage.sleep(1);
-        functionPage.waitForElement(selectCategory);
-        selectCategory.click();
+        functionPage.sleep(1);
+        functionPage.waitForElement(allStores);
+        allStores.click();
         functionPage.sleep(1);
         editPageTitle.sendKeys(TestBase.readFromConfigProperties(configFile,"pageTitle"));
         editSaveCatButton.click();
+
 
     }
 
