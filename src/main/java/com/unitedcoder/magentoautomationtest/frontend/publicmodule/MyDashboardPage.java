@@ -46,6 +46,8 @@ public class MyDashboardPage {
 
     @FindBy(xpath = "//ul[@class='messages']//span")
     WebElement successMessage;
+    @FindBy(linkText = "My Product Reviews")
+    WebElement myProductReviewLink;
 
     @FindBy(css = ".product-name>span")
     WebElement productName;
@@ -115,6 +117,11 @@ public class MyDashboardPage {
     public void clickOnNewsLetterSubscriptions() {
         functionPage.waitForElement(newsletterSubscriptionsLink);
         newsletterSubscriptionsLink.click();
+    }
+    //ayimsa
+    public void clickOnMyProductReviews(){
+        functionPage.waitForElement(myProductReviewLink);
+        myProductReviewLink.click();
     }
 
     public void clickOnMyAccountLink() {
