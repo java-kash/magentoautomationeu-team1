@@ -1,10 +1,7 @@
 package runner.testngframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.customersmodule.*;
-import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.Log4j;
-import com.unitedcoder.magentoautomationtest.utility.TestBase;
-import com.unitedcoder.magentoautomationtest.utility.TestNGResultListener;
+import com.unitedcoder.magentoautomationtest.utility.*;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -16,6 +13,7 @@ public class CustomerModuleRunner extends TestBase {
     CustomerDashboardPage customerDashboardPage;
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
+    CustomerGroupsPage customerGroupsPage;
     AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
     FilterCustomersPage filterCustomersPage;
@@ -35,7 +33,7 @@ public class CustomerModuleRunner extends TestBase {
         filterCustomersPage=new FilterCustomersPage(driver);
     }
     @BeforeClass
-    public void loginCustomerModule(){
+    public void loginCustomerModule() {
         Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
         customerManagerLogin.login();
     }
@@ -47,23 +45,23 @@ public class CustomerModuleRunner extends TestBase {
     }*/
 
     @Test(description = "Customer Manager can add a new customer ")
-    public void addCustomer(){
+    public void addCustomer() {
         customerDashboardPage.clickOnAddNewCustomerButton();
         newCustomerPage.addNewCustomerPage();
         Assert.assertTrue(newCustomerPage.verifyAddNewCustomer());
     }
 
     @Test(description = "Customer Manager can update an existing customer ")
-    public void upDataCustomer(){
+    public void upDataCustomer() {
         customerDashboardPage.clickOnCustomerEditIcon();
         editCustomerPage.editCustomerInformation();
         Assert.assertTrue(true);
     }
 
-    @Test
-    public void deleteCustomer() {
-        editCustomerPage.deleteCustomer();
-        Assert.assertTrue(true);
+        @Test(enabled = false)
+        public void deleteCustomer () {
+            editCustomerPage.deleteCustomer();
+            Assert.assertTrue(true);
 
     }
 
@@ -90,6 +88,22 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.filterCustomerByState();
     }
 
+        @Test(description = "Customer Manager Can Add New Customer Groups",dataProvider = "customerGroupInfo")
+        public void addCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.clickOnAddNewCustomerGroup(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
+
+        }
+
+
+        @DataProvider
+        public Object[][] customerGroupInfo(){
+        Object[][] data=new Object[][]{
+                {new TestDataHolder("master")}
+        };
+         return data;
+        }
 
     @Test(description = "Customer Manager can filter customers by Group")
     public void CustomerMangerGroup(){

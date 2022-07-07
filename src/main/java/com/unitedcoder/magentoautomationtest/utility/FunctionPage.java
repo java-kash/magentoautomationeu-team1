@@ -37,6 +37,17 @@ public  class FunctionPage {
                 .ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+    public void sleep(int second){
+        try {
+            Thread.sleep(second*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public void waitForAlertPresent(){
+        WebDriverWait wai=new WebDriverWait(driver,timeout);
+        wai.until(ExpectedConditions.alertIsPresent());
+    }
 
     public String generateFirstName(){
         String firstName=faker.name().firstName();
@@ -80,12 +91,4 @@ public  class FunctionPage {
         return middleName;
     }
 
-
-    public void sleep(int second){
-        try {
-            Thread.sleep(second*1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }
