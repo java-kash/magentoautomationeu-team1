@@ -15,8 +15,8 @@ public class SalesModuleRunner extends TestBase {
     FunctionPage functionPage;
     SalesManagerLogin salesManagerLogin;
     String configFile = "config-qa.properties";
-    String username=TestBase.readFromConfigProperties(configFile, "sm-username");
-    String password=TestBase.readFromConfigProperties(configFile, "sm-password");
+    String username = TestBase.readFromConfigProperties(configFile, "sm-username");
+    String password = TestBase.readFromConfigProperties(configFile, "sm-password");
 
     @BeforeSuite()
     public void setUp(ITestContext context) {
@@ -24,22 +24,18 @@ public class SalesModuleRunner extends TestBase {
         Log4j.startTestCase("Magento_Customer_Module_Automation_Test_Start");
         context.setAttribute("driver", driver);
         functionPage = new FunctionPage(driver);
-        salesManagerLogin=new SalesManagerLogin(driver);
+        salesManagerLogin = new SalesManagerLogin(driver);
 
     }
 
-  @BeforeClass()
+    @BeforeClass()
     public void loginSalesModule() {
-salesManagerLogin.login(username,password);
-      Assert.assertTrue(salesManagerLogin.verifyLogin());
+        salesManagerLogin.login(username, password);
+        Assert.assertTrue(salesManagerLogin.verifyLogin());
     }
 
-  @Test
-  public void test1(){
-      System.out.println(10);
-  }
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         salesManagerLogin.logout();
         driver.close();
         driver.quit();
