@@ -3,7 +3,13 @@
 <suite name="Magento_UI_Automation">
     <test verbose="2" preserve-order="true"  name="catalog_Module_Test">
         <classes>
-            <class name="runner.testngframwork.CatalogModuleRunner"/>
+            <class name="runner.testngframwork.CatalogModuleRunner">
+                <methods>
+
+                </methods>
+            </class>
+
+
         </classes>
     </test>
 </suite>
