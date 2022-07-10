@@ -86,5 +86,12 @@ public class CatalogDashboardPage {
         functionPage.waitForElement(manageAttributesOption);
         actions.moveToElement(manageAttributesOption).click().perform();
     }
+    public void clickOnManageCategories()  {
+        functionPage.waitForElement(catalogLink);
+        catalogLink.click();
+        functionPage.waitForElement(manageCategoriesLink);
+        manageCategoriesLink.click();
+    }
+
 
 }
