@@ -18,6 +18,7 @@ public class CatalogModuleRunner extends TestBase {
     CatalogDashboardPage catalogDashboardPage;
     ManagerAttributesPage managerAttributesPage;
     NewProductAttributePage newProductAttributePage;
+    ViewDefaultCategoryPage viewDefaultCategoryPage;
 
     @BeforeSuite
     public void setUp(){
@@ -30,6 +31,8 @@ public class CatalogModuleRunner extends TestBase {
         catalogDashboardPage = new CatalogDashboardPage(driver);
         managerAttributesPage = new ManagerAttributesPage(driver);
         newProductAttributePage = new NewProductAttributePage(driver);
+        viewDefaultCategoryPage=new ViewDefaultCategoryPage(driver);
+
 
     }
     @BeforeClass
@@ -84,6 +87,11 @@ public class CatalogModuleRunner extends TestBase {
         newProductAttributePage.enterOrSelectValidValues();
         Assert.assertTrue(newProductAttributePage.verifyNewAttributeSuccessMessages());
         Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList());
+    }
+    @Test
+    public void viewDefaultCategory(){
+        viewDefaultCategoryPage.viewDefaultCategory();
+        Assert.assertTrue(viewDefaultCategoryPage.verifyManagerCanViewAllDefaultCategories());
     }
 
 
