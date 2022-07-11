@@ -14,6 +14,7 @@ public class CustomerModuleRunner extends TestBase {
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
     CustomerGroupsPage customerGroupsPage;
+    AssignCustomerToAGroup assignCustomerToAGroup;
     AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
     FilterCustomersPage filterCustomersPage;
@@ -31,6 +32,7 @@ public class CustomerModuleRunner extends TestBase {
         editCustomerPage=new EditCustomerPage(driver);
         addNewAddressPage=new AddNewAddressPage(driver);
         filterCustomersPage=new FilterCustomersPage(driver);
+        assignCustomerToAGroup=new AssignCustomerToAGroup(driver);
     }
     @BeforeClass
     public void loginCustomerModule() {
@@ -86,6 +88,12 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.filterCustomerByCountry();
         customerDashboardPage.filterCustomerByWebsite();
         customerDashboardPage.filterCustomerByState();
+    }
+
+    @Test(description="Customer manager can assign a customer to a group in the actions onn the all customer page")
+    public void setAssignCustomerToAGroup(){
+        assignCustomerToAGroup.assignGroup();
+        Assert.assertTrue(assignCustomerToAGroup.verifyAssignCustomerToAGroup());
     }
 
         @Test(description = "Customer Manager Can Add New Customer Groups",dataProvider = "customerGroupInfo")
