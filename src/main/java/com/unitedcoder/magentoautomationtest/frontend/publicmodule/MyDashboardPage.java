@@ -43,12 +43,12 @@ public class MyDashboardPage {
     WebElement cartLink;
     @FindBy(xpath = "//*[@title='Update Cart']")
     WebElement updateCartButton;
-
     @FindBy(xpath = "//ul[@class='messages']//span")
     WebElement successMessage;
-
     @FindBy(css = ".product-name>span")
     WebElement productName;
+    @FindBy(css="#qty")
+    WebElement productCount;
 
     //ayimsa
     @FindBy(xpath = "//a[text()='My Product Reviews']")
@@ -134,6 +134,10 @@ public class MyDashboardPage {
         listInCard.get(list).click();
         functionPage.waitForElement(productName);
         setProductsName(productName.getText());
+        int value = random.nextInt(9) + 1; // 1-10
+        functionPage.waitForElement(productCount);
+        productCount.clear();
+        productCount.sendKeys(String.valueOf(value));
         functionPage.waitForElement(updateCartButton);
         updateCartButton.click();
     }
