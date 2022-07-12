@@ -41,6 +41,10 @@ public class ManageCategoryPage {
     WebElement saveCategoryButton;
     @FindBy(xpath = "//*[contains(text(),'The category has been saved.')]")
     WebElement successMessage;
+    @FindBy(xpath = "//span[contains(text(),'Delete Category')]")
+    WebElement deleteRootCatButton;
+    @FindBy(xpath = "//span[normalize-space()='The category has been deleted.']")
+    WebElement successDeleteMsg;
     @FindBy(xpath = "//*[@id=\"group_4meta_title\"]")
     WebElement editPageTitle;
     @FindBy(xpath = "//*[@id=\"extdd-176\"]")
@@ -110,6 +114,7 @@ public class ManageCategoryPage {
         functionPage.waitForElement(allStores);
         allStores.click();
         functionPage.sleep(1);
+        editPageTitle.clear();
         editPageTitle.sendKeys(TestBase.readFromConfigProperties(configFile,"pageTitle"));
         editSaveCatButton.click();
 
@@ -127,6 +132,38 @@ public class ManageCategoryPage {
         return false;
 
     }
+
+    public void deleteRootCategory(){
+        functionPage.waitForElement(catalogLink);
+        actions.moveToElement(catalogLink).click(manageCategoriesLink).perform();
+        functionPage.sleep(1);
+        functionPage.waitForElement(allStores);
+        allStores.click();
+        functionPage.sleep(1);
+        deleteRootCatButton.click();
+        functionPage.waitForAlertPresent();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+        functionPage.sleep(1);
+
+    }
+
+    public boolean verifyDeleteSuccessMsg(){
+        functionPage.waitForElement(successDeleteMsg);
+        if(successDeleteMsg.isDisplayed()){
+            Log4j.info("Test Passed");
+            return true;
+
+        }else
+            Log4j.error("Test Failed!!!");
+        return false;
+
+    }
+
+
+
+
+
     public boolean addSubcategory() throws InterruptedException {
         WebElement rootCategoriesLink=driver.findElement
                 (By.xpath(String.format("//span[contains(text(),'%s (0)')]",TestBase.readFromConfigProperties(configFile,"rootcategory-name"))));
