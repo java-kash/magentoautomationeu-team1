@@ -103,6 +103,17 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
 
         }
+        @Test(description = "customer manager can update existing customer groups",dataProvider ="customerGroupInfo" )
+        public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.updateExistingCustomerGroups(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
+        }
+        @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo")
+        public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerGroupsPage.deleteExitingCustomerGroups(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyDeleteExistingCustomerGroups());
+        }
 
 
         @DataProvider
