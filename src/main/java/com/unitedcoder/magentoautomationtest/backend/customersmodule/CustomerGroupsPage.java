@@ -77,9 +77,10 @@ public class CustomerGroupsPage {
             return false;
     }
     public void deleteExitingCustomerGroups(TestDataHolder testDataHolder){
-        WebElement existingGroupName1=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",
+        WebElement existingGroupName=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",
                 testDataHolder.getCustomerGroupName())));
-        existingGroupName1.click();
+        functionPage.waitForElement(existingGroupName);
+        existingGroupName.click();
         functionPage.waitForElement(deleteCustomerGroupButton);
         deleteCustomerGroupButton.click();
         functionPage.waitForAlertPresent();

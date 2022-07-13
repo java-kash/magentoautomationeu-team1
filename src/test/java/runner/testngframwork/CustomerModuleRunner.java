@@ -112,6 +112,7 @@ public class CustomerModuleRunner extends TestBase {
         }
         @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo")
         public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
         customerGroupsPage.deleteExitingCustomerGroups(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyDeleteExistingCustomerGroups());
         }
