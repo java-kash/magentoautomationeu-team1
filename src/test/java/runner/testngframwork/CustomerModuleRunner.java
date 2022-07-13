@@ -33,6 +33,7 @@ public class CustomerModuleRunner extends TestBase {
         addNewAddressPage=new AddNewAddressPage(driver);
         filterCustomersPage=new FilterCustomersPage(driver);
         assignCustomerToAGroup=new AssignCustomerToAGroup(driver);
+        customerGroupsPage=new CustomerGroupsPage(driver);
     }
     @BeforeClass
     public void loginCustomerModule() {
