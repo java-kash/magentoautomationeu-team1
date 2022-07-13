@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Magento_UI_Automation">
-    <test verbose="2" preserve-order="true"  name="catalog_Module_Test">
+    <test verbose="2" preserve-order="true" name="catalog_Module_Test">
         <classes>
-            <class name="runner.testngframwork.CatalogModuleRunner">
+            <class name="runner.testngframwork.FrontendRunner">
                 <methods>
-
+                    <include name="myWishList"/>
+                    <include name="upDataCustomer"/>
+                    <include name="deleteCustomer"/>
                 </methods>
             </class>
 
