@@ -33,6 +33,7 @@ public class CustomerModuleRunner extends TestBase {
         addNewAddressPage=new AddNewAddressPage(driver);
         filterCustomersPage=new FilterCustomersPage(driver);
         assignCustomerToAGroup=new AssignCustomerToAGroup(driver);
+        customerGroupsPage=new CustomerGroupsPage(driver);
     }
     @BeforeClass
     public void loginCustomerModule() {
@@ -102,6 +103,18 @@ public class CustomerModuleRunner extends TestBase {
         customerGroupsPage.clickOnAddNewCustomerGroup(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
 
+        }
+        @Test(description = "customer manager can update existing customer groups",dataProvider ="customerGroupInfo" )
+        public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.updateExistingCustomerGroups(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
+        }
+        @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo")
+        public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.deleteExitingCustomerGroups(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyDeleteExistingCustomerGroups());
         }
 
 
