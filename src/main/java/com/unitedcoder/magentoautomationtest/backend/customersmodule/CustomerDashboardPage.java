@@ -38,7 +38,7 @@ public class CustomerDashboardPage extends TestBase {
     @FindBy(xpath = "//span[text()='Manage Customers']")
     WebElement manageCustomersLink;
 
-    @FindBy(xpath = "//span[text()='Customer Groups']")
+    @FindBy(xpath = "//*[@id=\"nav\"]/li[1]/ul/li[2]/a/span")
     WebElement customerGroupsLink;
 
     @FindBy(xpath = "//span[text()='Online Customers']")

@@ -14,6 +14,7 @@ public class CustomerModuleRunner extends TestBase {
     NewCustomerPage newCustomerPage;
     EditCustomerPage editCustomerPage;
     CustomerGroupsPage customerGroupsPage;
+    AssignCustomerToAGroup assignCustomerToAGroup;
     AddNewAddressPage addNewAddressPage;
     String configFile = "config-qa.properties";
     FilterCustomersPage filterCustomersPage;
@@ -24,14 +25,15 @@ public class CustomerModuleRunner extends TestBase {
     public void setUp(ITestContext context) {
         browserSetUp(readFromConfigProperties(configFile, "backend_url"));
         Log4j.startTestCase("Magento_Customer_Module_Automation_Test_Start");
-        context.setAttribute("driver", driver);
-        customerManagerLogin = new CustomerManagerLogin(driver);
-        customerDashboardPage = new CustomerDashboardPage(driver);
-        newCustomerPage = new NewCustomerPage(driver);
-        functionPage = new FunctionPage(driver);
-        editCustomerPage = new EditCustomerPage(driver);
-        addNewAddressPage = new AddNewAddressPage(driver);
-        filterCustomersPage = new FilterCustomersPage(driver);
+        context.setAttribute("driver",driver);
+        customerManagerLogin=new CustomerManagerLogin(driver);
+        customerDashboardPage=new CustomerDashboardPage(driver);
+        newCustomerPage=new NewCustomerPage(driver);
+        functionPage=new FunctionPage(driver);
+        editCustomerPage=new EditCustomerPage(driver);
+        addNewAddressPage=new AddNewAddressPage(driver);
+        filterCustomersPage=new FilterCustomersPage(driver);
+        assignCustomerToAGroup=new AssignCustomerToAGroup(driver);
         customerGroupsPage=new CustomerGroupsPage(driver);
     }
 
@@ -87,12 +89,32 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(true);
     }
 
-    @Test(description = "Customer Manager Can Add New Customer Groups", dataProvider = "customerGroupInfo")
-    public void addCustomerGroups(TestDataHolder testDataHolder) {
+    @Test(description="Customer manager can assign a customer to a group in the actions onn the all customer page")
+    public void setAssignCustomerToAGroup(){
+        assignCustomerToAGroup.assignGroup();
+        Assert.assertTrue(assignCustomerToAGroup.verifyAssignCustomerToAGroup());
+    }
+
+        @Test(description = "Customer Manager Can Add New Customer Groups",dataProvider = "customerGroupInfo")
+        public void addCustomerGroups(TestDataHolder testDataHolder){
         customerDashboardPage.clickCustomerGroupsLink();
         customerGroupsPage.clickOnAddNewCustomerGroup(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
-    }
+
+        }
+        @Test(description = "customer manager can update existing customer groups",dataProvider ="customerGroupInfo" )
+        public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.updateExistingCustomerGroups(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
+        }
+        @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo")
+        public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
+        customerDashboardPage.clickCustomerGroupsLink();
+        customerGroupsPage.deleteExitingCustomerGroups(testDataHolder);
+        Assert.assertTrue(customerGroupsPage.verifyDeleteExistingCustomerGroups());
+        }
+
 
     @Test(description = "Customer Manager can filter customers by Group")
     public void CustomerMangerGroup() {
