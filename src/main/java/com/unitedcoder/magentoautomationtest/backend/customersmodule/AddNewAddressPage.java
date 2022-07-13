@@ -39,10 +39,10 @@ public class AddNewAddressPage {
     @FindBy(xpath = "//*[text()='Add New Address']")     // bu element 2 tal chikiwaldi.
     WebElement addNewAddressButton;
 
-    @FindBy(id = "_item2street0")
+    @FindBy(id = "_item1street0")
     WebElement streetAddressField;
 
-    @FindBy(id= "_item2city")
+    @FindBy(id= "_item1city")
     WebElement cityField;
 
     @FindBy(css = "select[id=\"_item1country_id\"]")
@@ -59,13 +59,31 @@ public class AddNewAddressPage {
 
     @FindBy(xpath = "//*[text()='The customer has been saved.']")
     WebElement successMassage;
+    @FindBy(id = "customerGrid_filter_name")
+    WebElement nameFilter;
+
+    @FindBy(xpath = "//*[@title='Search']")
+    WebElement searchButton;
+    @FindBy(css = ".even")
+    WebElement selectCustomer;
+    @FindBy(id = "customerGrid_filter_email")
+    WebElement emailAddressFilter;
 
 
-    public void selectCustomer(){
-        int randomNumber=1 + (int)(Math.random() * ((allCustomers.size() - 1) + 1));
-        WebElement randomCustomer=customerDriver.findElement(By.xpath("//table[@id=\"customerGrid_table\"]/tbody/tr["+randomNumber+"]/td[@class=\" last\"]/a"));
-        functionPage.waitForElement(randomCustomer);
-        randomCustomer.click();
+    public void selectCustomer(String email){
+//        int randomNumber=1 + (int)(Math.random() * ((allCustomers.size() - 1) + 1));
+//        WebElement randomCustomer=customerDriver.findElement(By.xpath("//table[@id=\"customerGrid_table\"]/tbody/tr["+randomNumber+"]/td[@class=\" last\"]/a"));
+//        functionPage.waitForElement(randomCustomer);
+//        randomCustomer.click();
+        functionPage.waitForElement(emailAddressFilter);
+        emailAddressFilter.sendKeys(email);
+        functionPage.sleep(2);
+        searchButton.click();
+        functionPage.sleep(2);
+        selectCustomer.click();
+
+
+
     }
 
     public void addNewAddress(){
@@ -75,9 +93,7 @@ public class AddNewAddressPage {
         functionPage.waitForElement(addNewAddressButton);
         addNewAddressButton.click();
         System.out.println("click addnewaddress success");
-        functionPage.sleep(1);
-        functionPage.waitForElement(streetAddressField);
-        streetAddressField.click();
+        functionPage.sleep(5);
         streetAddressField.clear();
         streetAddressField.sendKeys(functionPage.generateStreetName());
         functionPage.waitForElement(cityField);

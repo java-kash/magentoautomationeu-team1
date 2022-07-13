@@ -59,6 +59,7 @@ public class CustomerGroupsPage {
     public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
         WebElement existingGroupName=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",
                 testDataHolder.getCustomerGroupName())));
+        System.out.println(testDataHolder.getCustomerGroupName());
         functionPage.waitForElement(existingGroupName);
         existingGroupName.click();
         functionPage.waitForElement(taxClassDropDown);

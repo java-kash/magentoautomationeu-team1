@@ -42,6 +42,10 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(customerManagerLogin.verifyLoginPageOpened());
         customerManagerLogin.login();
     }
+    @BeforeMethod
+    public void backToDashboard(){
+        customerDashboardPage.clickOnMagentoLogoBackDashboard();
+    }
 
     @Test(description = "Customer Manager can add a new customer ", dataProvider = "NewCustomerInfo")
     public void addCustomer(String firstName, String lastName, String emailAddress) {
@@ -56,22 +60,26 @@ public class CustomerModuleRunner extends TestBase {
         customerDashboardPage.clickOnCustomerEditIcon(firstName);
         editCustomerPage.editCustomerInformation(middleName);
         Assert.assertTrue(true);
+        customerDashboardPage.filterReset();
     }
 
     @Test(description = "Customer Manager can delete an existing customer ",dataProvider = "customerEmail",
-           dependsOnMethods = "upDataCustomer")
+           dependsOnMethods = "addNewAddress")
     public void deleteCustomer(String customerEmail) {
         editCustomerPage.deleteCustomer(customerEmail);
         Assert.assertTrue(true);
+        customerDashboardPage.filterReset();
 
     }
 
 
-    @Test(description = "Customer Manager can add a new address for a customer",enabled = false)
-    public void addNewAddress() {
-        addNewAddressPage.selectCustomer();
+    @Test(description = "Customer Manager can add a new address for a customer",dataProvider = "customerEmail"
+            ,dependsOnMethods ="addCustomer" )
+    public void addNewAddress(String email) {
+        addNewAddressPage.selectCustomer(email);
         addNewAddressPage.addNewAddress();
         Assert.assertTrue(addNewAddressPage.verifyAddAddress());
+        customerDashboardPage.filterReset();
     }
 
 
@@ -102,13 +110,15 @@ public class CustomerModuleRunner extends TestBase {
         Assert.assertTrue(customerGroupsPage.verifyAddNewCustomerGroups());
 
         }
-        @Test(description = "customer manager can update existing customer groups",dataProvider ="customerGroupInfo" )
+        @Test(description = "customer manager can update existing customer groups",dataProvider ="customerGroupInfo"
+        ,dependsOnMethods = "addCustomerGroups")
         public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
         customerDashboardPage.clickCustomerGroupsLink();
         customerGroupsPage.updateExistingCustomerGroups(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
         }
-        @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo")
+        @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo"
+        ,dependsOnMethods = "updateExistingCustomerGroups")
         public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
         customerDashboardPage.clickCustomerGroupsLink();
         customerGroupsPage.deleteExitingCustomerGroups(testDataHolder);
