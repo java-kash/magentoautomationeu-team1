@@ -2,6 +2,7 @@ package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
+import com.unitedcoder.magentoautomationtest.utility.TestDataHolder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,10 +18,10 @@ public class NewCustomerPage {
         functionPage=new FunctionPage(driver);
     }
     @FindBy(id="_accountfirstname")
-    WebElement firstName;
+    WebElement firstNameField;
 
     @FindBy(id = "_accountlastname")
-    WebElement lastName;
+    WebElement lastNameField;
 
     @FindBy(id="_accountemail")
     WebElement emailField;
@@ -33,16 +34,16 @@ public class NewCustomerPage {
     @FindBy(xpath = "//*[text()='The customer has been saved.']")
     WebElement successfullyMessages;
 
-    public void addNewCustomerPage(){
-        functionPage.waitForElement(firstName);
-        firstName.click();
-        firstName.sendKeys(functionPage.generateFirstName());
-        functionPage.waitForElement(lastName);
-        lastName.click();
-        lastName.sendKeys(functionPage.generateLastName());
+    public void addNewCustomerPage(String firstName,String lastName,String emailAddress){
+        functionPage.waitForElement(firstNameField);
+        firstNameField.click();
+        firstNameField.sendKeys(firstName);
+        functionPage.waitForElement(lastNameField);
+        lastNameField.click();
+        lastNameField.sendKeys(lastName);
         functionPage.waitForElement(emailField);
         emailField.click();
-        emailField.sendKeys(functionPage.generateEmail());
+        emailField.sendKeys(emailAddress);
         functionPage.waitForElement(managementPassword);
         managementPassword.click();
         managementPassword.sendKeys( TestBase.readFromConfigProperties(configFile,"customer_password"));
