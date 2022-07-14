@@ -151,7 +151,7 @@ public class CustomerModuleRunner extends TestBase {
     public Object[][] customerFirstName() {
         System.out.println("in the second Data:  " + info.getCustomerFirstName());
         Object[][] customerName = new Object[][]{
-                {"Team1" + info.getCustomerFirstName(), "Team1" + functionPage.generateMiddleName()}
+                {"Team1" + info.getCustomerFirstName(),functionPage.generateMiddleName()}
         };
         return customerName;
     }
