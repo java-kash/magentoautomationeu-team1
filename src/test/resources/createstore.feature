@@ -1,3 +1,4 @@
+@CreateStore
 Feature: store manager can create a store
 
   Background:
@@ -5,8 +6,12 @@ Feature: store manager can create a store
   When admin user enter valid username and password
   Then admin user able to login successfully
 
-  @CreateStore
-  Scenario: store manager can create a store
+
+  Scenario Outline: store manager can create a store
     Given store manager is on the dashboard page
-    When the user fills out a new store form
+    When the user fills out a new store form "<storeName>"
     Then a new store should be created
+
+    Examples:
+    |storeName|
+    |masterStore|
