@@ -41,7 +41,7 @@ public class CatalogModuleRunner extends TestBase {
         catalogManagerLogInPage.login();
     }
 
-    @Test
+    @Test (description = "add Root Category")
     public void addRootCategory() {
         manageCategoryPage.addRootCategory();
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
@@ -57,10 +57,16 @@ public class CatalogModuleRunner extends TestBase {
     }
 
 
-    @Test()
+    @Test (description = "edit Root Category")
     public void editRootCategory(){
         manageCategoryPage.editRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
+    }
+
+    @Test (description = "delete Root Category")
+    public void deleteRootCategory(){
+        manageCategoryPage.deleteRootCategory();
+        Assert.assertTrue(manageCategoryPage.verifyDeleteSuccessMsg());
     }
 
     @Test(description = "add subcategory")

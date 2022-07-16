@@ -27,8 +27,6 @@ public class CustomerDashboardPage extends TestBase {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
-        PageFactory.initElements(driver,this);
-        functionPage=new FunctionPage(driver);
         actions=new Actions(driver);
     }
 
@@ -40,7 +38,7 @@ public class CustomerDashboardPage extends TestBase {
     @FindBy(xpath = "//span[text()='Manage Customers']")
     WebElement manageCustomersLink;
 
-    @FindBy(xpath = "//span[text()='Customer Groups']")
+    @FindBy(xpath = "//*[@id=\"nav\"]/li[1]/ul/li[2]/a/span")
     WebElement customerGroupsLink;
 
     @FindBy(xpath = "//span[text()='Online Customers']")
@@ -74,7 +72,10 @@ public class CustomerDashboardPage extends TestBase {
     WebElement SelectAll;
     @FindBy(xpath = "//span[text()='Export']")
     WebElement exportBtn;
-
+    @FindBy(id = "customerGrid_filter_name")
+    WebElement nameFilter;
+    @FindBy(css = "td.last>a")
+    WebElement edirIcon;
     //Kadirdan
     @FindBy(id = "customerGrid_filter_billing_country_id")
     WebElement countryFilter;
@@ -92,7 +93,7 @@ public class CustomerDashboardPage extends TestBase {
     WebElement webSiteValue;
     @FindAll(@FindBy(xpath = "//table[@id='customerGrid_table']/tbody/tr[@title]"))
     List<WebElement> filteredTableListRow;
-    @FindBy(xpath = "//*[@title='Reset Filter']")
+    @FindBy(xpath = "//button[@title='Reset Filter']")
     WebElement resetFilterButton;
 
 
@@ -104,7 +105,7 @@ public class CustomerDashboardPage extends TestBase {
 
     }
 
-    public boolean verifyExportCustpmers() {
+    public boolean verifyExportCustomer() {
         if (exportBtn.isEnabled()) {
             return true;
         } else
@@ -135,10 +136,18 @@ public class CustomerDashboardPage extends TestBase {
         }
 
     // i need verify Add
-    public boolean clickOnCustomerEditIcon() {
-        WebElement firstListCustomer = cutomerEditIcon.get(1);
-        functionPage.waitForElement(firstListCustomer);
-        firstListCustomer.click();
+    public boolean clickOnCustomerEditIcon(String firstName) {
+        functionPage.waitForElement(nameFilter);
+        nameFilter.clear();
+        nameFilter.click();
+        nameFilter.sendKeys(firstName);
+        functionPage.sleep(5);
+        functionPage.waitForElement(searchButton);
+        searchButton.click();
+        functionPage.sleep(3);
+        functionPage.waitForElement(edirIcon);
+        edirIcon.click();
+
         if (editPageTitle.isDisplayed()) {
             return true;
         } else
@@ -153,6 +162,7 @@ public class CustomerDashboardPage extends TestBase {
 
     public void filterCustomerByCountry() {
         countryName = readFromConfigProperties(configFile, "countryName");
+        String allCountry=readFromConfigProperties(configFile,"allcountry");
         functionPage.waitForElement(countryFilter);
         selectValueFromDropDown(countryFilter, "" + countryName + "");
         functionPage.waitForElement(searchButton);
@@ -164,6 +174,8 @@ public class CustomerDashboardPage extends TestBase {
         List<WebElement> allCountryValue = driver.findElements(By.xpath("//table[@id=\"customerGrid_table\"]/tbody/tr" +
                 "/td[contains(text(),'" + verifiedCountry + "')]"));
         Assert.assertEquals(allCountryValue.size(), filteredTableListRow.size());
+
+
     }
 
     public void filterCustomerByState() {
@@ -171,22 +183,34 @@ public class CustomerDashboardPage extends TestBase {
         stateInputBox.sendKeys(readFromConfigProperties(configFile, "stateValue"));
         functionPage.waitForElement(searchButton);
         searchButton.click();
+        functionPage.sleep(1);
+        functionPage.waitForElement(resetFilterButton);
+        resetFilterButton.click();
+        functionPage.sleep(1);
+
         //can't verify, system issue
     }
 
     public void filterCustomerByWebsite() {
         webSite = readFromConfigProperties(configFile, "webSite");
         functionPage.waitForElement(websiteFilter);
-        selectValueFromDropDown(websiteFilter, "" + webSite + "");
+        selectValueFromDropDown(websiteFilter, webSite);
         functionPage.waitForElement(searchButton);
         searchButton.click();
+        functionPage.sleep(3);
         //verify
         functionPage.waitForElement(webSiteValue);
         String verifiedWebSite = webSiteValue.getText();
         System.out.println(verifiedWebSite);
         List<WebElement> allWebSiteValue = driver.findElements(By.xpath("//table[@id=\"customerGrid_table\"]/tbody/tr" +
                 "/td[contains(text(),'" + verifiedWebSite + "')]"));
-        Assert.assertEquals(allWebSiteValue.size(), filteredTableListRow.size());
+        Assert.assertEquals(allWebSiteValue.size(),filteredTableListRow.size());
+
+    }
+    public void filterReset(){
+        functionPage.sleep(2);
+        resetFilterButton.click();
+        functionPage.sleep(2);
     }
 
 
