@@ -19,11 +19,12 @@ public class ManageStoresPage {
 
     public ManageStoresPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
         actions=new Actions(driver);
-        PageFactory.initElements(driver, this);
+
     }
-    @FindBy(xpath = "//span[text()='System']")
+    @FindBy(id= "//*[@id=\"nav\"]/li[3]/a/span")
     WebElement systemTab;
     @FindBy(xpath = "//span[text()='Manage Stores']")
     WebElement manageStoresOption;
@@ -41,10 +42,10 @@ public class ManageStoresPage {
     WebElement successMessage;
 
     public void CreateStore(String storeName){
-        functionPage.waitForElement(systemTab);
-        actions.moveToElement(systemTab).perform();
-        functionPage.waitForElement(manageStoresOption);
-        manageStoresOption.click();
+//        functionPage.waitForElement(systemTab);
+//        actions.moveToElement(systemTab).perform();
+//        functionPage.waitForElement(manageStoresOption);
+//        manageStoresOption.click();
         functionPage.waitForElement(createStoreButton);
         createStoreButton.click();
         functionPage.waitForElement(websiteDropDown);
@@ -56,7 +57,7 @@ public class ManageStoresPage {
         functionPage.waitForElement(rootCategoryDropDown);
         rootCategoryDropDown.click();
         Select select1=new Select(rootCategoryDropDown);
-        select1.selectByIndex(0);
+        select1.selectByIndex(1);
         functionPage.waitForElement(saveStoreButton);
         saveStoreButton.click();
 

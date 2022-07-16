@@ -13,17 +13,17 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber.json",
                 "junit:target/cucumber-results.xml"},
         features = {"src/test/resources"},
-        tags="@CreateStore"
+        tags="@MagentoStoreModuleLoginFeature"
 )
 
 public class Runner extends TestBase {
-    @BeforeClass
-    public static void setup() {
-
-    }
-
-    @AfterClass
-    public static void tearDown() {
-
-    }
+//    @BeforeClass
+//    public static void setup() {
+//
+//    }
+//
+//    @AfterClass
+//    public static void tearDown() {
+//
+//    }
 }
