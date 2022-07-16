@@ -1,11 +1,9 @@
-package runner.cucumberframwork;
+package runner.cucumberframwork.storemodulesteps;
 
-import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -13,17 +11,10 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber.json",
                 "junit:target/cucumber-results.xml"},
         features = {"src/test/resources"},
-        tags="  @StoreModuleLogin"
+        tags="@MagentoStoreModuleFeature"
 )
 
-public class Runner extends TestBase {
-    @BeforeClass
-    public static void setup() {
+public class Runner{
 
-    }
 
-    @AfterClass
-    public static void tearDown() {
-
-    }
 }
