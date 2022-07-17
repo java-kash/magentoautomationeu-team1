@@ -112,10 +112,34 @@ public class StoreModuleSteps extends TestBase {
         cancelOrderPage.verify();
         System.out.println("cancel order");
     }
+    //create store steps
+    // *************************Esma*****************************
+
+    ManageStoresPage manageStoresPage;
+    ManageCurrencyRatesPage manageCurrencyRatesPage;
+    private String storeName;
+
+    @Given("store manager is on the dashboard page")
+    public void storeManagerIsOnTheDashboardPage() {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+        manageStoresPage=new ManageStoresPage(driver);
 
 
+    }
 
+    @When("the user fills out a new store form {string}")
+    public void theUserFillsOutANewStoreForm(String arg0) {
+        manageStoresPage=new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        storeName=arg0;
+        manageStoresPage.CreateStore(storeName);
+    }
 
+    @Then("a new store should be created")
+    public void aNewStoreShouldBeCreated() {
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
 
 
 }

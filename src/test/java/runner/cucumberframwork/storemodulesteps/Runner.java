@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber.json",
                 "junit:target/cucumber-results.xml"},
         features = {"src/test/resources"},
-        tags="@MagentoStoreModuleLoginFeature"
+        tags="@MagentoStoreModuleFeature"
 )
 
 public class Runner extends TestBase {
