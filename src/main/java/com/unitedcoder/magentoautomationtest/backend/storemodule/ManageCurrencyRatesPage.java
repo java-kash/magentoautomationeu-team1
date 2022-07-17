@@ -34,14 +34,13 @@ public class ManageCurrencyRatesPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
-       actions=new Actions(driver);
+
 
     }
     public void clickManageStore(){
         functionPage.waitForElement(systemTab);
         functionPage.sleep(3);
         systemTab.click();
-//        actions.moveToElement(systemTab).perform();
         functionPage.waitForElement(manageStoresOption);
         manageStoresOption.click();
     }
