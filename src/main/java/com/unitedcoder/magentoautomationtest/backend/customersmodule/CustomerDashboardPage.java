@@ -133,6 +133,12 @@ public class CustomerDashboardPage extends TestBase {
 
 
         }
+        public void clickManageCustomerLink(){
+        functionPage.waitForElement(CustomersLink);
+        CustomersLink.click();
+        functionPage.waitForElement(manageCustomersLink);
+        manageCustomersLink.click();
+        }
 
     // i need verify Add
     public boolean clickOnCustomerEditIcon() {

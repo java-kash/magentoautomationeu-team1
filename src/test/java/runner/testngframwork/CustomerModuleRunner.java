@@ -19,6 +19,8 @@ public class CustomerModuleRunner extends TestBase {
     String configFile = "config-qa.properties";
     FilterCustomersPage filterCustomersPage;
 
+    FilterEmailPage filterEmailPage;
+
 
     @BeforeSuite()
     public void setUp(ITestContext context) {
@@ -33,6 +35,7 @@ public class CustomerModuleRunner extends TestBase {
         addNewAddressPage=new AddNewAddressPage(driver);
         filterCustomersPage=new FilterCustomersPage(driver);
         assignCustomerToAGroup=new AssignCustomerToAGroup(driver);
+        filterEmailPage=new FilterEmailPage(driver);
     }
     @BeforeClass
     public void loginCustomerModule() {
@@ -117,6 +120,13 @@ public class CustomerModuleRunner extends TestBase {
     public void CustomerMangerGroup(){
        filterCustomersPage.ManagerFilter();
         filterCustomersPage.verifyGroups();
+    }
+    @Test(description = "Customer manager can filter customer by Email")
+    public void filterEmail() throws InterruptedException {
+        customerDashboardPage.clickManageCustomerLink();
+        filterEmailPage.filterEmail();
+        filterEmailPage.verification();
+
     }
 
     @AfterSuite
