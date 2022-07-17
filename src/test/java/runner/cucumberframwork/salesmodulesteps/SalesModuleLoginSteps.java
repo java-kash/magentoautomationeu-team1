@@ -1,4 +1,4 @@
-package runner.cucumberframwork;
+package runner.cucumberframwork.salesmodulesteps;
 
 import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesManagerLogin;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
