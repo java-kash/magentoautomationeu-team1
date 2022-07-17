@@ -1,4 +1,4 @@
-package runner.cucumberframwork;
+package runner.cucumberframwork.storemodulesteps;
 
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import io.cucumber.junit.Cucumber;
@@ -6,6 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -17,13 +18,13 @@ import org.junit.runner.RunWith;
 )
 
 public class Runner extends TestBase {
-//    @BeforeClass
-//    public static void setup() {
-//
-//    }
-//
-//    @AfterClass
-//    public static void tearDown() {
-//
-//    }
+    @BeforeClass
+    public static void setup() {
+
+    }
+
+    @AfterClass
+    public static void tearDown() {
+
+    }
 }
