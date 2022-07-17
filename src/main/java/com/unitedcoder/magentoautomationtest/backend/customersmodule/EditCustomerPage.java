@@ -2,6 +2,7 @@ package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,20 +21,22 @@ public class EditCustomerPage {
     WebElement accountInformation;
     @FindBy(xpath = "//input[@id='_accountmiddlename'][1]")
     WebElement middleNameField;
-    @FindBy(xpath = "//*[text()='Save and Continue Edit'][1]")
-    WebElement saveAndContinueButton;
+    @FindBy(xpath = "//div[@id='anchor-content']//p/button[4]")
+    WebElement saveButton;
     @FindBy(xpath = "//*[text()='The customer has been saved.']")
     WebElement successMessages;
     @FindBy(id = "customerGrid_massaction-select")
     WebElement actionsSelect;
     @FindBy(xpath = "//*[@title='Submit']")
     WebElement submitButton;
-    @FindAll(
-            @FindBy(css = ".massaction-checkbox"))
-    List<WebElement> customerCheckBox;
-    @FindAll(
-            @FindBy(xpath = "//div[@class='hor-scroll']//tbody/tr"))
-    List<WebElement> testElement;
+    @FindBy(id = "customerGrid_filter_email")
+    WebElement emailAddressFilter;
+    @FindBy(xpath = "//*[@title='Search']")
+    WebElement searchButton;
+    @FindBy(xpath = "//input[@name='customer']")
+    WebElement checkBox;
+
+
 
     public EditCustomerPage(WebDriver driver) {
         this.driver = driver;
@@ -41,49 +44,47 @@ public class EditCustomerPage {
         functionPage=new FunctionPage(driver);
     }
 
-    public boolean editCustomerInformation(){
+    public boolean editCustomerInformation(String middleName){
         functionPage.waitForElement(accountInformation);
         accountInformation.click();
         functionPage.waitForElement(middleNameField);
         middleNameField.clear();
-        middleNameField.sendKeys(functionPage.generateMiddleName());
-        functionPage.waitForElement(saveAndContinueButton);
-        saveAndContinueButton.click();
+        middleNameField.sendKeys(middleName);
+        functionPage.waitForElement(saveButton);
+        saveButton.click();
+        functionPage.sleep(3);
 
         functionPage.waitForElement(successMessages);
         if(successMessages.isDisplayed()){
-            Log4j.info("Edit Customer");
             return true;
 
         }else
-            Log4j.error("Edit Customer");
             return false;
     }
-    public void deleteCustomer(){
+    public void deleteCustomer(String customerEmail){
 //        String test=testElement.get(1).getText();
 //        String[] test2=test.split("\\s+");
 //        System.out.println(test2[4]);
 //        int checkBoxSize=customerCheckBox.size();
 //        System.out.println(checkBoxSize);
-
-        for (int i=0;i<3;i++){
-            WebElement customer=customerCheckBox.get(i);
-            functionPage.waitForElement(customer);
-            customer.click();
-
-        }
-
-
-
-//        functionPage.waitForElement(firstListCustomer);
-//        firstListCustomer.click();
-
+        functionPage.waitForElement(emailAddressFilter);
+        emailAddressFilter.clear();
+        emailAddressFilter.click();
+        emailAddressFilter.sendKeys(customerEmail);
+        functionPage.waitForElement(searchButton);
+        searchButton.click();
+        functionPage.sleep(3);
+        functionPage.waitForElement(checkBox);
+        checkBox.click();
         Select select=new Select(actionsSelect);
         functionPage.waitForElement(actionsSelect);
         actionsSelect.click();
         select.selectByVisibleText(CustomerDropDownSelect.Delete.name());
         functionPage.waitForElement(submitButton);
         submitButton.click();
+        functionPage.waitForAlertPresent();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
 
 
 

@@ -2,6 +2,8 @@ package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestDataHolder;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +31,8 @@ public class CustomerGroupsPage {
     WebElement saveCustomerGroupButton;
     @FindBy(css = ".success-msg>ul li span")
     WebElement successMessage;
+    @FindBy(xpath = "(//button[@class='scalable delete']/span/span/span)[1]")
+    WebElement deleteCustomerGroupButton;
 
     public void clickOnAddNewCustomerGroup(TestDataHolder testDataHolder){
         functionPage.waitForElement(addNewCustomerGroupButton);
@@ -51,6 +55,46 @@ public class CustomerGroupsPage {
         }else
             return false;
 
+    }
+    public void updateExistingCustomerGroups(TestDataHolder testDataHolder){
+        WebElement existingGroupName=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",
+                testDataHolder.getCustomerGroupName())));
+        System.out.println(testDataHolder.getCustomerGroupName());
+        functionPage.waitForElement(existingGroupName);
+        existingGroupName.click();
+        functionPage.waitForElement(taxClassDropDown);
+        taxClassDropDown.click();
+        Select select=new Select(taxClassDropDown);
+        select.selectByIndex(3);
+        functionPage.waitForElement(saveCustomerGroupButton);
+        saveCustomerGroupButton.click();
+
+    }
+    public boolean verifyUpdateExistingCustomerGroups(){
+        functionPage.waitForElement(successMessage);
+        if (successMessage.getText().contains("saved")){
+            return true;
+        }else
+            return false;
+    }
+    public void deleteExitingCustomerGroups(TestDataHolder testDataHolder){
+        WebElement existingGroupName=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",
+                testDataHolder.getCustomerGroupName())));
+        functionPage.waitForElement(existingGroupName);
+        existingGroupName.click();
+        functionPage.waitForElement(deleteCustomerGroupButton);
+        deleteCustomerGroupButton.click();
+        functionPage.waitForAlertPresent();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+
+    }
+    public boolean verifyDeleteExistingCustomerGroups(){
+        functionPage.waitForElement(successMessage);
+        if (successMessage.getText().contains("deleted")){
+            return true;
+        }else
+            return false;
     }
 
 }
