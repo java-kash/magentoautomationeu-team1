@@ -18,7 +18,11 @@ public class FilterEmailPage {
     FunctionPage functionPage;
 
     String  sentEmail=TestBase.readFromConfigProperties("config-qa.properties","filterEmail");
-
+    public FilterEmailPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionPage = new FunctionPage(driver);
+    }
     @FindBy(id="customerGrid_filter_email")
     WebElement filterEmailInputBox;
     @FindBy(xpath = "//span[text()='Search']")
@@ -28,11 +32,7 @@ public class FilterEmailPage {
     )
     List<WebElement> verification;
 
-    public FilterEmailPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionPage = new FunctionPage(driver);
-    }
+
     public void filterEmail(){
 
         functionPage.waitForElement(filterEmailInputBox);
