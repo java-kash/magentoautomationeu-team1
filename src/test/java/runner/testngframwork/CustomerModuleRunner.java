@@ -20,6 +20,8 @@ public class CustomerModuleRunner extends TestBase {
     FilterCustomersPage filterCustomersPage;
     TestDataHolder info = new TestDataHolder();
 
+    FilterEmailPage filterEmailPage;
+
 
     @BeforeSuite()
     public void setUp(ITestContext context) {
@@ -35,6 +37,7 @@ public class CustomerModuleRunner extends TestBase {
         filterCustomersPage=new FilterCustomersPage(driver);
         assignCustomerToAGroup=new AssignCustomerToAGroup(driver);
         customerGroupsPage=new CustomerGroupsPage(driver);
+        filterEmailPage=new FilterEmailPage(driver);
     }
 
     @BeforeClass
@@ -172,6 +175,13 @@ public class CustomerModuleRunner extends TestBase {
         return data;
     }
 
+    @Test(description = "Customer manager can filter customer by Email")
+    public void filterEmail() throws InterruptedException {
+        customerDashboardPage.clickManageCustomerLink();
+        filterEmailPage.filterEmail();
+        filterEmailPage.verification();
+
+    }
 
     @AfterSuite
     public void tearDown() {
