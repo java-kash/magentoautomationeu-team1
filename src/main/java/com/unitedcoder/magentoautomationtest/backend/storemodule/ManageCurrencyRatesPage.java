@@ -3,6 +3,7 @@ package com.unitedcoder.magentoautomationtest.backend.storemodule;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -13,9 +14,10 @@ import org.openqa.selenium.support.PageFactory;
 public class ManageCurrencyRatesPage {
     WebDriver driver;
     FunctionPage functionPage;
-    @FindBy(linkText = "System")
+    Actions actions;
+    @FindBy(xpath= "//span[text()='System']")
     WebElement systemTab;
-    @FindBy(linkText = "Manage Stores")
+    @FindBy(xpath = "//span[text()='Manage Stores']")
     WebElement manageStoresOption;
     @FindBy(linkText = "Catalog")
     WebElement catalogTab;
@@ -30,7 +32,16 @@ public class ManageCurrencyRatesPage {
 
     public ManageCurrencyRatesPage(WebDriver driver) {
         this.driver = driver;
-        functionPage = new FunctionPage(driver);
         PageFactory.initElements(driver, this);
+        functionPage = new FunctionPage(driver);
+
+
+    }
+    public void clickManageStore(){
+        functionPage.waitForElement(systemTab);
+        functionPage.sleep(3);
+        systemTab.click();
+        functionPage.waitForElement(manageStoresOption);
+        manageStoresOption.click();
     }
 }

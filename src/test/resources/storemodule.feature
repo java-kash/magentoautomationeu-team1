@@ -33,6 +33,17 @@ Feature: Magento Store Module Function Test
       Then    cancel order
       And     verify  cancel order
 
+#   ***************** Esma ************************
+
+    Scenario Outline: store manager can create a store
+      Given store manager is on the dashboard page
+      When the user fills out a new store form "<storeName>"
+       Then a new store should be created
+
+     Examples:
+      |storeName|
+      |masterStore|
+
 
 
 
