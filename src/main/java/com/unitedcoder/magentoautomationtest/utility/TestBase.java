@@ -3,6 +3,7 @@ package com.unitedcoder.magentoautomationtest.utility;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
@@ -14,20 +15,23 @@ public class TestBase {
      public  WebDriver driver;
      public static String browserName="chrome";
 
-     public void browserSetUp(String url){
-         if((driver)==null){
-             if(browserName.equalsIgnoreCase("Chrome")){
-                 WebDriverManager.chromedriver().setup();
-                 driver=new ChromeDriver();
-                 driver.manage().window().maximize();
-                 driver.get(url);
-             }else if (browserName.equalsIgnoreCase("FireFox")){
-                 WebDriverManager.firefoxdriver().setup();
-                 driver=new FirefoxDriver();
-                 driver.manage().window().maximize();
-                 driver.get(url);
+     public void browserSetUp(String url) {
+         ChromeOptions chromeOptions = new ChromeOptions();
+         JenkinsBrowserSetup jenkinsBrowserSetup = new JenkinsBrowserSetup();
+         boolean useHeadless = jenkinsBrowserSetup.serHeadlessModelIfLinux(chromeOptions);
+         if (!useHeadless) {
+             if ((driver) == null) {
+                 if (browserName.equalsIgnoreCase("Chrome")) {
+                     WebDriverManager.chromedriver().setup();
+                 } else if (browserName.equalsIgnoreCase("FireFox")) {
+                     WebDriverManager.firefoxdriver().setup();
+                     driver = new FirefoxDriver();
+                 }
              }
          }
+         driver=new ChromeDriver(chromeOptions);
+         driver.manage().window().maximize();
+         driver.get(url);
      }
      public void closeBrowser(){
          //driver.close();
@@ -46,7 +50,6 @@ public class TestBase {
         System.out.println(String.format("%s=%s",key,value));
         return value;
     }
-
 
     }
 
