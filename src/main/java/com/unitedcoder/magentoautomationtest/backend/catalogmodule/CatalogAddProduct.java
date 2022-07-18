@@ -64,8 +64,7 @@ public class CatalogAddProduct extends TestBase {
     WebElement typeInput;
     @FindBy(xpath = "//ul[@id='product_info_tabs']//li[8]/a")
     WebElement clothingLink;
-    @FindBy(xpath = "//*[@id=\"productGrid_table\"]/tbody/tr/td[12]/a[\"+Edit+\"]")
-    WebElement edit;
+
 
     public void Addproduct(){
         functionPage.waitForElement(addproductbutton);
