@@ -43,29 +43,22 @@ public class CatalogModuleRunner extends TestBase {
         catalogManagerLogInPage.login();
     }
 
-    @Test (description = "add Root Category")
+    @Test (description = "add Root Category",priority = 1)
     public void addRootCategory() {
         manageCategoryPage.addRootCategory();
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
 
     }
 
-    @Test
-    public void filterProductsByCategory(){
-        filterProductsByCategoryPage.openCategoryList();
-        filterProductsByCategoryPage.viewLimit();
-        filterProductsByCategoryPage.filterByCategoryName();
-        Assert.assertTrue(filterProductsByCategoryPage.verify());
-    }
 
 
-    @Test (description = "edit Root Category")
+    @Test (description = "edit Root Category",dependsOnMethods = "addRootCategory")
     public void editRootCategory(){
         manageCategoryPage.editRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
     }
 
-    @Test (description = "delete Root Category")
+    @Test (description = "delete Root Category",dependsOnMethods = "editRootCategory")
     public void deleteRootCategory(){
         manageCategoryPage.deleteRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyDeleteSuccessMsg());
@@ -85,6 +78,14 @@ public class CatalogModuleRunner extends TestBase {
     @Test(description = "delete subcategory test",dependsOnMethods = "editSubCategoryTest")
     public void deleteSubcategoryTest(){
         Assert.assertTrue(manageCategoryPage.deleteSubcategory());
+    }
+
+    @Test
+    public void filterProductsByCategory(){
+        filterProductsByCategoryPage.openCategoryList();
+        filterProductsByCategoryPage.viewLimit();
+        filterProductsByCategoryPage.filterByCategoryName();
+        Assert.assertTrue(filterProductsByCategoryPage.verify());
     }
 
     //Kadirdan
