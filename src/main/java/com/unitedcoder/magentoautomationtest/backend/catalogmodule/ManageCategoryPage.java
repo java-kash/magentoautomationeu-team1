@@ -170,8 +170,9 @@ public class ManageCategoryPage {
         functionPage.waitForElement(rootCategoriesLink);
         rootCategoriesLink.click();
         functionPage.waitForElement(addSubCategoryLink);
+        Thread.sleep(5000);
         actions.moveToElement(addSubCategoryLink).click().perform();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         functionPage.waitForElement(subcategoryName);
         subcategoryName.sendKeys(TestBase.readFromConfigProperties(configFile, "subcategory_name"));
         functionPage.waitForElement(isActiveSub);
@@ -216,6 +217,7 @@ public boolean deleteSubcategory(){
     WebElement subCategoryButton = driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]", TestBase.readFromConfigProperties(configFile, "subcategory_name"))));
     functionPage.waitForElement(subCategoryButton);
     subCategoryButton.click();
+    functionPage.sleep(5);
     functionPage.waitForElement(deleteCategoryIcon);
     deleteCategoryIcon.click();
     functionPage.waitForAlertPresent();
