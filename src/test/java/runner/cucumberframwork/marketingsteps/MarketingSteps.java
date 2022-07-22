@@ -1,0 +1,85 @@
+package runner.cucumberframwork.marketingsteps;
+
+import com.unitedcoder.magentoautomationtest.backend.marketingmodule.CatalogPriceRulePage;
+import com.unitedcoder.magentoautomationtest.backend.marketingmodule.DashboardPage;
+import com.unitedcoder.magentoautomationtest.backend.marketingmodule.MarketingLoginPage;
+import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.TestBase;
+
+
+import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
+
+import org.openqa.selenium.WebDriver;
+
+
+public class MarketingSteps extends TestBase {
+    MarketingLoginPage marketingLoginPage;
+    CatalogPriceRulePage catalogPriceRulePage;
+    DashboardPage dashboardPage;
+    FunctionPage functionPage;
+    String configFile="config-qa.properties";
+    @Before("@MagentoMarketingModuleFeature")
+    public void setUp(){
+        browserSetUp(readFromConfigProperties(configFile,"backend_url"));
+        marketingLoginPage=new MarketingLoginPage(driver);
+        marketingLoginPage.login();
+
+    }
+    @After("@MagentoMarketingModuleFeature")
+    public  void tearDown() {
+        driver.quit();
+    }
+
+//    @Given("Marketing manager  is already in Magento admin login page")
+//    public void marketingManagerIsAlreadyInMagentoAdminLoginPage() {
+//        marketingLoginPage=new MarketingLoginPage(driver);
+//
+//    }
+//
+//    @When("Marketing manager  enter valid username and password")
+//    public void marketingManagerEnterValidUsernameAndPassword() {
+//        marketingLoginPage.login();
+//    }
+//
+//    @Then("Marketing manager able to login successfully")
+//    public void marketingManagerAbleToLoginSuccessfully() {
+//        Assert.assertTrue(marketingLoginPage.verify());
+//    }
+
+    @Given("Marketing manager on the dashboard page")
+    public void marketingManagerOnTheDashboardPage() {
+        functionPage=new FunctionPage(driver);
+        catalogPriceRulePage=new CatalogPriceRulePage(driver);
+        dashboardPage=new DashboardPage(driver);
+    }
+
+    @When("Click on the Catalog Price Rules")
+    public void clickOnTheCatalogPriceRules() {
+        dashboardPage.clickOnCatalogPriceRulesOption();
+    }
+
+    @And("Marketing manager add new rule{string}")
+    public void marketingManagerAddNewRule(String arg0) {
+        catalogPriceRulePage.addNewCatalogPriceRule(arg0);
+    }
+
+    @Then("Marketing manager add new catalog price rule")
+    public void marketingManagerAddNewCatalogPriceRule() {
+        Assert.assertTrue(catalogPriceRulePage.verifyAddNewCatalogPriceRule());
+    }
+    @After("@marketingModule")
+    public void close(){
+        closeBrowser();
+    }
+
+
+
+}
