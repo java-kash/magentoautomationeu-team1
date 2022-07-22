@@ -3,6 +3,7 @@ package runner.cucumberframwork.marketingsteps;
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.CatalogPriceRulePage;
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.DashboardPage;
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.MarketingLoginPage;
+import com.unitedcoder.magentoautomationtest.backend.marketingmodule.UpdateExistingCatalogPriceRule;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 
@@ -25,6 +26,7 @@ public class MarketingSteps extends TestBase {
     CatalogPriceRulePage catalogPriceRulePage;
     DashboardPage dashboardPage;
     FunctionPage functionPage;
+    UpdateExistingCatalogPriceRule updateExistingCatalogPriceRule;
     String configFile="config-qa.properties";
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -59,6 +61,7 @@ public class MarketingSteps extends TestBase {
         functionPage=new FunctionPage(driver);
         catalogPriceRulePage=new CatalogPriceRulePage(driver);
         dashboardPage=new DashboardPage(driver);
+        updateExistingCatalogPriceRule=new UpdateExistingCatalogPriceRule(driver);
     }
 
     @When("Click on the Catalog Price Rules")
@@ -82,4 +85,19 @@ public class MarketingSteps extends TestBase {
 
 
 
+
+    @When("Catalog Price Rule Page Open")
+    public void catalogPriceRulePageOpen() {
+        updateExistingCatalogPriceRule.openCatalogPriceRulePage();
+    }
+
+    @Then("update existing Catalog Price Rule")
+    public void updateExistingCatalogPriceRule() {
+        updateExistingCatalogPriceRule.update();
+    }
+
+    @And("verify existing Catalog Price Rule updated")
+    public void verifyExistingCatalogPriceRuleUpdated() {
+        updateExistingCatalogPriceRule.verify();
+    }
 }
