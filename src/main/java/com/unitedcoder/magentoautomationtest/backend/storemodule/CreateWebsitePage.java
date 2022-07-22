@@ -7,18 +7,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Test;
 
 import java.util.Random;
 
-public class createWebsitePage {
+public class CreateWebsitePage {
     WebDriver driver;
     FunctionPage functionPage;
     String  sentName= TestBase.readFromConfigProperties("config-qa.properties","websiteName");
 
 
 
-    public createWebsitePage(WebDriver driver) {
+    public CreateWebsitePage(WebDriver driver) {
         this.driver = driver;
         functionPage = new FunctionPage(driver);
         PageFactory.initElements(driver, this);

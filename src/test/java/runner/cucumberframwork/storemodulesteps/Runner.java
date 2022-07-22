@@ -1,15 +1,9 @@
 package runner.cucumberframwork.storemodulesteps;
 
-import com.unitedcoder.magentoautomationtest.utility.TestBase;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.junit.runner.RunWith;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
