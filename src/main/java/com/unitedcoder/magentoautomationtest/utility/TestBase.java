@@ -1,5 +1,6 @@
 package com.unitedcoder.magentoautomationtest.utility;
 
+import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TestBase {
+public class TestBase  {
      public  WebDriver driver;
      public static String browserName="chrome";
 
