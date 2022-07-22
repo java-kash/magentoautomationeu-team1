@@ -152,15 +152,28 @@ public void setUp(){
     }
 
 
-    @When("the user edit the store")
-    public void theUserEditTheStore() {
-        manageStoresPage=new ManageStoresPage(driver);
-        manageCurrencyRatesPage.clickManageStore();
-        manageStoresPage.editStore();
-    }
+//      createWebsite
+    // *************************Zohra*****************************
+ createWebsitePage createWebsitePage;
 
-    @Then("store edit successfully")
-    public void storeEditSuccessfully() {
-        Assert.assertTrue(manageStoresPage.verifyEditStore());
+
+    @Given("store manager is on the dashboard page")
+    public void store_manager_is_on_the_dashboard_page() {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+        createWebsitePage=new createWebsitePage(driver);
+    }
+    @When("store manager should be able to create website")
+    public void store_manager_should_be_able_to_create_website() {
+        createWebsitePage=new createWebsitePage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        createWebsitePage.createWebsite();
+
+    }
+    @Then("a new website should be created")
+    public void store_manager_should_be_able_to_see_the_website_has_been_saved_message() {
+
+        Assert.assertTrue(createWebsitePage.verifyCreateWebsite());
+
     }
 }
