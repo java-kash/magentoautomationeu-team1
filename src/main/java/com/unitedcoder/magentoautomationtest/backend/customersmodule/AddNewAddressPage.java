@@ -39,7 +39,7 @@ public class AddNewAddressPage {
     @FindBy(xpath = "//*[text()='Add New Address']")     // bu element 2 tal chikiwaldi.
     WebElement addNewAddressButton;
 
-    @FindBy(id = "_item1street0")
+    @FindBy(xpath = "(//*[contains(@id,\"street0\")])[2]")
     WebElement streetAddressField;
 
     @FindBy(id= "_item1city")
