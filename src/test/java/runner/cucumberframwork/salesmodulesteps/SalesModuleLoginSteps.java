@@ -16,6 +16,7 @@ public class SalesModuleLoginSteps extends TestBase {
     public void salesManagerIsAlreadyInMagentoAdminLoginPage() {
         browserSetUp("http://magentoqa2.unitedcoder.com/index.php/admin");
         salesManagerLogin=new SalesManagerLogin(driver);
+        salesModuleManageCustomerPage=new SalesModuleManageCustomerPage(driver);
     }
     @When("admin user enter valid {string} and {string} for sales module")
     public void adminUserEnterValidAndForSalesModule(String arg0, String arg1) {
@@ -29,7 +30,7 @@ public class SalesModuleLoginSteps extends TestBase {
 
     @Given("Sales manager at the Manage Customers page")
     public void salesManagerAtTheManageCustomersPage() {
-     salesModuleManageCustomerPage=new SalesModuleManageCustomerPage(driver);
+
   salesModuleManageCustomerPage.clickOnManageCustomersLink();
     }
 
