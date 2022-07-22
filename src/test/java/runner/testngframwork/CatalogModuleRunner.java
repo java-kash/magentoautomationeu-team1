@@ -75,6 +75,7 @@ public class CatalogModuleRunner extends TestBase {
         catalogDashboardPage.clickOnManageCategories();
         Assert.assertTrue(manageCategoryPage.editSubCategory());
     }
+
     @Test(description = "delete subcategory test",dependsOnMethods = "editSubCategoryTest")
     public void deleteSubcategoryTest(){
         Assert.assertTrue(manageCategoryPage.deleteSubcategory());
