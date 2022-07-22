@@ -1,6 +1,7 @@
 package runner.cucumberframwork.salesmodulesteps;
 
 import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesManagerLogin;
+import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleManageCustomerPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,6 +10,7 @@ import org.junit.Assert;
 
 public class SalesModuleLoginSteps extends TestBase {
    SalesManagerLogin salesManagerLogin;
+   SalesModuleManageCustomerPage salesModuleManageCustomerPage;
 
     @Given("Sales Manager is already in Magento admin login page")
     public void salesManagerIsAlreadyInMagentoAdminLoginPage() {
@@ -25,5 +27,19 @@ public class SalesModuleLoginSteps extends TestBase {
     }
 
 
+    @Given("Sales manager at the Manage Customers page")
+    public void salesManagerAtTheManageCustomersPage() {
+     salesModuleManageCustomerPage=new SalesModuleManageCustomerPage(driver);
+  salesModuleManageCustomerPage.clickOnManageCustomersLink();
+    }
 
+    @When("Sales manager click on customer")
+    public void salesManagerClickOnCustomer() {
+        salesModuleManageCustomerPage.navigateToCustomerInformationPage();
+    }
+
+    @Then("Sales manager at the Customer Information page and click on Shopping Cart to view shopping cart")
+    public void salesManagerAtTheCustomerInformationPageAndClickOnShoppingCartToViewShoppingCart() {
+        Assert.assertTrue(salesModuleManageCustomerPage.shoppingCartIsVisible());
+    }
 }

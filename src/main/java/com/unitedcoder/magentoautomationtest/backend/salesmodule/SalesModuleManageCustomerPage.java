@@ -36,12 +36,14 @@ public class SalesModuleManageCustomerPage {
         functionPage.waitForElement(manageCustomersLink);
         manageCustomersLink.click();
     }
-public boolean shoppingCartIsVisible(){
+    public void navigateToCustomerInformationPage(){
         int listSize=customersList.size();
-          Random r=new Random();
-          int randomValue= r.nextInt(listSize);
-          functionPage.waitForElement(customersList.get(randomValue));
-          customersList.get(randomValue).click();
+        Random r=new Random();
+        int randomValue= r.nextInt(listSize);
+        functionPage.waitForElement(customersList.get(randomValue));
+        customersList.get(randomValue).click();
+    }
+public boolean shoppingCartIsVisible(){
           functionPage.waitForElement(shoppingCartLink);
           shoppingCartLink.click();
           functionPage.waitForElement(shoppingCartTable);
