@@ -5,7 +5,6 @@ import com.unitedcoder.magentoautomationtest.utility.TestBase;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,23 +20,6 @@ public class StoreModuleSteps extends TestBase {
 
     final static String configFile = "config-qa.properties";
     final static String url = TestBase.readFromConfigProperties(configFile, "backend_url");
-//
-//    @Given("admin user is already in Magento admin login page")
-//    public void adminUserIsAlreadyInMagentoAdminLoginPage() {
-//       browserSetUp(url);
-//        storeModuleLogin = new StoreModuleLogin(driver);
-//    }
-//
-//    @When("admin user enter valid username and password")
-//    public void adminUserEnterValidUsernameAndPassword() {
-//        storeModuleLogin.login();
-//    }
-//
-//    @Then("admin user able to login successfully")
-//    public void adminUserAbleToLoginSuccessfully() {
-//        Assert.assertTrue(storeModuleLogin.verifyLogin());
-//    }
-
 
 //******************************************************************************
 
@@ -158,9 +140,24 @@ public void setUp(){
         manageCurrencyRatesPage.clickManageStore();
         manageStoresPage.editStore();
     }
-
     @Then("store edit successfully")
     public void storeEditSuccessfully() {
         Assert.assertTrue(manageStoresPage.verifyEditStore());
     }
+    //      createWebsite
+    // *************************Zohra*****************************
+    CreateWebsitePage createWebsitePage;
+
+    @When("store manager should be able to create website")
+    public void store_manager_should_be_able_to_create_website() {
+        createWebsitePage=new CreateWebsitePage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        createWebsitePage.createWebsite();
+
+    }
+    @Then("a new website should be created")
+    public void store_manager_should_be_able_to_see_the_website_has_been_saved_message() {
+        Assert.assertTrue(createWebsitePage.verifyCreateWebsite());
+    }
+
 }
