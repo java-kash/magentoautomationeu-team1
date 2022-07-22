@@ -2,7 +2,6 @@ package com.unitedcoder.magentoautomationtest.backend.catalogmodule;
 
 import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerDropDownSelect;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,15 +11,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class CatalogAddProduct extends TestBase {
+public class CatalogProductPage extends TestBase {
     WebDriver driver;
     FunctionPage functionPage;
     String configFile="config-qa.properties";
     Actions actions;
+    String name;
 
 
 
-    public CatalogAddProduct(WebDriver driver){
+    public CatalogProductPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
@@ -28,6 +28,15 @@ public class CatalogAddProduct extends TestBase {
 
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @FindBy(xpath="//*[@class='scalable add']")
     WebElement addproductbutton;
     @FindBy(xpath ="//*[@id='attribute_set_id']")
@@ -64,6 +73,14 @@ public class CatalogAddProduct extends TestBase {
     WebElement typeInput;
     @FindBy(xpath = "//ul[@id='product_info_tabs']//li[8]/a")
     WebElement clothingLink;
+//    @FindBy(xpath = "//table[@id='productGrid_table']//tr[@class='even pointer']//td[contains(text(),'"+getName+"')]")
+//    WebElement productName;
+    @FindBy(xpath = "//div[@id=\"group_fields7\"]//tbody//tr//td[@class='value']//select[@id=\"country_of_manufacture\"]")
+    WebElement country;
+    @FindBy(xpath = "//span[text()='Save and Continue Edit']")
+    WebElement saveEditButton;
+    @FindBy(xpath = "//span[text()='The product has been saved.']")
+    WebElement succesMassageEdit;
 
 
     public void Addproduct(){
@@ -93,7 +110,10 @@ public class CatalogAddProduct extends TestBase {
         functionPage.waitForElement(visibilityselect);
         visibilityselect.click();
         functionPage.waitForElement(nameinput);
-        nameinput.sendKeys(readFromConfigProperties(configFile,"name"));
+        String clothing=readFromConfigProperties(configFile,"name")+System.currentTimeMillis();
+        nameinput.sendKeys(clothing);
+        setName(clothing);
+        //nameinput.sendKeys(readFromConfigProperties(configFile,"name"));
        //driver.findElement(By.xpath("//ul[@id='product_info_tabs']//li[2]/a")).click();
         functionPage.waitForElement(pricestUp);
         pricestUp.click();
@@ -114,7 +134,7 @@ public class CatalogAddProduct extends TestBase {
 
     }
     public boolean verifyAddproduct(){
-      //  functionPage.sleep(3);
+        functionPage.sleep(2);
         functionPage.waitForElement(succesMassage);
         if(succesMassage.getText().contains("The product has been saved.")){
 
@@ -123,6 +143,27 @@ public class CatalogAddProduct extends TestBase {
         return false;
 
 
+    }
+    public void editProduct(){
+        functionPage.sleep(3);
+        WebElement p=driver.findElement(By.xpath("//*[contains(text(),'"+getName()+"')]"));
+        functionPage.waitForElement(p);
+        p.click();
+        functionPage.waitForElement(country);
+        country.click();
+        Select select=new Select(country);
+        select.selectByVisibleText(CustomerDropDownSelect.Turkey.name());
+        functionPage.sleep(2);
+        functionPage.waitForElement(saveEditButton);
+        saveEditButton.click();
+    }
+    public boolean verifyEdit(){
+        functionPage.sleep(2);
+        functionPage.waitForElement(succesMassageEdit);
+        if(succesMassageEdit.getText().contains("The product has been saved.")){
+            return true;
+        }else
+            return false;
     }
 
 

@@ -2,11 +2,15 @@ package runner.cucumberframwork.storemodulesteps;
 
 import com.unitedcoder.magentoautomationtest.backend.storemodule.*;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
+
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 import org.junit.Assert;
 
 public class StoreModuleSteps extends TestBase {
@@ -17,23 +21,22 @@ public class StoreModuleSteps extends TestBase {
 
     final static String configFile = "config-qa.properties";
     final static String url = TestBase.readFromConfigProperties(configFile, "backend_url");
-
-
-    @Given("admin user is already in Magento admin login page")
-    public void adminUserIsAlreadyInMagentoAdminLoginPage() {
-       browserSetUp(url);
-        storeModuleLogin = new StoreModuleLogin(driver);
-    }
-
-    @When("admin user enter valid username and password")
-    public void adminUserEnterValidUsernameAndPassword() {
-        storeModuleLogin.login();
-    }
-
-    @Then("admin user able to login successfully")
-    public void adminUserAbleToLoginSuccessfully() {
-        Assert.assertTrue(storeModuleLogin.verifyLogin());
-    }
+//
+//    @Given("admin user is already in Magento admin login page")
+//    public void adminUserIsAlreadyInMagentoAdminLoginPage() {
+//       browserSetUp(url);
+//        storeModuleLogin = new StoreModuleLogin(driver);
+//    }
+//
+//    @When("admin user enter valid username and password")
+//    public void adminUserEnterValidUsernameAndPassword() {
+//        storeModuleLogin.login();
+//    }
+//
+//    @Then("admin user able to login successfully")
+//    public void adminUserAbleToLoginSuccessfully() {
+//        Assert.assertTrue(storeModuleLogin.verifyLogin());
+//    }
 
 
 //******************************************************************************
@@ -41,10 +44,17 @@ public class StoreModuleSteps extends TestBase {
     CreateNewOrderPage createNewOrderPage;
     EditOrderPage editOrderPage;
     CancelOrderPage cancelOrderPage;
+@Before("@MagentoStoreModuleFeature")
+public void setUp(){
+    browserSetUp(url);
+    storeModuleLogin = new StoreModuleLogin(driver);
+    storeModuleLogin.login();
 
+}
 
 @Given("create page object")
     public void storeManagerAlreadyLoggedIn() {
+
         storeModuleLogin = new StoreModuleLogin(driver);
         createNewOrderPage=new CreateNewOrderPage(driver);
         editOrderPage=new EditOrderPage(driver);
@@ -72,9 +82,8 @@ public class StoreModuleSteps extends TestBase {
         System.out.println("create order");
     }
 
-    @After
+    @After("@MagentoStoreModuleFeature")
         public  void tearDown() {
-        driver.close();
         driver.quit();
     }
 
