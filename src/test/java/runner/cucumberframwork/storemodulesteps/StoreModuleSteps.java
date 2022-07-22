@@ -118,6 +118,7 @@ public class StoreModuleSteps extends TestBase {
     ManageStoresPage manageStoresPage;
     ManageCurrencyRatesPage manageCurrencyRatesPage;
     private String storeName;
+    private String websiteCode;
 
     @Given("store manager is on the dashboard page")
     public void storeManagerIsOnTheDashboardPage() {
@@ -142,4 +143,15 @@ public class StoreModuleSteps extends TestBase {
     }
 
 
+    @When("the user edit the store")
+    public void theUserEditTheStore() {
+        manageStoresPage=new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        manageStoresPage.editStore();
+    }
+
+    @Then("store edit successfully")
+    public void storeEditSuccessfully() {
+        Assert.assertTrue(manageStoresPage.verifyEditStore());
+    }
 }

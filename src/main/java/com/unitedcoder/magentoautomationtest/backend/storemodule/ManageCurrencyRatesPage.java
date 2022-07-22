@@ -44,4 +44,5 @@ public class ManageCurrencyRatesPage {
         functionPage.waitForElement(manageStoresOption);
         manageStoresOption.click();
     }
+
 }

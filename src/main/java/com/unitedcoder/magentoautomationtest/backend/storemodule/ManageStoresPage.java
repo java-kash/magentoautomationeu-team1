@@ -40,6 +40,8 @@ public class ManageStoresPage {
     WebElement saveStoreButton;
     @FindBy(css = ".success-msg>ul li span")
     WebElement successMessage;
+    @FindBy(xpath = "//*[@id=\"page:main-container\"]/div[3]/div/table/tbody/tr[16]/td[2]/a")
+    WebElement existingStoreName;
 
     public void CreateStore(String storeName){
 //        functionPage.waitForElement(systemTab);
@@ -68,6 +70,27 @@ public class ManageStoresPage {
             return true;
 
         }else
+            return false;
+
+    }
+
+    public void editStore(){
+        functionPage.waitForElement(existingStoreName);
+        existingStoreName.click();
+        functionPage.waitForElement(rootCategoryDropDown);
+        rootCategoryDropDown.click();
+        Select select=new Select(rootCategoryDropDown);
+        select.selectByIndex(6);
+        functionPage.waitForElement(saveStoreButton);
+        saveStoreButton.click();
+
+    }
+    public boolean verifyEditStore() {
+        functionPage.waitForElement(successMessage);
+        if (successMessage.getText().contains("saved")) {
+            return true;
+
+        } else
             return false;
 
     }
