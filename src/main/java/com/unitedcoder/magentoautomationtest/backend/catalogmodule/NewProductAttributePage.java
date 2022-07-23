@@ -57,6 +57,7 @@ public class NewProductAttributePage extends TestBase {
 
     public void enterOrSelectValidValues() {
         String codeName = readFromConfigProperties(configFile, "attributeCode") + currentTimeStamp;
+        System.out.println("first time"+codeName);
         functionPage.waitForElement(attributeCodeField);
         attributeCodeField.sendKeys(codeName);
         setAttributeCode(codeName);
@@ -75,6 +76,7 @@ public class NewProductAttributePage extends TestBase {
     }
 
     public boolean verifyNewAttributeSuccessMessages() {
+        System.out.println("seconde"+getAttributeCode());
         functionPage.waitForElement(successMessage);
         if (successMessage.getText().contains("The product attribute has been saved.")) {
             return true;

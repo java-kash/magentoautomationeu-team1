@@ -45,6 +45,11 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue(catalogManagerLogInPage.verifyLoginPageOpened());
         catalogManagerLogInPage.login();
     }
+    @BeforeMethod
+    public void backToDashboard(){
+        catalogDashboardPage.backToDashboardPage();
+        catalogDashboardPage.dashboardVerify();
+    }
 
     @Test (description = "add Root Category",priority = 1)
     public void addRootCategory() {
@@ -78,9 +83,9 @@ public class CatalogModuleRunner extends TestBase {
         catalogDashboardPage.clickOnManageCategories();
         Assert.assertTrue(manageCategoryPage.editSubCategory());
     }
-    @Test(description = "delete subcategory test",dependsOnMethods = "editSubCategoryTest")
+    @Test(description = "delete subcategory test",dependsOnMethods = "addSubcategoryTest")
     public void deleteSubcategoryTest(){
-        Assert.assertTrue(manageCategoryPage.deleteSubcategory());
+        Assert.assertTrue(manageCategoryPage.deleteSubcategory());//please check you are code
     }
 
     @Test
@@ -98,8 +103,9 @@ public class CatalogModuleRunner extends TestBase {
         managerAttributesPage.clickOnAddNewAttributeButton();
         newProductAttributePage.enterOrSelectValidValues();
         Assert.assertTrue(newProductAttributePage.verifyNewAttributeSuccessMessages());
-        Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList());
+    //    Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList()); you all view then you can use
     }
+    // with nijat together see
     @Test
     public void viewDefaultCategory(){
         viewDefaultCategoryPage.viewDefaultCategory();
