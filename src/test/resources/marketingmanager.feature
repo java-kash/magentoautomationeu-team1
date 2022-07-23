@@ -14,3 +14,16 @@ Feature:  Marketing Module Function Test
     Examples:
       | ruleName |
       | Team1    |
+
+
+  Scenario: Marketing Manager can update existing Catalog Price Rule
+    Given   Marketing manager on the dashboard page
+    When    Catalog Price Rule Page Open
+    Then    update existing Catalog Price Rule
+    And     verify existing Catalog Price Rule updated
+
+    Scenario: Marketing Manager can update pending reviews
+      Given Marketing manager on the dashboard page
+      When Marketing manager should be able edit pending reviews
+      Then Marketing manager can update pending reviews
+

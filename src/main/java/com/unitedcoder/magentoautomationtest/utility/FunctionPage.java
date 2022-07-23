@@ -2,14 +2,18 @@ package com.unitedcoder.magentoautomationtest.utility;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +22,7 @@ public  class FunctionPage {
     static  String  configFile="config-qa.properties";
     public static int timeout=Integer.parseInt(TestBase.readFromConfigProperties(configFile,"timeout"));
     Faker faker=new Faker();
+
     public FunctionPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -45,10 +50,7 @@ public  class FunctionPage {
             e.printStackTrace();
         }
     }
-    public void waitForAlertPresent(){
-        WebDriverWait wai=new WebDriverWait(driver,timeout);
-        wai.until(ExpectedConditions.alertIsPresent());
-    }
+
 
     public String generateFirstName(){
         String firstName=faker.name().firstName();
@@ -90,11 +92,43 @@ public  class FunctionPage {
         return middleName;
     }
 
+
+    public void waitForAlertPresent(){
+        WebDriverWait wai=new WebDriverWait(driver,timeout);
+        wai.until(ExpectedConditions.alertIsPresent());
+    }
+
 //alertAccept
     public void alertAccept(){
         Alert alert=driver.switchTo().alert();
         alert.accept();
     }
 
+    public String getPageTitle(){
+        return driver.getTitle();
+    }
+
+    public String getPageName(String pageName) {
+        WebElement name = driver.findElement(By.xpath("//*[contains(text(),'" + pageName + "')]"));
+        return name.getText();
+    }
+
+    public void hoverToClick(String text) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"))).click().perform();
+    }
+
+    public  List<String> getElementsText(By locator) {
+        List<WebElement> elements = driver.findElements(locator);
+        List<String> elemTexts = new ArrayList<>();
+        for (WebElement el : elements) {
+            elemTexts.add(el.getText());
+        }
+        return elemTexts;
+    }
+
+    public  int getSectionCount(By locator) {
+        return driver.findElements(locator).size();
+    }
 
 }
