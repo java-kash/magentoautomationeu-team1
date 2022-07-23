@@ -16,7 +16,7 @@ import org.testng.annotations.BeforeClass;
         plugin = {"pretty","html:target//cucumber-output/cucumber-html-report.html",
                 "json:target/cucumber.json",
                 "junit:target/cucumber-results.xml"},
-        features = {"src/test/resources/marketingmanager.feature"}
+        features = {"src/test/resources/salesmodulelogin.feature"}
   //       glue = {"runner/cucumberframwork/marketingsteps","runner/cucumberframwork/marketingsteps/"},
     //     tags = "@MagentoMarketingModuleFeature"
 
