@@ -162,6 +162,8 @@ public class StoreModuleSteps extends TestBase {
     //      createWebsite
     // *************************Zohra*****************************
     CreateWebsitePage createWebsitePage;
+    EditWebsitePage editWebsitePage;
+
 
     @When("store manager should be able to create website")
     public void store_manager_should_be_able_to_create_website() {
@@ -305,4 +307,20 @@ public class StoreModuleSteps extends TestBase {
         functionPage.waitForAlertPresent();
         functionPage.alertAccept();
     }
+
+    @When("the user edit the website")
+    public void the_user_edit_the_website() {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+//       manageStoresPage=new ManageStoresPage(driver);
+        editWebsitePage=new EditWebsitePage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        editWebsitePage.editWebsite();
+    }
+    @Then("website edit successfully")
+    public void website_edit_successfully() {
+        Assert.assertTrue(editWebsitePage.verifyEditWebsite());
+    }
+
+
 }

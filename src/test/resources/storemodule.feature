@@ -106,6 +106,13 @@ Feature: Magento Store Module Function Test
     Examples:
       | SheetName                | RowNumber |
       | General_Information_Data | 0         |
+@editWebsite
+    Scenario:store manager edit website
+    Given store manager is on the dashboard page
+    When  the user edit the website
+   Then  website edit successfully
+
+
 
 
 
