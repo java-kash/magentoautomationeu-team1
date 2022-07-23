@@ -3,6 +3,7 @@ package com.unitedcoder.magentoautomationtest.backend.catalogmodule;
 import com.unitedcoder.magentoautomationtest.backend.customersmodule.CustomerDropDownSelect;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -81,6 +82,10 @@ public class CatalogProductPage extends TestBase {
     WebElement saveEditButton;
     @FindBy(xpath = "//span[text()='The product has been saved.']")
     WebElement succesMassageEdit;
+    @FindBy(xpath = "//span[text()='Delete']")
+    WebElement deleteButton;
+    @FindBy(xpath = "//div[@id='messages']//li/span")
+    WebElement deleteMessage;
 
 
     public void Addproduct(){
@@ -161,6 +166,25 @@ public class CatalogProductPage extends TestBase {
         functionPage.sleep(2);
         functionPage.waitForElement(succesMassageEdit);
         if(succesMassageEdit.getText().contains("The product has been saved.")){
+            return true;
+        }else
+            return false;
+    }
+    public void deleteProduct(){
+        functionPage.sleep(2);
+        WebElement d=driver.findElement(By.xpath("//*[contains(text(),'"+getName()+"')]"));
+        functionPage.waitForElement(d);
+        d.click();
+        functionPage.waitForElement(deleteButton);
+        deleteButton.click();
+        functionPage.waitForAlertPresent();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+
+    }
+    public boolean verifyDeleted(){
+        functionPage.waitForElement(deleteMessage);
+        if(deleteMessage.getText().contains("The product has been deleted.")){
             return true;
         }else
             return false;

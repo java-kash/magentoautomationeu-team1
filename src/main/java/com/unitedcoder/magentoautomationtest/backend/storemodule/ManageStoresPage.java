@@ -40,7 +40,7 @@ public class ManageStoresPage {
     WebElement saveStoreButton;
     @FindBy(css = ".success-msg>ul li span")
     WebElement successMessage;
-    @FindBy(xpath = "//*[@id=\"page:main-container\"]/div[3]/div/table/tbody/tr[16]/td[2]/a")
+    @FindBy(xpath = "(//*[@title='Id: 22'])[1]")
     WebElement existingStoreName;
 
     public void CreateStore(String storeName){
@@ -75,6 +75,8 @@ public class ManageStoresPage {
     }
 
     public void editStore(){
+        actions.moveByOffset(0,600).build().perform();
+        functionPage.sleep(3);
         functionPage.waitForElement(existingStoreName);
         existingStoreName.click();
         functionPage.waitForElement(rootCategoryDropDown);
