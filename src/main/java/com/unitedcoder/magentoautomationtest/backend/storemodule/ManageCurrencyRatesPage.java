@@ -1,6 +1,7 @@
 package com.unitedcoder.magentoautomationtest.backend.storemodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -30,13 +31,17 @@ public class ManageCurrencyRatesPage {
     @FindBy(linkText = "Orders")
     WebElement ordersOption;
 
+    public By tabSections = By.xpath("//*[@id='nav']/li/a/span");
+
+    public By catalogTabSections = By.xpath("//*[contains(text(),'Catalog')]/ancestor::li/ul/li");
+
     public ManageCurrencyRatesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
-
-
+        actions = new Actions(driver);
     }
+
     public void clickManageStore(){
         functionPage.waitForElement(systemTab);
         functionPage.sleep(3);
