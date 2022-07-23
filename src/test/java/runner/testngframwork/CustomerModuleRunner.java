@@ -70,14 +70,14 @@ public class CustomerModuleRunner extends TestBase {
            dependsOnMethods = "addNewAddress")
     public void deleteCustomer(String customerEmail) {
         editCustomerPage.deleteCustomer(customerEmail);
-        Assert.assertTrue(true);
+        Assert.assertTrue(editCustomerPage.deleteVerify());
         customerDashboardPage.filterReset();
 
     }
 
 
     @Test(description = "Customer Manager can add a new address for a customer",dataProvider = "customerEmail"
-            ,dependsOnMethods ="addCustomer" )
+            ,dependsOnMethods ={"upDataCustomer","addCustomer"} )
     public void addNewAddress(String email) {
         addNewAddressPage.selectCustomer(email);
         addNewAddressPage.addNewAddress();
@@ -120,8 +120,8 @@ public class CustomerModuleRunner extends TestBase {
         customerGroupsPage.updateExistingCustomerGroups(testDataHolder);
         Assert.assertTrue(customerGroupsPage.verifyUpdateExistingCustomerGroups());
         }
-        @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo"
-        ,dependsOnMethods = "updateExistingCustomerGroups")
+        @Test(description = "customer manager can delete existing customer groups ",dataProvider = "customerGroupInfo",
+        dependsOnMethods = "updateExistingCustomerGroups")
         public void deleteExistingCustomerGroups(TestDataHolder testDataHolder){
         customerDashboardPage.clickCustomerGroupsLink();
         customerGroupsPage.deleteExitingCustomerGroups(testDataHolder);
@@ -134,6 +134,14 @@ public class CustomerModuleRunner extends TestBase {
         filterCustomersPage.ManagerFilter();
         Assert.assertTrue(true);
         customerDashboardPage.filterReset();
+    }
+    @Test(description = "Customer manager can filter customer by Email")
+    public void filterEmail() throws InterruptedException {
+        customerDashboardPage.clickManageCustomerLink();
+        filterEmailPage.filterEmail();
+        filterEmailPage.verification();
+        customerDashboardPage.filterReset();
+
     }
 
     @DataProvider
@@ -175,13 +183,6 @@ public class CustomerModuleRunner extends TestBase {
         return data;
     }
 
-    @Test(description = "Customer manager can filter customer by Email")
-    public void filterEmail() throws InterruptedException {
-        customerDashboardPage.clickManageCustomerLink();
-        filterEmailPage.filterEmail();
-        filterEmailPage.verification();
-
-    }
 
     @AfterSuite
     public void tearDown() {
