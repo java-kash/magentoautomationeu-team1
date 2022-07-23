@@ -33,6 +33,10 @@ Feature: Magento Store Module Function Test
       Then    cancel order
       And     verify  cancel order
 
+      @CreateStoreView
+      Scenario: Store manager can create store view
+
+
 
 
 

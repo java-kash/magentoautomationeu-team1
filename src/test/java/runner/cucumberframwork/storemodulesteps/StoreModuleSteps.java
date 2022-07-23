@@ -41,6 +41,8 @@ public class StoreModuleSteps extends TestBase {
     CreateNewOrderPage createNewOrderPage;
     EditOrderPage editOrderPage;
     CancelOrderPage cancelOrderPage;
+    CreateStoreViewPage createStoreViewPage;
+
 
 
 @Given("create page object")
@@ -49,6 +51,8 @@ public class StoreModuleSteps extends TestBase {
         createNewOrderPage=new CreateNewOrderPage(driver);
         editOrderPage=new EditOrderPage(driver);
         cancelOrderPage=new CancelOrderPage(driver);
+        createNewOrderPage=new CreateNewOrderPage(driver);
+
     }
 
 
@@ -112,7 +116,7 @@ public class StoreModuleSteps extends TestBase {
         cancelOrderPage.verify();
         System.out.println("cancel order");
     }
-
+//*************  kerim  ***************************
 
 
 
