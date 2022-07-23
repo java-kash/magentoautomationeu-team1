@@ -25,7 +25,7 @@ public class SalesModuleManageCustomerPage {
     WebElement manageCustomersLink;
     @FindAll(@FindBy(xpath = "//table[@id='customerGrid_table']/tbody/tr"))
     List<WebElement> customersList;
-    @FindBy(xpath = "//span[text()='Shopping Cart']")
+    @FindBy(css = "#customer_info_tabs_cart")
     WebElement shoppingCartLink;
     @FindBy(xpath = "//table[@id='customer_cart_grid0_table']")
     WebElement shoppingCartTable;
@@ -38,6 +38,7 @@ public class SalesModuleManageCustomerPage {
     }
     public void navigateToCustomerInformationPage(){
         int listSize=customersList.size();
+        System.out.println("Customers list size="+listSize);
         Random r=new Random();
         int randomValue= r.nextInt(listSize);
         functionPage.waitForElement(customersList.get(randomValue));
@@ -46,6 +47,7 @@ public class SalesModuleManageCustomerPage {
 public boolean shoppingCartIsVisible(){
           functionPage.waitForElement(shoppingCartLink);
           shoppingCartLink.click();
+          functionPage.sleep(3);
           functionPage.waitForElement(shoppingCartTable);
           if (shoppingCartTable.isDisplayed()){
               return true;
