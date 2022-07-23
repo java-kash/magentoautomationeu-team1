@@ -6,6 +6,7 @@ import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import com.unitedcoder.magentoautomationtest.utility.TestNGResultListener;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 @Listeners(TestNGResultListener.class)
@@ -23,9 +24,10 @@ public class CatalogModuleRunner extends TestBase {
 
 
     @BeforeSuite
-    public void setUp(){
+    public void setUp(ITestContext context){
         browserSetUp(readFromConfigProperties(configFile,"backend_url"));
         Log4j.startTestCase("Magento_Customer_Module_Automation_Test_Start");
+        context.setAttribute("driver",driver);
         catalogManagerLogInPage = new CatalogManagerLogInPage(driver);
         functionPage=new FunctionPage(driver);
         manageCategoryPage =new ManageCategoryPage(driver);
