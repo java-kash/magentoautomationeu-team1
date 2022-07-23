@@ -19,6 +19,8 @@ public class CatalogModuleRunner extends TestBase {
     ManagerAttributesPage managerAttributesPage;
     NewProductAttributePage newProductAttributePage;
     ViewDefaultCategoryPage viewDefaultCategoryPage;
+    CatalogProductPage catalogProductPage;
+
 
     @BeforeSuite
     public void setUp(){
@@ -32,6 +34,8 @@ public class CatalogModuleRunner extends TestBase {
         managerAttributesPage = new ManagerAttributesPage(driver);
         newProductAttributePage = new NewProductAttributePage(driver);
         viewDefaultCategoryPage=new ViewDefaultCategoryPage(driver);
+        catalogProductPage=new CatalogProductPage(driver);
+
 
 
     }
@@ -41,29 +45,22 @@ public class CatalogModuleRunner extends TestBase {
         catalogManagerLogInPage.login();
     }
 
-    @Test (description = "add Root Category")
+    @Test (description = "add Root Category",priority = 1)
     public void addRootCategory() {
         manageCategoryPage.addRootCategory();
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
 
     }
 
-    @Test
-    public void filterProductsByCategory(){
-        filterProductsByCategoryPage.openCategoryList();
-        filterProductsByCategoryPage.viewLimit();
-        filterProductsByCategoryPage.filterByCategoryName();
-        Assert.assertTrue(filterProductsByCategoryPage.verify());
-    }
 
 
-    @Test (description = "edit Root Category")
+    @Test (description = "edit Root Category",dependsOnMethods = "addRootCategory")
     public void editRootCategory(){
         manageCategoryPage.editRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
     }
 
-    @Test (description = "delete Root Category")
+    @Test (description = "delete Root Category",dependsOnMethods = "editRootCategory")
     public void deleteRootCategory(){
         manageCategoryPage.deleteRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyDeleteSuccessMsg());
@@ -80,9 +77,18 @@ public class CatalogModuleRunner extends TestBase {
         catalogDashboardPage.clickOnManageCategories();
         Assert.assertTrue(manageCategoryPage.editSubCategory());
     }
+
     @Test(description = "delete subcategory test",dependsOnMethods = "editSubCategoryTest")
     public void deleteSubcategoryTest(){
         Assert.assertTrue(manageCategoryPage.deleteSubcategory());
+    }
+
+    @Test
+    public void filterProductsByCategory(){
+        filterProductsByCategoryPage.openCategoryList();
+        filterProductsByCategoryPage.viewLimit();
+        filterProductsByCategoryPage.filterByCategoryName();
+        Assert.assertTrue(filterProductsByCategoryPage.verify());
     }
 
     //Kadirdan
@@ -99,6 +105,24 @@ public class CatalogModuleRunner extends TestBase {
         viewDefaultCategoryPage.viewDefaultCategory();
         Assert.assertTrue(viewDefaultCategoryPage.verifyManagerCanViewAllDefaultCategories());
     }
+
+    @Test
+    public void addproductCatalog(){
+        catalogProductPage.Addproduct();
+        Assert.assertTrue(catalogProductPage.verifyAddproduct());
+
+    }
+    @Test(dependsOnMethods = "addproductCatalog")
+    public void editproductPage(){
+        catalogProductPage.editProduct();
+        Assert.assertTrue(catalogProductPage.verifyEdit());
+    }
+    @Test(dependsOnMethods = "addproductCatalog")
+    public void deleteProductPage(){
+        catalogProductPage.deleteProduct();
+        Assert.assertTrue(catalogProductPage.verifyDeleted());
+    }
+
 
 
     @AfterSuite
