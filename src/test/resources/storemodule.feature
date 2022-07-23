@@ -52,6 +52,12 @@ Feature: Magento Store Module Function Test
          Given store manager is on the dashboard page
          When  the user edit the store
          Then store edit successfully
+ #   ***************** Zohra ************************
+  @addWebsite
+  Scenario: Store Manager create website
+    Given   store manager is on the dashboard page
+    When    store manager should be able to create website
+    Then   a new website should be created
 
 
 

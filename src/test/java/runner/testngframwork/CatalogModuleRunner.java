@@ -19,7 +19,7 @@ public class CatalogModuleRunner extends TestBase {
     ManagerAttributesPage managerAttributesPage;
     NewProductAttributePage newProductAttributePage;
     ViewDefaultCategoryPage viewDefaultCategoryPage;
-    CatalogProductPage catalogAddProduct;
+    CatalogProductPage catalogProductPage;
 
 
     @BeforeSuite
@@ -34,7 +34,8 @@ public class CatalogModuleRunner extends TestBase {
         managerAttributesPage = new ManagerAttributesPage(driver);
         newProductAttributePage = new NewProductAttributePage(driver);
         viewDefaultCategoryPage=new ViewDefaultCategoryPage(driver);
-        catalogAddProduct=new CatalogProductPage(driver);
+        catalogProductPage=new CatalogProductPage(driver);
+
 
 
     }
@@ -76,6 +77,7 @@ public class CatalogModuleRunner extends TestBase {
         catalogDashboardPage.clickOnManageCategories();
         Assert.assertTrue(manageCategoryPage.editSubCategory());
     }
+
     @Test(description = "delete subcategory test",dependsOnMethods = "editSubCategoryTest")
     public void deleteSubcategoryTest(){
         Assert.assertTrue(manageCategoryPage.deleteSubcategory());
@@ -106,15 +108,21 @@ public class CatalogModuleRunner extends TestBase {
 
     @Test
     public void addproductCatalog(){
-        catalogAddProduct.Addproduct();
-        Assert.assertTrue(catalogAddProduct.verifyAddproduct());
+        catalogProductPage.Addproduct();
+        Assert.assertTrue(catalogProductPage.verifyAddproduct());
 
     }
     @Test(dependsOnMethods = "addproductCatalog")
     public void editproductPage(){
-        catalogAddProduct.editProduct();
-        Assert.assertTrue(catalogAddProduct.verifyEdit());
+        catalogProductPage.editProduct();
+        Assert.assertTrue(catalogProductPage.verifyEdit());
     }
+    @Test(dependsOnMethods = "addproductCatalog")
+    public void deleteProductPage(){
+        catalogProductPage.deleteProduct();
+        Assert.assertTrue(catalogProductPage.verifyDeleted());
+    }
+
 
 
     @AfterSuite
