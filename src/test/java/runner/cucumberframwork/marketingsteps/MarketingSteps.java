@@ -1,9 +1,6 @@
 package runner.cucumberframwork.marketingsteps;
 
-import com.unitedcoder.magentoautomationtest.backend.marketingmodule.CatalogPriceRulePage;
-import com.unitedcoder.magentoautomationtest.backend.marketingmodule.DashboardPage;
-import com.unitedcoder.magentoautomationtest.backend.marketingmodule.MarketingLoginPage;
-import com.unitedcoder.magentoautomationtest.backend.marketingmodule.UpdateExistingCatalogPriceRule;
+import com.unitedcoder.magentoautomationtest.backend.marketingmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 
@@ -28,6 +25,7 @@ public class MarketingSteps extends TestBase {
     FunctionPage functionPage;
     UpdateExistingCatalogPriceRule updateExistingCatalogPriceRule;
     String configFile="config-qa.properties";
+    PendingReviewsPage pendingReviewsPage;
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
         browserSetUp(readFromConfigProperties(configFile,"backend_url"));
@@ -62,6 +60,7 @@ public class MarketingSteps extends TestBase {
         catalogPriceRulePage=new CatalogPriceRulePage(driver);
         dashboardPage=new DashboardPage(driver);
         updateExistingCatalogPriceRule=new UpdateExistingCatalogPriceRule(driver);
+        pendingReviewsPage=new PendingReviewsPage(driver);
     }
 
     @When("Click on the Catalog Price Rules")
@@ -99,5 +98,17 @@ public class MarketingSteps extends TestBase {
     @And("verify existing Catalog Price Rule updated")
     public void verifyExistingCatalogPriceRuleUpdated() {
         updateExistingCatalogPriceRule.verify();
+    }
+
+    @When("Marketing manager should be able edit pending reviews")
+    public void marketingManagerShouldBeAbleEditPendingReviews() {
+        dashboardPage.clickAllReviewsOption();
+        pendingReviewsPage.updatePendingReviews();
+
+    }
+
+    @Then("Marketing manager can update pending reviews")
+    public void marketingManagerCanUpdatePendingReviews() {
+       Assert.assertTrue(pendingReviewsPage.verifyUpdatePendingReviews());
     }
 }
