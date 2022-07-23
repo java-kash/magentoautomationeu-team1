@@ -147,6 +147,8 @@ public void setUp(){
     //      createWebsite
     // *************************Zohra*****************************
     CreateWebsitePage createWebsitePage;
+    EditWebsitePage editWebsitePage;
+
 
     @When("store manager should be able to create website")
     public void store_manager_should_be_able_to_create_website() {
@@ -155,9 +157,26 @@ public void setUp(){
         createWebsitePage.createWebsite();
 
     }
+
     @Then("a new website should be created")
     public void store_manager_should_be_able_to_see_the_website_has_been_saved_message() {
         Assert.assertTrue(createWebsitePage.verifyCreateWebsite());
     }
+
+
+    @When("the user edit the website")
+    public void the_user_edit_the_website() {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+//       manageStoresPage=new ManageStoresPage(driver);
+        editWebsitePage=new EditWebsitePage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        editWebsitePage.editWebsite();
+    }
+    @Then("website edit successfully")
+    public void website_edit_successfully() {
+        Assert.assertTrue(editWebsitePage.verifyEditWebsite());
+    }
+
 
 }
