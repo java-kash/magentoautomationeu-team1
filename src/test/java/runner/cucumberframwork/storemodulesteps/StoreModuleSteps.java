@@ -129,6 +129,8 @@ public class StoreModuleSteps extends TestBase {
         formPage = new CategoriesAndNewRootCategoryFormPage(driver);
         functionPage = new FunctionPage(driver);
         manageCurrencyRatesPage = new ManageCurrencyRatesPage(driver);
+        createWebsitePage = new CreateWebsitePage(driver);
+        deleteWebsitePage=new DeleteWebsitePage(driver);
 
 
     }
@@ -163,6 +165,9 @@ public class StoreModuleSteps extends TestBase {
     // *************************Zohra*****************************
     CreateWebsitePage createWebsitePage;
     EditWebsitePage editWebsitePage;
+
+    DeleteWebsitePage deleteWebsitePage;
+
 
 
     @When("store manager should be able to create website")
@@ -323,4 +328,20 @@ public class StoreModuleSteps extends TestBase {
     }
 
 
+
+
+
+    @When("the user delete the website")
+    public void the_user_delete_the_website() throws InterruptedException {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+
+        manageCurrencyRatesPage.clickManageStore();
+        deleteWebsitePage=new DeleteWebsitePage(driver);
+        deleteWebsitePage.deleteWebsite();
+    }
+    @Then("website delete successfully")
+    public void website_delete_successfully() {
+        Assert.assertTrue(deleteWebsitePage.verifyDeleteWebsite());
+    }
 }
