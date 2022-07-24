@@ -30,3 +30,8 @@ Feature:  Marketing Module Function Test
     Given Marketing manager on the dashboard page
     When Marketing manager should be able add new shopping cart price rule
     Then a new shopping cart price rule should be added
+
+  Scenario: Marketing Manager can update existing Cart Price Rule
+    Given Marketing manager on the dashboard page
+    When Marketing manager should be able update existing
+    Then Marketing manager should be updated

@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
                 "junit:target/cucumber-results.xml"},
        features = {"src/test/resources/marketingmanager.feature"},
         glue = {"runner/cucumberframwork/marketingsteps"},
-         tags = "@AddNewShoppingCartPricePule"
+         tags = "@MagentoMarketingModuleFeature"
 
 
 )

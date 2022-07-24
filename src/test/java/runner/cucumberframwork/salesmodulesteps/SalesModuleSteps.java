@@ -4,14 +4,19 @@ import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesManagerLog
 import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleInvoicesPage;
 import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleManageCustomerPage;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.Log4j;
+import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 
 public class SalesModuleSteps extends TestBase {
@@ -20,6 +25,7 @@ public class SalesModuleSteps extends TestBase {
     FunctionPage functionPage;
     String configFile = "config-qa.properties";
     SalesModuleInvoicesPage salesModuleInvoicesPage;
+    ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
     @Before("@SalesModuleFeature")
     public void setUp() {
@@ -28,7 +34,16 @@ public class SalesModuleSteps extends TestBase {
     salesManagerLogin.login(readFromConfigProperties(configFile,"sales-username"),readFromConfigProperties(configFile,"sales-password"));
     }
     @After("@SalesModuleFeature")
-    public void tearDown(){
+    public void tearDown(Scenario scenario){
+        if (scenario.isFailed()){
+            Log4j.error(scenario.getName()+"      Failed");
+            screenshotUtility.takeScreenshot("image",scenario.getName(),driver);
+            byte[] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath,"image/png",scenario.getName());
+        }
+        if(!scenario.isFailed()) {
+            Log4j.info(scenario.getName() + "       Passed");
+        }
         driver.quit();
     }
 
