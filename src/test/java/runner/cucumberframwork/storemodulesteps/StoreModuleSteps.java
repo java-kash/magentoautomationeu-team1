@@ -37,6 +37,7 @@ public class StoreModuleSteps extends TestBase {
     CategoriesAndNewRootCategoryFormPage formPage;
     FunctionPage functionPage;
     String title;
+    CreateStoreViewPage createStoreViewPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
     @Before("@MagentoStoreModuleFeature")
@@ -63,6 +64,12 @@ public class StoreModuleSteps extends TestBase {
     @Given("create page object")
     public void storeManagerAlreadyLoggedIn() {
 
+
+        storeModuleLogin = new StoreModuleLogin(driver);
+        createNewOrderPage=new CreateNewOrderPage(driver);
+        editOrderPage=new EditOrderPage(driver);
+        cancelOrderPage=new CancelOrderPage(driver);
+        createNewOrderPage=new CreateNewOrderPage(driver);
 
     }
 
@@ -143,6 +150,10 @@ public class StoreModuleSteps extends TestBase {
         manageCurrencyRatesPage = new ManageCurrencyRatesPage(driver);
         createWebsitePage = new CreateWebsitePage(driver);
         deleteWebsitePage=new DeleteWebsitePage(driver);
+        createStoreViewPage= new CreateStoreViewPage(driver);
+
+
+
 
 
     }
@@ -194,6 +205,8 @@ public class StoreModuleSteps extends TestBase {
     public void store_manager_should_be_able_to_see_the_website_has_been_saved_message() {
         Assert.assertTrue(createWebsitePage.verifyCreateWebsite());
     }
+
+
 
     //*****************************Kadirdan******************************
 
@@ -341,9 +354,6 @@ public class StoreModuleSteps extends TestBase {
     }
 
 
-
-
-
     @When("the user delete the website")
     public void the_user_delete_the_website() throws InterruptedException {
         storeModuleLogin=new StoreModuleLogin(driver);
@@ -357,4 +367,26 @@ public class StoreModuleSteps extends TestBase {
     public void website_delete_successfully() {
         Assert.assertTrue(deleteWebsitePage.verifyDeleteWebsite());
     }
+
+    // *************************Abdukerim*****************************
+
+    private String StoreViewName;
+    private String code;
+
+    @When("store manager create new store view  {string} and  {string}")
+    public void storeManagerCreateNewStoreViewAnd(String arg0, String arg1) {
+        manageStoresPage = new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        StoreViewName = arg0;
+        code =arg1;
+        createStoreViewPage.createStoreView(StoreViewName,code);
+    }
+
+    @Then("verify create new store view")
+    public void verifyCreateNewStoreView() {
+        createStoreViewPage.verifyCreateStoreView();
+
+
+    }
+
 }

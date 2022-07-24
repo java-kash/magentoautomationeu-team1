@@ -26,6 +26,7 @@ public class MarketingSteps extends TestBase {
     CatalogPriceRulePage catalogPriceRulePage;
     DashboardPage dashboardPage;
     FunctionPage functionPage;
+    AddNewNewsletterTemplate addNewNewsletterTemplate;
     UpdateExistingCatalogPriceRule updateExistingCatalogPriceRule;
     String configFile="config-qa.properties";
     PendingReviewsPage pendingReviewsPage;
@@ -61,6 +62,7 @@ public class MarketingSteps extends TestBase {
         updateExistingCatalogPriceRule=new UpdateExistingCatalogPriceRule(driver);
         pendingReviewsPage=new PendingReviewsPage(driver);
         addNewShoppingCartPriceRulePage=new AddNewCartPriceRulePage(driver);
+        addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
     }
 
     @When("Click on the Catalog Price Rules")
@@ -124,6 +126,20 @@ public class MarketingSteps extends TestBase {
     public void a_new_shopping_cart_price_rule_should_be_added() {
         Assert.assertTrue(addNewShoppingCartPriceRulePage.verifyAddNewShoppingCartPriceRule());
     }
+
+    @When("Marketing manager add new newsletter template{string} and {string} and{string}")
+    public void marketingManagerAddNewNewsletterTemplateAndAnd(String arg0, String arg1, String arg2) {
+        addNewNewsletterTemplate.addNewNewsLetterTemplate(arg0,arg1,arg2);
+    }
+
+
+    @Then("Marketing manager can see her new added template {string}")
+    public void marketingManagerCanSeeHerNewAddedTemplate(String arg0) {
+        addNewNewsletterTemplate.verifyNewsletterAddedSuccessfully(arg0);
+    }
+
+
+
 
     @When("Marketing manager should be able update existing")
     public void marketingManagerShouldBeAbleUpdateExisting() {
