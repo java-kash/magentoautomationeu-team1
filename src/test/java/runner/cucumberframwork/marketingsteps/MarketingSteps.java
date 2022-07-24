@@ -23,9 +23,12 @@ public class MarketingSteps extends TestBase {
     CatalogPriceRulePage catalogPriceRulePage;
     DashboardPage dashboardPage;
     FunctionPage functionPage;
+    AddNewNewsletterTemplate addNewNewsletterTemplate;
     UpdateExistingCatalogPriceRule updateExistingCatalogPriceRule;
     String configFile="config-qa.properties";
     PendingReviewsPage pendingReviewsPage;
+    AddNewCartPriceRulePage addNewShoppingCartPriceRulePage;
+
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
         browserSetUp(readFromConfigProperties(configFile,"backend_url"));
@@ -61,6 +64,8 @@ public class MarketingSteps extends TestBase {
         dashboardPage=new DashboardPage(driver);
         updateExistingCatalogPriceRule=new UpdateExistingCatalogPriceRule(driver);
         pendingReviewsPage=new PendingReviewsPage(driver);
+        addNewShoppingCartPriceRulePage=new AddNewCartPriceRulePage(driver);
+        addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
     }
 
     @When("Click on the Catalog Price Rules")
@@ -111,4 +116,31 @@ public class MarketingSteps extends TestBase {
     public void marketingManagerCanUpdatePendingReviews() {
        Assert.assertTrue(pendingReviewsPage.verifyUpdatePendingReviews());
     }
+
+
+
+    @When("Marketing manager should be able add new shopping cart price rule")
+    public void marketing_manager_should_be_able_add_new_shopping_cart_price_rule() {
+
+        addNewShoppingCartPriceRulePage.addNewShoppingCartPriceRule();
+
+    }
+    @Then("a new shopping cart price rule should be added")
+    public void a_new_shopping_cart_price_rule_should_be_added() {
+        Assert.assertTrue(addNewShoppingCartPriceRulePage.verifyAddNewShoppingCartPriceRule());
+    }
+
+    @When("Marketing manager add new newsletter template{string} and {string} and{string}")
+    public void marketingManagerAddNewNewsletterTemplateAndAnd(String arg0, String arg1, String arg2) {
+        addNewNewsletterTemplate.addNewNewsLetterTemplate(arg0,arg1,arg2);
+    }
+
+
+    @Then("Marketing manager can see her new added template {string}")
+    public void marketingManagerCanSeeHerNewAddedTemplate(String arg0) {
+        addNewNewsletterTemplate.verifyNewsletterAddedSuccessfully(arg0);
+    }
+
+
+
 }

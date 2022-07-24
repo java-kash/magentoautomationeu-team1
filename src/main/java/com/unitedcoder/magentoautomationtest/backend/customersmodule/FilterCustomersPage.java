@@ -34,7 +34,7 @@ public class FilterCustomersPage {
         Groups.click();
 
         Select select = new Select(Groups);
-        select.selectByVisibleText(CustomerDropDownSelect.team2.name());
+        select.selectByVisibleText(CustomerDropDownSelect.Almas.name());
         functionPage.sleep(3);
         functionPage.waitForElement(SearchButton);
         SearchButton.click();

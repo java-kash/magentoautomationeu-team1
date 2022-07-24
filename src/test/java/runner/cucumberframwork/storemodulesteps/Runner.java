@@ -10,9 +10,9 @@ import org.junit.runner.RunWith;
         plugin = {"pretty","html:target//cucumber-output/cucumber-html-report.html",
                 "json:target/cucumber.json",
                 "junit:target/cucumber-results.xml"},
-       features = {"src/test/resources/marketingmanager.feature"}
-//        glue = {"runner/cucumberframwork/marketingsteps","runner/cucumberframwork/marketingsteps/"},
-//         tags = "@editWebsite"
+       features = {"src/test/resources/marketingmanager.feature"},
+        glue = {"runner/cucumberframwork/marketingsteps"},
+         tags = "@AddNewShoppingCartPricePule"
 
 
 )
