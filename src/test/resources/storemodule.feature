@@ -58,6 +58,24 @@ Feature: Magento Store Module Function Test
     When    store manager should be able to create website
     Then   a new website should be created
 
+
+  @editWebsite
+  Scenario:store manager edit website
+    Given store manager is on the dashboard page
+    When  the user edit the website
+    Then  website edit successfully
+
+
+   @deleteWebsite
+   Scenario:store manager delete website
+     Given store manager is on the dashboard page
+     When  the user delete the website
+     Then  website delete successfully
+
+
+
+
+
     #*****************    Kadirdan     *******************
   @Kadirdan
   Scenario Outline: test Add , Edit and Delete Product Category functionality
@@ -106,11 +124,10 @@ Feature: Magento Store Module Function Test
     Examples:
       | SheetName                | RowNumber |
       | General_Information_Data | 0         |
-@editWebsite
-    Scenario:store manager edit website
-    Given store manager is on the dashboard page
-    When  the user edit the website
-   Then  website edit successfully
+
+
+
+
 
 
 
