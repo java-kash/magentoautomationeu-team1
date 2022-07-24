@@ -64,6 +64,11 @@ Feature: Magento Store Module Function Test
 
       @CreateStoreView
       Scenario: Store manager can create store view
+        Given store manager is on the dashboard page
+        When store manager is on manage store page
+        Then store manager create new store view
+        And verify create new store view
+
 
 
 

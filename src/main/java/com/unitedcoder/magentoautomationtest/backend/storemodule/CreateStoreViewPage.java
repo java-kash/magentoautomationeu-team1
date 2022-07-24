@@ -42,12 +42,14 @@ public class CreateStoreViewPage {
     @FindBy(xpath = "//span[text()=\"The store view has been saved\" ]")
     WebElement successmsg;
 
-
-    public void createStoreView(){
+    public void manageStorePage(){
         functionPage.waitForElement(Systemtab);
         Systemtab.click();
         functionPage.waitForElement(ManageStore);
         ManageStore.click();
+    }
+
+    public void createStoreView(){
         functionPage.waitForElement(CreateStrbtn);
         CreateStrbtn.click();
         functionPage.waitForElement(Namefeild);

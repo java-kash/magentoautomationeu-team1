@@ -164,5 +164,17 @@ public void setUp(){
     public void store_manager_should_be_able_to_see_the_website_has_been_saved_message() {
         Assert.assertTrue(createWebsitePage.verifyCreateWebsite());
     }
+    // *************************Abdukerim*****************************
+    @When("store manager is on manage store page")
+    public void storeManagerIsOnManageStorePage() {
 
+    }
+
+    @Then("store manager create new store view")
+    public void storeManagerCreateNewStoreView() {
+    }
+
+    @And("verify create new store view")
+    public void verifyCreateNewStoreView() {
+    }
 }
