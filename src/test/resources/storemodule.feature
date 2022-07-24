@@ -2,13 +2,6 @@
 
 Feature: Magento Store Module Function Test
 
-#****************     Habiba *****************
-#Login
-#  Background:
-#      Given admin user is already in Magento admin login page
-#      When admin user enter valid username and password
-#      Then admin user able to login successfully
-
 #*****************    Nijat     *******************
 
 
