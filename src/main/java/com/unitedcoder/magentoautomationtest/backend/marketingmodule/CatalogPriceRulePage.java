@@ -52,7 +52,7 @@ public class CatalogPriceRulePage extends TestBase {
         webSites.selectByValue("1");
         Select customerGroup=new Select(customerGroupsSelect);
         functionPage.waitForElement(customerGroupsSelect);
-        customerGroup.selectByVisibleText(MarketingDropDownSelect.master.name());
+        customerGroup.selectByVisibleText(MarketingDropDownSelect.Almas.name());
         functionPage.waitForElement(actionsLink);
         actionsLink.click();
         functionPage.waitForElement(discountAmountField);
