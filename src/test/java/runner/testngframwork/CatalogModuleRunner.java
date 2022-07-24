@@ -114,13 +114,13 @@ public class CatalogModuleRunner extends TestBase {
     }
 
     @Test
-    public void addproductCatalog(){
+    public void addProductCatalog(){
         catalogProductPage.Addproduct();
         Assert.assertTrue(catalogProductPage.verifyAddproduct());
 
     }
     @Test(dependsOnMethods = "addproductCatalog")
-    public void editproductPage(){
+    public void editProductPage(){
         catalogProductPage.editProduct();
         Assert.assertTrue(catalogProductPage.verifyEdit());
     }
