@@ -1,4 +1,4 @@
-package runner.cucumberframwork.storemodulesteps;
+package runner.cucumberframwork;
 
 
 import io.cucumber.junit.Cucumber;
@@ -10,8 +10,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty","html:target//cucumber-output/cucumber-html-report.html",
                 "json:target/cucumber.json",
                 "junit:target/cucumber-results.xml"},
-       features = {"src/test/resources/marketingmanager.feature"},
-        glue = {"runner/cucumberframwork/marketingsteps"},
+       features = {"src/test/resources"},
          tags = "@MagentoMarketingModuleFeature"
 
 

@@ -1,4 +1,4 @@
-package runner.cucumberframwork.storemodulesteps;
+package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.storemodule.*;
 import com.unitedcoder.magentoautomationtest.utility.*;

@@ -1,4 +1,4 @@
-package runner.cucumberframwork.marketingsteps;
+package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
