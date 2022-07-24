@@ -11,7 +11,7 @@ import org.testng.annotations.*;
 
 
 @Listeners(TestNGResultListener.class)
-public class CatalogModuleRunner extends TestBase {
+public class CatalogModule extends TestBase {
     FunctionPage functionPage;
     static CatalogManagerLogInPage catalogManagerLogInPage;
     String configFile = "config-qa.properties";
@@ -105,7 +105,7 @@ public class CatalogModuleRunner extends TestBase {
         managerAttributesPage.clickOnAddNewAttributeButton();
         newProductAttributePage.enterOrSelectValidValues();
         Assert.assertTrue(newProductAttributePage.verifyNewAttributeSuccessMessages());
-    //    Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList()); you all view then you can use
+        //    Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList()); you all view then you can use
     }
     // with nijat together see
     @Test
@@ -120,12 +120,12 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue(catalogProductPage.verifyAddproduct());
 
     }
-    @Test(dependsOnMethods = "addproductCatalog")
+    @Test(dependsOnMethods = "addProductCatalog")
     public void editProductPage(){
         catalogProductPage.editProduct();
         Assert.assertTrue(catalogProductPage.verifyEdit());
     }
-    @Test(dependsOnMethods = "addproductCatalog")
+    @Test(dependsOnMethods = "editProductPage")
     public void deleteProductPage(){
         catalogProductPage.deleteProduct();
         Assert.assertTrue(catalogProductPage.verifyDeleted());
