@@ -22,3 +22,11 @@ Feature:  Marketing Module Function Test
       When Marketing manager should be able edit pending reviews
       Then Marketing manager can update pending reviews
 
+
+
+    #   ***************** Zohra ************************
+@AddNewShoppingCartPricePule
+  Scenario:Marketing Manager can add new  shopping cart price rule
+    Given Marketing manager on the dashboard page
+    When Marketing manager should be able add new shopping cart price rule
+    Then a new shopping cart price rule should be added
