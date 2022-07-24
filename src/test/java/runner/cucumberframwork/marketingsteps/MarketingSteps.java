@@ -27,6 +27,7 @@ public class MarketingSteps extends TestBase {
     UpdateExistingCatalogPriceRule updateExistingCatalogPriceRule;
     String configFile="config-qa.properties";
     PendingReviewsPage pendingReviewsPage;
+    AddNewCartPriceRulePage addNewShoppingCartPriceRulePage;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -63,6 +64,7 @@ public class MarketingSteps extends TestBase {
         dashboardPage=new DashboardPage(driver);
         updateExistingCatalogPriceRule=new UpdateExistingCatalogPriceRule(driver);
         pendingReviewsPage=new PendingReviewsPage(driver);
+        addNewShoppingCartPriceRulePage=new AddNewCartPriceRulePage(driver);
         addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
     }
 
@@ -113,6 +115,19 @@ public class MarketingSteps extends TestBase {
     @Then("Marketing manager can update pending reviews")
     public void marketingManagerCanUpdatePendingReviews() {
        Assert.assertTrue(pendingReviewsPage.verifyUpdatePendingReviews());
+    }
+
+
+
+    @When("Marketing manager should be able add new shopping cart price rule")
+    public void marketing_manager_should_be_able_add_new_shopping_cart_price_rule() {
+
+        addNewShoppingCartPriceRulePage.addNewShoppingCartPriceRule();
+
+    }
+    @Then("a new shopping cart price rule should be added")
+    public void a_new_shopping_cart_price_rule_should_be_added() {
+        Assert.assertTrue(addNewShoppingCartPriceRulePage.verifyAddNewShoppingCartPriceRule());
     }
 
     @When("Marketing manager add new newsletter template{string} and {string} and{string}")

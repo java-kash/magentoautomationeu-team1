@@ -1,18 +1,14 @@
 package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.Collections;
-import java.util.List;
+
 
 public class EditCustomerPage {
     WebDriver driver;
@@ -35,6 +31,8 @@ public class EditCustomerPage {
     WebElement searchButton;
     @FindBy(xpath = "//input[@name='customer']")
     WebElement checkBox;
+    @FindBy(xpath = "//span[contains(text(),'were deleted.')]")
+    WebElement deleteSuccessMessage;
 
 
 
@@ -43,6 +41,7 @@ public class EditCustomerPage {
         PageFactory.initElements(driver,this);
         functionPage=new FunctionPage(driver);
     }
+
 
     public boolean editCustomerInformation(String middleName){
         functionPage.waitForElement(accountInformation);
@@ -85,8 +84,13 @@ public class EditCustomerPage {
         functionPage.waitForAlertPresent();
         Alert alert=driver.switchTo().alert();
         alert.accept();
-
-
+    }
+    public boolean deleteVerify(){
+        functionPage.waitForElement(deleteSuccessMessage);
+        if(deleteSuccessMessage.isDisplayed()){
+            return true;
+        }
+        return false;
 
     }
 }

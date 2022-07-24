@@ -213,8 +213,10 @@ public class ManageCategoryPage {
             return false;
 
     }
+
 public boolean deleteSubcategory(){
     WebElement subCategoryButton = driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]", TestBase.readFromConfigProperties(configFile, "subcategory_name"))));
+    functionPage.sleep(3);
     functionPage.waitForElement(subCategoryButton);
     subCategoryButton.click();
     functionPage.sleep(5);

@@ -31,7 +31,7 @@ public class ViewDefaultCategoryPage extends TestBase {
     WebElement defaultCategoryLink;
     @FindBy(xpath = "//a[contains(text(),'Expand All')]")
     WebElement expandAllLink;
-    @FindBy(xpath = "//span[contains(text(),'zibuzinnet (52)')]")
+    @FindBy(xpath = "//span[contains(text(),'zibuzinnet')]")
     WebElement zibuzinnetLink;
     @FindBy(xpath = "//h3[contains(text(),'zibuzinnet (ID: 6)')]")
     WebElement verifyMessage;

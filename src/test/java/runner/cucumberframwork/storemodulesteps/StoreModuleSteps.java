@@ -52,6 +52,7 @@ public class StoreModuleSteps extends TestBase {
     }
 
 
+
 //*************   Nijat   ***************************
 
     //Create New Order Steps
@@ -129,6 +130,8 @@ public class StoreModuleSteps extends TestBase {
         formPage = new CategoriesAndNewRootCategoryFormPage(driver);
         functionPage = new FunctionPage(driver);
         manageCurrencyRatesPage = new ManageCurrencyRatesPage(driver);
+        createWebsitePage = new CreateWebsitePage(driver);
+        deleteWebsitePage=new DeleteWebsitePage(driver);
 
 
     }
@@ -162,6 +165,11 @@ public class StoreModuleSteps extends TestBase {
     //      createWebsite
     // *************************Zohra*****************************
     CreateWebsitePage createWebsitePage;
+    EditWebsitePage editWebsitePage;
+
+    DeleteWebsitePage deleteWebsitePage;
+
+
 
     @When("store manager should be able to create website")
     public void store_manager_should_be_able_to_create_website() {
@@ -205,6 +213,7 @@ public class StoreModuleSteps extends TestBase {
 
     @When("user hovers to click the {string}")
     public void userHoversOverThe(String text) {
+        FunctionPage functionPage = new FunctionPage(driver);
         functionPage.hoverToClick(text);
     }
 
@@ -304,5 +313,37 @@ public class StoreModuleSteps extends TestBase {
         functionPage.sleep(3);
         functionPage.waitForAlertPresent();
         functionPage.alertAccept();
+    }
+
+    @When("the user edit the website")
+    public void the_user_edit_the_website() {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+//       manageStoresPage=new ManageStoresPage(driver);
+        editWebsitePage=new EditWebsitePage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        editWebsitePage.editWebsite();
+    }
+    @Then("website edit successfully")
+    public void website_edit_successfully() {
+        Assert.assertTrue(editWebsitePage.verifyEditWebsite());
+    }
+
+
+
+
+
+    @When("the user delete the website")
+    public void the_user_delete_the_website() throws InterruptedException {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+
+        manageCurrencyRatesPage.clickManageStore();
+        deleteWebsitePage=new DeleteWebsitePage(driver);
+        deleteWebsitePage.deleteWebsite();
+    }
+    @Then("website delete successfully")
+    public void website_delete_successfully() {
+        Assert.assertTrue(deleteWebsitePage.verifyDeleteWebsite());
     }
 }

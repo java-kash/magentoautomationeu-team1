@@ -32,8 +32,10 @@ public class FilterCustomersPage {
     public void ManagerFilter() {
         functionPage.waitForElement(Groups);
         Groups.click();
+
         Select select = new Select(Groups);
-        select.selectByVisibleText(CustomerDropDownSelect.Private.name());
+        select.selectByVisibleText(CustomerDropDownSelect.Almas.name());
+        functionPage.sleep(3);
         functionPage.waitForElement(SearchButton);
         SearchButton.click();
 
