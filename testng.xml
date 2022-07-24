@@ -3,11 +3,8 @@
 <suite name="Magento_UI_Automation">
     <test verbose="2" preserve-order="true" name="catalog_Module_Test"  thread-count="3">
         <classes>
-            <class name="runner.testngframwork.CatalogModule">
+            <class name="runner.testngframwork.CatalogModuleRunner">
                 <methods>
-                    <include name="addSubcategoryTest"/>
-                    <include name="editSubCategoryTest"/>
-                    <include name="deleteSubcategoryTest"/>
                 </methods>
             </class>
         </classes>
