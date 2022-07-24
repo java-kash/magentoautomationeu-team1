@@ -123,6 +123,14 @@ Feature: Magento Store Module Function Test
 
 
 
+  @CreateStoreView
+  Scenario Outline: Store manager can create store view
+    Given store manager is on the dashboard page
+    When store manager create new store view  "<StoreViewName>" and  "<code>"
+    Then verify create new store view
+    Examples: :
+  | StoreViewName              | code   |
+  | team122                    | aqswde |
 
 
 
