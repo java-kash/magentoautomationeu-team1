@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+
 @Listeners(TestNGResultListener.class)
 public class CatalogModuleRunner extends TestBase {
     FunctionPage functionPage;
@@ -52,7 +53,7 @@ public class CatalogModuleRunner extends TestBase {
         catalogDashboardPage.dashboardVerify();
     }
 
-    @Test (description = "add Root Category",priority = 1)
+    @Test(description = "add Root Category",priority = 1)
     public void addRootCategory() {
         manageCategoryPage.addRootCategory();
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
@@ -104,7 +105,7 @@ public class CatalogModuleRunner extends TestBase {
         managerAttributesPage.clickOnAddNewAttributeButton();
         newProductAttributePage.enterOrSelectValidValues();
         Assert.assertTrue(newProductAttributePage.verifyNewAttributeSuccessMessages());
-    //    Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList()); you all view then you can use
+        //    Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList()); you all view then you can use
     }
     // with nijat together see
     @Test
@@ -119,12 +120,12 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue(catalogProductPage.verifyAddproduct());
 
     }
-    @Test(dependsOnMethods = "addproductCatalog")
+    @Test(dependsOnMethods = "addProductCatalog")
     public void editProductPage(){
         catalogProductPage.editProduct();
         Assert.assertTrue(catalogProductPage.verifyEdit());
     }
-    @Test(dependsOnMethods = "addproductCatalog")
+    @Test(dependsOnMethods = "editProductPage")
     public void deleteProductPage(){
         catalogProductPage.deleteProduct();
         Assert.assertTrue(catalogProductPage.verifyDeleted());
