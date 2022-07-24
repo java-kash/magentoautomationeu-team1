@@ -31,10 +31,12 @@ public class CreateStoreViewPage {
     @FindBy(xpath = "(//span[text()='Create Store View'])[1]")
     WebElement CreateStrbtn;
 
-    @FindBy(xpath = "input[id=\"store_name\"]")
+    @FindBy(css = "input[id=\"store_name\"]")
     WebElement Namefeild;
-    @FindBy(xpath = "input[id=\"store_code\"]")
+    @FindBy(css = "input[id=\"store_code\"]")
     WebElement codefeild;
+    @FindBy(id = "store_is_active")
+    WebElement statusdropdown;
 
     @FindBy(xpath = "(//span[text()=\"Save Store View\" ])[1]")
     WebElement SaveStrBtn;
@@ -49,15 +51,20 @@ public class CreateStoreViewPage {
         ManageStore.click();
     }
 
-    public void createStoreView(){
+    public void createStoreView(String StoreViewName,String code){
         functionPage.waitForElement(CreateStrbtn);
         CreateStrbtn.click();
         functionPage.waitForElement(Namefeild);
-        Namefeild.click();
-        Namefeild.sendKeys(functionPage.generateFirstName());
+        // Namefeild.click();
+        Namefeild.sendKeys(StoreViewName);
         functionPage.waitForElement(codefeild);
-        codefeild.click();
-        codefeild.sendKeys(functionPage.generateZipCode());
+        //codefeild.click();
+        codefeild.sendKeys(code);
+        functionPage.waitForElement(statusdropdown);
+        statusdropdown.click();
+        Select select=new Select(statusdropdown);
+        select.selectByIndex(1);
+
 
         functionPage.waitForElement(SaveStrBtn);
         SaveStrBtn.click();

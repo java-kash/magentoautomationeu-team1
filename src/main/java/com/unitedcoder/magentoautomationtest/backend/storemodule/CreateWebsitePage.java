@@ -44,7 +44,7 @@ public class CreateWebsitePage {
        functionPage.waitForElement(websiteCode);
        Random random = new Random();
        char randomizedCharacter = (char) (random.nextInt(26) + 'a');
-       Faker javaFaker=  new Faker();
+//       Faker javaFaker=  new Faker();
        String zipCode = functionPage.generateZipCode().toString().replace("-","_");
        websiteCode.sendKeys(randomizedCharacter+zipCode);
        functionPage.waitForElement(saveWebsiteButton);
