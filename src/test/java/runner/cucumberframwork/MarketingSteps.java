@@ -32,6 +32,7 @@ public class MarketingSteps extends TestBase {
     PendingReviewsPage pendingReviewsPage;
     AddNewCartPriceRulePage addNewShoppingCartPriceRulePage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
+    UpdateAnExistingNewsletterTemplatePage updateAnExistingNewsletterTemplatePage;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -63,6 +64,8 @@ public class MarketingSteps extends TestBase {
         pendingReviewsPage=new PendingReviewsPage(driver);
         addNewShoppingCartPriceRulePage=new AddNewCartPriceRulePage(driver);
         addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
+        updateAnExistingNewsletterTemplatePage=new UpdateAnExistingNewsletterTemplatePage(driver);
+
     }
 
     @When("Click on the Catalog Price Rules")
@@ -150,4 +153,16 @@ public class MarketingSteps extends TestBase {
     public void marketingManagerShouldBeUpdated() {
         Assert.assertTrue(addNewShoppingCartPriceRulePage.verifyUpDateShoppingCartPriceRule());
     }
+
+    @When("Marketing manager Update {string} and {string}")
+    public void marketingManagerUpdateAnd(String arg0, String arg1) {
+        updateAnExistingNewsletterTemplatePage.updateNewsletterTemplate(arg0,arg1);
+    }
+
+    @Then("Marketing manager able to see his updated new template content {string}")
+    public void marketingManagerAbleToSeeHisUpdatedNewTemplateContent(String arg0) {
+        updateAnExistingNewsletterTemplatePage.updateNewsletterTemplateSuccessfully(arg0);
+    }
+
+
 }
