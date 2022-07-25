@@ -9,7 +9,6 @@ public class TestDataHolder {
     public TestDataHolder() {
     }
 
-
     public String getCustomerFirstName() {
         return customerFirstName;
     }
@@ -41,4 +40,6 @@ public class TestDataHolder {
     public String getCustomerGroupName() {
         return customerGroupName;
     }
+
+
 }
