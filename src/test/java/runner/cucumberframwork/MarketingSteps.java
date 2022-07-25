@@ -1,21 +1,24 @@
-package runner.cucumberframwork.marketingsteps;
+package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.Log4j;
+import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
-
-
-import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
+import io.cucumber.java.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class MarketingSteps extends TestBase {
@@ -28,6 +31,7 @@ public class MarketingSteps extends TestBase {
     String configFile="config-qa.properties";
     PendingReviewsPage pendingReviewsPage;
     AddNewCartPriceRulePage addNewShoppingCartPriceRulePage;
+    ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -37,25 +41,18 @@ public class MarketingSteps extends TestBase {
 
     }
     @After("@MagentoMarketingModuleFeature")
-    public  void tearDown() {
+    public  void tearDown(Scenario scenario) {
+        if (scenario.isFailed()){
+            Log4j.error(scenario.getName()+"      Failed");
+            screenshotUtility.takeScreenshot("image",scenario.getName(),driver);
+            byte[] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath,"image/png",scenario.getName());
+        }
+        if(!scenario.isFailed()) {
+            Log4j.info(scenario.getName() + "       Passed");
+        }
         driver.quit();
     }
-
-//    @Given("Marketing manager  is already in Magento admin login page")
-//    public void marketingManagerIsAlreadyInMagentoAdminLoginPage() {
-//        marketingLoginPage=new MarketingLoginPage(driver);
-//
-//    }
-//
-//    @When("Marketing manager  enter valid username and password")
-//    public void marketingManagerEnterValidUsernameAndPassword() {
-//        marketingLoginPage.login();
-//    }
-//
-//    @Then("Marketing manager able to login successfully")
-//    public void marketingManagerAbleToLoginSuccessfully() {
-//        Assert.assertTrue(marketingLoginPage.verify());
-//    }
 
     @Given("Marketing manager on the dashboard page")
     public void marketingManagerOnTheDashboardPage() {
@@ -143,4 +140,14 @@ public class MarketingSteps extends TestBase {
 
 
 
+
+    @When("Marketing manager should be able update existing")
+    public void marketingManagerShouldBeAbleUpdateExisting() {
+        addNewShoppingCartPriceRulePage.upDateShoppingCartPriceRule();
+    }
+
+    @Then("Marketing manager should be updated")
+    public void marketingManagerShouldBeUpdated() {
+        Assert.assertTrue(addNewShoppingCartPriceRulePage.verifyUpDateShoppingCartPriceRule());
+    }
 }

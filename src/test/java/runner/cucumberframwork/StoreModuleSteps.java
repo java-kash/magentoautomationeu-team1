@@ -1,13 +1,12 @@
-package runner.cucumberframwork.storemodulesteps;
+package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.storemodule.*;
-import com.unitedcoder.magentoautomationtest.utility.ExcelReader;
-import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.TestBase;
+import com.unitedcoder.magentoautomationtest.utility.*;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +14,8 @@ import io.cucumber.java.en.When;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,6 +38,7 @@ public class StoreModuleSteps extends TestBase {
     FunctionPage functionPage;
     String title;
     CreateStoreViewPage createStoreViewPage;
+    ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
     @Before("@MagentoStoreModuleFeature")
     public void setUp() {
@@ -44,6 +46,19 @@ public class StoreModuleSteps extends TestBase {
         storeModuleLogin = new StoreModuleLogin(driver);
         storeModuleLogin.login();
 
+    }
+    @After("@MagentoStoreModuleFeature")
+    public void tearDown(Scenario scenario){
+        if (scenario.isFailed()){
+            Log4j.error(scenario.getName()+"      Failed");
+            screenshotUtility.takeScreenshot("image",scenario.getName(),driver);
+            byte[] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath,"image/png",scenario.getName());
+        }
+        if(!scenario.isFailed()) {
+            Log4j.info(scenario.getName() + "       Passed");
+        }
+        driver.quit();
     }
 
     @Given("create page object")
@@ -80,10 +95,6 @@ public class StoreModuleSteps extends TestBase {
         System.out.println("create order");
     }
 
-    @After("@MagentoStoreModuleFeature")
-    public void tearDown() {
-        driver.quit();
-    }
 
     //Edit order steps
     @When("a customer select for edit")
@@ -341,11 +352,6 @@ public class StoreModuleSteps extends TestBase {
     public void website_edit_successfully() {
         Assert.assertTrue(editWebsitePage.verifyEditWebsite());
     }
-
-
-
-
-
 
 
     @When("the user delete the website")

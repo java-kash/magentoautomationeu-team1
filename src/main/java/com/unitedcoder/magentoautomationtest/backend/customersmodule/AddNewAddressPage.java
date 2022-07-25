@@ -70,6 +70,7 @@ public class AddNewAddressPage {
     WebElement emailAddressFilter;
 
 
+
     public void selectCustomer(String email){
 //        int randomNumber=1 + (int)(Math.random() * ((allCustomers.size() - 1) + 1));
 //        WebElement randomCustomer=customerDriver.findElement(By.xpath("//table[@id=\"customerGrid_table\"]/tbody/tr["+randomNumber+"]/td[@class=\" last\"]/a"));
