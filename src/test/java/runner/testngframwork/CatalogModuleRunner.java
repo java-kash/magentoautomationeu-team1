@@ -9,7 +9,6 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-
 @Listeners(TestNGResultListener.class)
 public class CatalogModuleRunner extends TestBase {
     FunctionPage functionPage;
@@ -22,6 +21,7 @@ public class CatalogModuleRunner extends TestBase {
     NewProductAttributePage newProductAttributePage;
     ViewDefaultCategoryPage viewDefaultCategoryPage;
     CatalogProductPage catalogProductPage;
+    String subcatName=readFromConfigProperties(configFile,"subcategory_name");
 
 
     @BeforeSuite
@@ -53,7 +53,7 @@ public class CatalogModuleRunner extends TestBase {
         catalogDashboardPage.dashboardVerify();
     }
 
-    @Test(description = "add Root Category",priority = 1)
+    @Test (description = "add Root Category",priority = 1)
     public void addRootCategory() {
         manageCategoryPage.addRootCategory();
         Assert.assertTrue(manageCategoryPage.verifySuccessMessage());
@@ -68,7 +68,7 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue(manageCategoryPage.verifyEditSuccessMessage());
     }
 
-    @Test (description = "delete Root Category",dependsOnMethods = "editRootCategory")
+    @Test (description = "delete Root Category")
     public void deleteRootCategory(){
         manageCategoryPage.deleteRootCategory();
         Assert.assertTrue(manageCategoryPage.verifyDeleteSuccessMsg());
@@ -80,14 +80,15 @@ public class CatalogModuleRunner extends TestBase {
         Assert.assertTrue( manageCategoryPage.addSubcategory());
     }
 
-    @Test(description = "edit subcategory",dependsOnMethods = "addSubcategoryTest")
+    @Test(description = "edit subcategory")
     public void editSubCategoryTest(){
         catalogDashboardPage.clickOnManageCategories();
-        Assert.assertTrue(manageCategoryPage.editSubCategory());
+        Assert.assertTrue(manageCategoryPage.editSubCategory(subcatName));
     }
-    @Test(description = "delete subcategory test",dependsOnMethods = "addSubcategoryTest")
+    @Test(description = "delete subcategory test")
     public void deleteSubcategoryTest(){
-        Assert.assertTrue(manageCategoryPage.deleteSubcategory());//please check you are code
+        catalogDashboardPage.clickOnManageCategories();
+        Assert.assertTrue(manageCategoryPage.deleteSubcategory(subcatName));//please check you are code
     }
 
     @Test
@@ -105,7 +106,7 @@ public class CatalogModuleRunner extends TestBase {
         managerAttributesPage.clickOnAddNewAttributeButton();
         newProductAttributePage.enterOrSelectValidValues();
         Assert.assertTrue(newProductAttributePage.verifyNewAttributeSuccessMessages());
-        //    Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList()); you all view then you can use
+    //    Assert.assertTrue(newProductAttributePage.verifyNewAttributeInTheTableList()); you all view then you can use
     }
     // with nijat together see
     @Test
@@ -115,23 +116,21 @@ public class CatalogModuleRunner extends TestBase {
     }
 
     @Test
-    public void addProductCatalog(){
+    public void addproductCatalog(){
         catalogProductPage.Addproduct();
         Assert.assertTrue(catalogProductPage.verifyAddproduct());
 
     }
-    @Test(dependsOnMethods = "addProductCatalog")
-    public void editProductPage(){
+    @Test(dependsOnMethods = "addproductCatalog")
+    public void editproductPage(){
         catalogProductPage.editProduct();
         Assert.assertTrue(catalogProductPage.verifyEdit());
     }
-    @Test(dependsOnMethods = "editProductPage")
+    @Test(dependsOnMethods = "addproductCatalog")
     public void deleteProductPage(){
         catalogProductPage.deleteProduct();
         Assert.assertTrue(catalogProductPage.verifyDeleted());
     }
-
-
 
     @AfterSuite
     public void tearDown() {

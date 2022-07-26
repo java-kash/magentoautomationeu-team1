@@ -49,7 +49,7 @@ public boolean shoppingCartIsVisible(){
           shoppingCartLink.click();
           functionPage.sleep(3);
           functionPage.waitForElement(shoppingCartTable);
-          functionPage.sleep(3);
+          functionPage.sleep(5);
           if (shoppingCartTable.isDisplayed()){
               return true;
           }else

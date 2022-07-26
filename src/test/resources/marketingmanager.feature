@@ -37,3 +37,17 @@ Feature:  Marketing Module Function Test
     Given Marketing manager on the dashboard page
     When Marketing manager should be able add new shopping cart price rule
     Then a new shopping cart price rule should be added
+
+  Scenario: Marketing Manager can update existing Cart Price Rule
+    Given Marketing manager on the dashboard page
+    When Marketing manager should be able update existing
+    Then Marketing manager should be updated
+
+
+    Scenario Outline:Marketing manager can update an existing newsletter template
+      Given Marketing manager on the dashboard page
+      When Marketing manager Update "<Template Name>" and "<Template Content>"
+      Then Marketing manager able to see his updated new template content "<Template Name>"
+      Examples:
+        |Template Name|Template Content|Template Name|
+        |QA Engineer|This is my new Content|QA Engineer|

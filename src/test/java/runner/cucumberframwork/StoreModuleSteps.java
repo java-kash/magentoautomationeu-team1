@@ -1,14 +1,12 @@
-package runner.cucumberframwork.storemodulesteps;
+package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.storemodule.*;
-import com.unitedcoder.magentoautomationtest.utility.ExcelReader;
-import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.TestBase;
+import com.unitedcoder.magentoautomationtest.utility.*;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.bs.A;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,6 +14,8 @@ import io.cucumber.java.en.When;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +38,7 @@ public class StoreModuleSteps extends TestBase {
     FunctionPage functionPage;
     String title;
     CreateStoreViewPage createStoreViewPage;
+    ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
 
     @Before("@MagentoStoreModuleFeature")
@@ -46,6 +47,19 @@ public class StoreModuleSteps extends TestBase {
         storeModuleLogin = new StoreModuleLogin(driver);
         storeModuleLogin.login();
 
+    }
+    @After("@MagentoStoreModuleFeature")
+    public void tearDown(Scenario scenario){
+        if (scenario.isFailed()){
+            Log4j.error(scenario.getName()+"      Failed");
+            screenshotUtility.takeScreenshot("image",scenario.getName(),driver);
+            byte[] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath,"image/png",scenario.getName());
+        }
+        if(!scenario.isFailed()) {
+            Log4j.info(scenario.getName() + "       Passed");
+        }
+        driver.quit();
     }
 
     @Given("create page object")
@@ -83,10 +97,6 @@ public class StoreModuleSteps extends TestBase {
         System.out.println("create order");
     }
 
-    @After("@MagentoStoreModuleFeature")
-    public void tearDown() {
-        driver.quit();
-    }
 
     //Edit order steps
     @When("a customer select for edit")
@@ -349,11 +359,6 @@ public class StoreModuleSteps extends TestBase {
     }
 
 
-
-
-
-
-
     @When("the user delete the website")
     public void the_user_delete_the_website() throws InterruptedException {
         storeModuleLogin=new StoreModuleLogin(driver);
@@ -372,6 +377,8 @@ public class StoreModuleSteps extends TestBase {
 
     private String StoreViewName;
     private String code;
+    private String StoreViewName2;
+    private String code2;
 
     @When("store manager create new store view  {string} and  {string}")
     public void storeManagerCreateNewStoreViewAnd(String arg0, String arg1) {
@@ -379,7 +386,7 @@ public class StoreModuleSteps extends TestBase {
         manageCurrencyRatesPage.clickManageStore();
         StoreViewName = arg0;
         code =arg1;
-        createStoreViewPage.createStoreView(StoreViewName,code);
+        createStoreViewPage.createStoreView(StoreViewName);
     }
 
     @Then("verify create new store view")
@@ -389,6 +396,19 @@ public class StoreModuleSteps extends TestBase {
 
     }
 
+    @When("store manager edit store view  {string} and  {string}")
+    public void storeManagerEditStoreViewAnd(String arg0, String arg1) {
+        manageStoresPage = new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        StoreViewName2= arg0 ;
+        code2=arg1 ;
+        createStoreViewPage.editStoreView(StoreViewName2,code2);
+    }
+
+    @Then("verify edited store view")
+    public void verifyEditedStoreView() {
+        Assert.assertTrue( createStoreViewPage.verifyCreateStoreView());
+    }
 
     @When("user clicks on manage product under Catalog link")
     public void userClicksOnManageProductUnderCatalogLink() {

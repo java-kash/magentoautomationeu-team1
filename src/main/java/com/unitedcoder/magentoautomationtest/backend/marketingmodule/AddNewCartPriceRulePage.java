@@ -14,13 +14,15 @@ public class AddNewCartPriceRulePage {
     WebDriver driver;
 
     FunctionPage functionPage;
-
-    String  sentRuleName= TestBase.readFromConfigProperties("config-qa.properties","ruleName");
+    Actions actions;
+    String configFile="config-qa.properties";
+    String  sentRuleName= TestBase.readFromConfigProperties(configFile,"ruleName");
 
     public AddNewCartPriceRulePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionPage=new FunctionPage(driver);
+        actions= new Actions(driver);
     }
 
     @FindBy(xpath = "//span[text()='Promotions']")
@@ -43,6 +45,10 @@ public class AddNewCartPriceRulePage {
     WebElement saveButton;
    @FindBy(xpath = "//span[text()='The rule has been saved.']")
     WebElement successMessages;
+    @FindBy(xpath = "//td[contains(text(),'50% Sales')]")
+    WebElement existingRule;
+    @FindBy(id = "rule_description")
+    WebElement descriptionField;
 
    public void addNewShoppingCartPriceRule(){
        functionPage.waitForElement(promotionsLink);
@@ -62,7 +68,7 @@ public class AddNewCartPriceRulePage {
     Select dropDownCoupon=new Select(coupon);
     dropDownCoupon.selectByValue("1");
     functionPage.waitForElement(saveButton);
-    Actions actions= new Actions(driver);
+
     actions.moveToElement(saveButton).build().perform();
     saveButton.click();
 
@@ -70,6 +76,28 @@ public class AddNewCartPriceRulePage {
    public boolean verifyAddNewShoppingCartPriceRule(){
        functionPage.waitForElement(successMessages);
        return successMessages.isDisplayed();
+   }
+
+   public void upDateShoppingCartPriceRule(){
+       functionPage.waitForElement(promotionsLink);
+       promotionsLink.click();
+       functionPage.waitForElement(shoppingCartPriceRules);
+       shoppingCartPriceRules.click();
+       functionPage.waitForElement(existingRule);
+       existingRule.click();
+       functionPage.waitForElement(descriptionField);
+       descriptionField.clear();
+       descriptionField.sendKeys(TestBase.readFromConfigProperties(configFile,"description"));
+       functionPage.waitForElement(saveButton);
+       actions.moveToElement(saveButton).build().perform();
+       saveButton.click();
+   }
+   public boolean verifyUpDateShoppingCartPriceRule(){
+       functionPage.waitForElement(successMessages);
+       if(successMessages.isDisplayed()){
+           return true;
+       }
+        return false;
    }
 
 }
