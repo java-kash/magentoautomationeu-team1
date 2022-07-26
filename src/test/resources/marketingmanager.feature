@@ -51,3 +51,13 @@ Feature:  Marketing Module Function Test
       Examples:
         |Template Name|Template Content|Template Name|
         |QA Engineer|This is my new Content|QA Engineer|
+
+
+
+        Scenario:Marketing Manager can view all Reviews
+          Given Marketing manager on the dashboard page
+          When User hovers to click the "Catalog"
+          And User hovers to click the "Reviews and Ratings"
+          And User hovers to click the "Customer Reviews"
+          And User hovers to click the "All Reviews"
+          Then user should see page name All Reviews

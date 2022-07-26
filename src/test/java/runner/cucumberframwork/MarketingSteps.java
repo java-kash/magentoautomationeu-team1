@@ -1,6 +1,7 @@
 package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.*;
+import com.unitedcoder.magentoautomationtest.backend.storemodule.ManageStoresPage;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
@@ -33,6 +34,7 @@ public class MarketingSteps extends TestBase {
     AddNewCartPriceRulePage addNewShoppingCartPriceRulePage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     UpdateAnExistingNewsletterTemplatePage updateAnExistingNewsletterTemplatePage;
+    ViewAllReviews viewAllReviews;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -65,8 +67,11 @@ public class MarketingSteps extends TestBase {
         addNewShoppingCartPriceRulePage=new AddNewCartPriceRulePage(driver);
         addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
         updateAnExistingNewsletterTemplatePage=new UpdateAnExistingNewsletterTemplatePage(driver);
+        viewAllReviews=new ViewAllReviews(driver);
 
     }
+
+
 
     @When("Click on the Catalog Price Rules")
     public void clickOnTheCatalogPriceRules() {
@@ -164,5 +169,22 @@ public class MarketingSteps extends TestBase {
         updateAnExistingNewsletterTemplatePage.updateNewsletterTemplateSuccessfully(arg0);
     }
 
+    @When("User hovers to click the {string}")
+    public void userHoversOverThe(String text) {
+        functionPage.hoverToClick(text);
+    }
+    @Then("User navigates to {string}")
+    public void userNavigatesToPageAndShouldSeePageName(String expectedPageName) {
+        System.out.println("Expected page name: " + expectedPageName);
+        System.out.println("Actual page name: " + functionPage.getPageName(expectedPageName));
+        Assert.assertEquals(expectedPageName, functionPage.getPageName(expectedPageName));
+    }
 
+
+
+    @Then("user should see page name All Reviews")
+    public void userShouldSeePageNameAllReviews() {
+        Assert.assertTrue(viewAllReviews.verifyRiewsPage());
+
+    }
 }
