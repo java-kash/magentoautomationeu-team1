@@ -65,6 +65,17 @@ Feature: Magento Store Module Function Test
      When  the user delete the website
      Then  website delete successfully
 
+  @viewAllStores
+  Scenario: Store Manager can view all stores
+    Given store manager is on the dashboard page
+    When user clicks on manage product under Catalog link
+    Then all stores succes display
+
+
+
+
+
+
 
 
 

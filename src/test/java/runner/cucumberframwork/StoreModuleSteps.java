@@ -40,6 +40,7 @@ public class StoreModuleSteps extends TestBase {
     CreateStoreViewPage createStoreViewPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
+
     @Before("@MagentoStoreModuleFeature")
     public void setUp() {
         browserSetUp(url);
@@ -70,6 +71,7 @@ public class StoreModuleSteps extends TestBase {
         editOrderPage=new EditOrderPage(driver);
         cancelOrderPage=new CancelOrderPage(driver);
         createNewOrderPage=new CreateNewOrderPage(driver);
+
 
     }
 
@@ -135,6 +137,7 @@ public class StoreModuleSteps extends TestBase {
 
     ManageStoresPage manageStoresPage;
     ManageCurrencyRatesPage manageCurrencyRatesPage;
+    ViewAllStorePage viewAllStorePage;
     private String storeName;
     private String websiteCode;
 
@@ -151,6 +154,8 @@ public class StoreModuleSteps extends TestBase {
         createWebsitePage = new CreateWebsitePage(driver);
         deleteWebsitePage=new DeleteWebsitePage(driver);
         createStoreViewPage= new CreateStoreViewPage(driver);
+        viewAllStorePage=new ViewAllStorePage(driver);
+
 
 
 
@@ -404,4 +409,19 @@ public class StoreModuleSteps extends TestBase {
     public void verifyEditedStoreView() {
         Assert.assertTrue( createStoreViewPage.verifyCreateStoreView());
     }
+
+    @When("user clicks on manage product under Catalog link")
+    public void userClicksOnManageProductUnderCatalogLink() {
+        viewAllStorePage=new ViewAllStorePage(driver);
+        viewAllStorePage.clickViewStore();
+    }
+
+    @Then("all stores succes display")
+    public void allStoresSuccesDisplay() {
+
+       Assert.assertTrue(viewAllStorePage.verifyStorePage());
+    }
+
+
+
 }
