@@ -366,6 +366,8 @@ public class StoreModuleSteps extends TestBase {
 
     private String StoreViewName;
     private String code;
+    private String StoreViewName2;
+    private String code2;
 
     @When("store manager create new store view  {string} and  {string}")
     public void storeManagerCreateNewStoreViewAnd(String arg0, String arg1) {
@@ -373,7 +375,7 @@ public class StoreModuleSteps extends TestBase {
         manageCurrencyRatesPage.clickManageStore();
         StoreViewName = arg0;
         code =arg1;
-        createStoreViewPage.createStoreView(StoreViewName,code);
+        createStoreViewPage.createStoreView(StoreViewName);
     }
 
     @Then("verify create new store view")
@@ -383,4 +385,17 @@ public class StoreModuleSteps extends TestBase {
 
     }
 
+    @When("store manager edit store view  {string} and  {string}")
+    public void storeManagerEditStoreViewAnd(String arg0, String arg1) {
+        manageStoresPage = new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        StoreViewName2= arg0 ;
+        code2=arg1 ;
+        createStoreViewPage.editStoreView(StoreViewName2,code2);
+    }
+
+    @Then("verify edited store view")
+    public void verifyEditedStoreView() {
+        Assert.assertTrue( createStoreViewPage.verifyCreateStoreView());
+    }
 }
