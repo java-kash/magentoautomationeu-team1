@@ -8,6 +8,7 @@ import com.unitedcoder.magentoautomationtest.utility.TestBase;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -38,6 +39,7 @@ public class StoreModuleSteps extends TestBase {
     String title;
     CreateStoreViewPage createStoreViewPage;
 
+
     @Before("@MagentoStoreModuleFeature")
     public void setUp() {
         browserSetUp(url);
@@ -55,6 +57,7 @@ public class StoreModuleSteps extends TestBase {
         editOrderPage=new EditOrderPage(driver);
         cancelOrderPage=new CancelOrderPage(driver);
         createNewOrderPage=new CreateNewOrderPage(driver);
+
 
     }
 
@@ -124,6 +127,7 @@ public class StoreModuleSteps extends TestBase {
 
     ManageStoresPage manageStoresPage;
     ManageCurrencyRatesPage manageCurrencyRatesPage;
+    ViewAllStorePage viewAllStorePage;
     private String storeName;
     private String websiteCode;
 
@@ -140,6 +144,8 @@ public class StoreModuleSteps extends TestBase {
         createWebsitePage = new CreateWebsitePage(driver);
         deleteWebsitePage=new DeleteWebsitePage(driver);
         createStoreViewPage= new CreateStoreViewPage(driver);
+        viewAllStorePage=new ViewAllStorePage(driver);
+
 
 
 
@@ -382,5 +388,20 @@ public class StoreModuleSteps extends TestBase {
 
 
     }
+
+
+    @When("user clicks on manage product under Catalog link")
+    public void userClicksOnManageProductUnderCatalogLink() {
+        viewAllStorePage=new ViewAllStorePage(driver);
+        viewAllStorePage.clickViewStore();
+    }
+
+    @Then("all stores succes display")
+    public void allStoresSuccesDisplay() {
+
+       Assert.assertTrue(viewAllStorePage.verifyStorePage());
+    }
+
+
 
 }
