@@ -26,8 +26,13 @@ public class ReportingModuleDashBoard {
     WebElement ordersLink;
     @FindBy(xpath = "//span[text()='Refunds']")
     WebElement refundsLink;
+    @FindBy(xpath = "//span[text()='Dashboard']")
+    WebElement dashBoardLink;
 
-
+public void clickOnDashBoardLink(){
+    functionPage.waitForElement(dashBoardLink);
+    dashBoardLink.click();
+}
     public void openTargetPages(WebElement element1,WebElement element2,WebElement element3){
     actions.moveToElement(element1).moveToElement(element2).moveToElement(element3).click().perform();
 
