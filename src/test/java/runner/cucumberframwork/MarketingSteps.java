@@ -1,6 +1,7 @@
 package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.*;
+import com.unitedcoder.magentoautomationtest.backend.storemodule.ManageStoresPage;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
@@ -35,6 +36,7 @@ public class MarketingSteps extends TestBase {
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     UpdateAnExistingNewsletterTemplatePage updateAnExistingNewsletterTemplatePage;
     String title;
+    ViewAllReviews viewAllReviews;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -68,7 +70,7 @@ public class MarketingSteps extends TestBase {
         addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
         updateAnExistingNewsletterTemplatePage=new UpdateAnExistingNewsletterTemplatePage(driver);
         updateExistingReviews = new UpdateExistingReviews(driver);
-
+        viewAllReviews=new ViewAllReviews(driver);
     }
 
     @When("Click on the Catalog Price Rules")
@@ -167,17 +169,23 @@ public class MarketingSteps extends TestBase {
         updateAnExistingNewsletterTemplatePage.updateNewsletterTemplateSuccessfully(arg0);
     }
 
-
-    @When("Marketing manager can update review")
-    public void marketingManagerCanUpdateReview() {
-        dashboardPage.clickAllReviewsOption2();
-        updateExistingReviews.updateReview();
-
+    @When("User hovers to click the {string}")
+    public void userHoversOverThe(String text) {
+        functionPage.hoverToClick(text);
+    }
+    @Then("User navigates to {string}")
+    public void userNavigatesToPageAndShouldSeePageName(String expectedPageName) {
+        System.out.println("Expected page name: " + expectedPageName);
+        System.out.println("Actual page name: " + functionPage.getPageName(expectedPageName));
+        Assert.assertEquals(expectedPageName, functionPage.getPageName(expectedPageName));
     }
 
-    @Then("Marketing manager can see the success massage")
-    public void marketingManagerCanSeeTheSuccessMassage() {
-        Assert.assertTrue(updateExistingReviews.verifyUpdateReview());
+
+
+    @Then("user should see page name All Reviews")
+    public void userShouldSeePageNameAllReviews() {
+        Assert.assertTrue(viewAllReviews.verifyRiewsPage());
+
     }
 
     @When("user selects one id number randomly in ID column on the list table")
@@ -237,9 +245,4 @@ public class MarketingSteps extends TestBase {
         Assert.assertTrue(title.contains(expectedTitleName));
     }
 
-    @When("User hovers to click the {string}")
-    public void userHoversOverThe(String text) {
-        FunctionPage functionPage = new FunctionPage(driver);
-        functionPage.hoverToClick(text);
-    }
 }
