@@ -242,7 +242,6 @@ public class StoreModuleSteps extends TestBase {
 
     @When("user hovers to click the {string}")
     public void userHoversOverThe(String text) {
-        FunctionPage functionPage = new FunctionPage(driver);
         functionPage.hoverToClick(text);
     }
 

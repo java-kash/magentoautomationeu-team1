@@ -1,6 +1,7 @@
 package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.marketingmodule.*;
+import com.unitedcoder.magentoautomationtest.backend.storemodule.ManageStoresPage;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
@@ -34,6 +35,8 @@ public class MarketingSteps extends TestBase {
     UpdateExistingReviews updateExistingReviews;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     UpdateAnExistingNewsletterTemplatePage updateAnExistingNewsletterTemplatePage;
+    String title;
+    ViewAllReviews viewAllReviews;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -67,7 +70,7 @@ public class MarketingSteps extends TestBase {
         addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
         updateAnExistingNewsletterTemplatePage=new UpdateAnExistingNewsletterTemplatePage(driver);
         updateExistingReviews = new UpdateExistingReviews(driver);
-
+        viewAllReviews=new ViewAllReviews(driver);
     }
 
     @When("Click on the Catalog Price Rules")
@@ -166,6 +169,81 @@ public class MarketingSteps extends TestBase {
         updateAnExistingNewsletterTemplatePage.updateNewsletterTemplateSuccessfully(arg0);
     }
 
+    @When("User hovers to click the {string}")
+    public void userHoversOverThe(String text) {
+        functionPage.hoverToClick(text);
+    }
+    @Then("User navigates to {string}")
+    public void userNavigatesToPageAndShouldSeePageName(String expectedPageName) {
+        System.out.println("Expected page name: " + expectedPageName);
+        System.out.println("Actual page name: " + functionPage.getPageName(expectedPageName));
+        Assert.assertEquals(expectedPageName, functionPage.getPageName(expectedPageName));
+    }
+
+
+
+    @Then("user should see page name All Reviews")
+    public void userShouldSeePageNameAllReviews() {
+        Assert.assertTrue(viewAllReviews.verifyRiewsPage());
+
+    }
+
+    @When("user selects one id number randomly in ID column on the list table")
+    public void userSelectsOneIdNumberRandomlyInIDColumnOnTheListTable() {
+        catalogPriceRulePage.selectsOneIdNumberRandomly();
+    }
+
+    @And("user fills the number in ID field with made the random id number")
+    public void userFillsTheNumberInIDFieldWithMadeTheRandomIdNumber() {
+        catalogPriceRulePage.fillIdToField();
+    }
+
+    @And("user Clicks on Search button")
+    public void userClicksOnSearchButton() {
+        catalogPriceRulePage.clickOnSearchButton();
+    }
+
+    @Then("user should be able to see rules ID match with selected ID")
+    public void userShouldBeAbleToSeeRulesIDMatchWithSelectedID() {
+        Assert.assertEquals(catalogPriceRulePage.listIdNumber(), catalogPriceRulePage.getFieldValue());
+
+        System.out.println("Id field value is: " + catalogPriceRulePage.getFieldValue());
+        System.out.println("Table's ID is: " + catalogPriceRulePage.listIdNumber());
+    }
+
+    @When("user clicks on Reset Filter button")
+    public void userClicksOnResetFilterButton() {
+        catalogPriceRulePage.clickOnResetButton();
+    }
+
+    @When("user selects one rule name randomly in Rule Name column on the list table")
+    public void userSelectsOneRuleNameRandomlyInRuleNameColumnOnTheListTable() {
+        catalogPriceRulePage.selectsOneRuleNameRandomly();
+    }
+
+    @And("user fills the Rule Name field with made the random rule name")
+    public void userFillsTheRuleNameFieldWithMadeTheRandomRuleName() {
+        catalogPriceRulePage.fillNameToField();
+    }
+
+    @Then("user should be able to see rules Rule Name match with selected Rule Name")
+    public void userShouldBeAbleToSeeRulesRuleNameMatchWithSelectedRuleName() {
+        Assert.assertEquals(catalogPriceRulePage.listRuleName(), catalogPriceRulePage.getNameFieldValue());
+
+        System.out.println("Rule name field value is: " + catalogPriceRulePage.getNameFieldValue());
+        System.out.println("Table's rule name is: " + catalogPriceRulePage.listRuleName());
+    }
+
+    @When("User gets the title of the page")
+    public void user_gets_the_title_of_the_page() {
+        title = functionPage.getPageTitle();
+        System.out.println("Page title is: " + title);
+    }
+
+    @Then("Page title should be {string}")
+    public void page_title_should_be(String expectedTitleName) {
+        Assert.assertTrue(title.contains(expectedTitleName));
+    }
 
     @When("Marketing manager can update review")
     public void marketingManagerCanUpdateReview() {
@@ -178,4 +256,7 @@ public class MarketingSteps extends TestBase {
     public void marketingManagerCanSeeTheSuccessMassage() {
         Assert.assertTrue(updateExistingReviews.verifyUpdateReview());
     }
+
+
+
 }
