@@ -31,6 +31,7 @@ public class MarketingSteps extends TestBase {
     String configFile="config-qa.properties";
     PendingReviewsPage pendingReviewsPage;
     AddNewCartPriceRulePage addNewShoppingCartPriceRulePage;
+    UpdateExistingReviews updateExistingReviews;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     UpdateAnExistingNewsletterTemplatePage updateAnExistingNewsletterTemplatePage;
 
@@ -65,6 +66,7 @@ public class MarketingSteps extends TestBase {
         addNewShoppingCartPriceRulePage=new AddNewCartPriceRulePage(driver);
         addNewNewsletterTemplate=new AddNewNewsletterTemplate(driver);
         updateAnExistingNewsletterTemplatePage=new UpdateAnExistingNewsletterTemplatePage(driver);
+        updateExistingReviews = new UpdateExistingReviews(driver);
 
     }
 
@@ -165,4 +167,15 @@ public class MarketingSteps extends TestBase {
     }
 
 
+    @When("Marketing manager can update review")
+    public void marketingManagerCanUpdateReview() {
+        dashboardPage.clickAllReviewsOption2();
+        updateExistingReviews.updateReview();
+
+    }
+
+    @Then("Marketing manager can see the success massage")
+    public void marketingManagerCanSeeTheSuccessMassage() {
+        Assert.assertTrue(updateExistingReviews.verifyUpdateReview());
+    }
 }

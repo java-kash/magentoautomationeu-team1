@@ -51,3 +51,9 @@ Feature:  Marketing Module Function Test
       Examples:
         |Template Name|Template Content|Template Name|
         |QA Engineer|This is my new Content|QA Engineer|
+
+
+      Scenario: Marketing Manager can update existing reviews
+        Given Marketing manager on the dashboard page
+        When  Marketing manager can update review
+        Then  Marketing manager can see the success massage

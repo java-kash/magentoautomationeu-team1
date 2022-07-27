@@ -35,6 +35,9 @@ public class DashboardPage {
     @FindBy(xpath = "//*[text()='Pending Reviews']")
     WebElement pendingReviewsOption;
 
+    @FindBy(xpath = "//*[text()='All Reviews']")
+    WebElement AllReviewsOption;
+
 
 
 
@@ -60,6 +63,18 @@ public class DashboardPage {
 
 
    }
+    public void clickAllReviewsOption2(){
+        functionPage.waitForElement(catalogTeb);
+        actions.moveToElement(catalogTeb).perform();
+        functionPage.waitForElement(reviewsAndRatingsOption);
+        reviewsAndRatingsOption.click();
+        functionPage.waitForElement(customerReviewsOption);
+        customerReviewsOption.click();
+        functionPage.waitForElement(AllReviewsOption);
+        AllReviewsOption.click();
+
+
+    }
 
 
 }
