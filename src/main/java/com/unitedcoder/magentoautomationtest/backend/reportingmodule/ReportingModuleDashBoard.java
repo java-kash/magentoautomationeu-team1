@@ -24,4 +24,15 @@ public class ReportingModuleDashBoard {
     @FindBy(xpath = "//span[text()='Refunds']")
     WebElement refundsLink;
 
+
+    public void openOrdersPage(){
+        functionPage.waitForElement(reportsLink);
+
+        functionPage.waitForElement(salesLink);
+
+        functionPage.waitForElement(ordersLink);
+
+
+    }
+
 }
