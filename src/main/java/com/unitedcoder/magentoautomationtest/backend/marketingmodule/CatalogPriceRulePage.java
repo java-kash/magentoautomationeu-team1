@@ -164,4 +164,6 @@ public class CatalogPriceRulePage extends TestBase {
     }
 
 
+
+
 }

@@ -245,4 +245,18 @@ public class MarketingSteps extends TestBase {
         Assert.assertTrue(title.contains(expectedTitleName));
     }
 
+    @When("Marketing manager can update review")
+    public void marketingManagerCanUpdateReview() {
+        dashboardPage.clickAllReviewsOption2();
+        updateExistingReviews.updateReview();
+
+    }
+
+    @Then("Marketing manager can see the success massage")
+    public void marketingManagerCanSeeTheSuccessMassage() {
+        Assert.assertTrue(updateExistingReviews.verifyUpdateReview());
+    }
+
+
+
 }
