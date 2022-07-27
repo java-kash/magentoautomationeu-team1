@@ -65,6 +65,17 @@ Feature: Magento Store Module Function Test
      When  the user delete the website
      Then  website delete successfully
 
+  @viewAllStores
+  Scenario: Store Manager can view all stores
+    Given store manager is on the dashboard page
+    When user clicks on manage product under Catalog link
+    Then all stores succes display
+
+
+
+
+
+
 
 
 
@@ -128,11 +139,18 @@ Feature: Magento Store Module Function Test
     Given store manager is on the dashboard page
     When store manager create new store view  "<StoreViewName>" and  "<code>"
     Then verify create new store view
-    Examples: :
+    Examples:
   | StoreViewName              | code   |
-  | team122                    | aqswde |
+  | team122                    | ahhqghswedwe |
 
-
+  @EditStoreView
+  Scenario Outline: Store manager can edit Store View
+    Given store manager is on the dashboard page
+    When store manager edit store view  "<StoreViewName2>" and  "<code2>"
+    Then verify edited store view
+    Examples:
+      | StoreViewName2            | code2   |
+      | team123                    | agfwde |
 
 
 
