@@ -34,6 +34,7 @@ public class MarketingSteps extends TestBase {
     UpdateExistingReviews updateExistingReviews;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     UpdateAnExistingNewsletterTemplatePage updateAnExistingNewsletterTemplatePage;
+    String title;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -177,5 +178,68 @@ public class MarketingSteps extends TestBase {
     @Then("Marketing manager can see the success massage")
     public void marketingManagerCanSeeTheSuccessMassage() {
         Assert.assertTrue(updateExistingReviews.verifyUpdateReview());
+    }
+
+    @When("user selects one id number randomly in ID column on the list table")
+    public void userSelectsOneIdNumberRandomlyInIDColumnOnTheListTable() {
+        catalogPriceRulePage.selectsOneIdNumberRandomly();
+    }
+
+    @And("user fills the number in ID field with made the random id number")
+    public void userFillsTheNumberInIDFieldWithMadeTheRandomIdNumber() {
+        catalogPriceRulePage.fillIdToField();
+    }
+
+    @And("user Clicks on Search button")
+    public void userClicksOnSearchButton() {
+        catalogPriceRulePage.clickOnSearchButton();
+    }
+
+    @Then("user should be able to see rules ID match with selected ID")
+    public void userShouldBeAbleToSeeRulesIDMatchWithSelectedID() {
+        Assert.assertEquals(catalogPriceRulePage.listIdNumber(), catalogPriceRulePage.getFieldValue());
+
+        System.out.println("Id field value is: " + catalogPriceRulePage.getFieldValue());
+        System.out.println("Table's ID is: " + catalogPriceRulePage.listIdNumber());
+    }
+
+    @When("user clicks on Reset Filter button")
+    public void userClicksOnResetFilterButton() {
+        catalogPriceRulePage.clickOnResetButton();
+    }
+
+    @When("user selects one rule name randomly in Rule Name column on the list table")
+    public void userSelectsOneRuleNameRandomlyInRuleNameColumnOnTheListTable() {
+        catalogPriceRulePage.selectsOneRuleNameRandomly();
+    }
+
+    @And("user fills the Rule Name field with made the random rule name")
+    public void userFillsTheRuleNameFieldWithMadeTheRandomRuleName() {
+        catalogPriceRulePage.fillNameToField();
+    }
+
+    @Then("user should be able to see rules Rule Name match with selected Rule Name")
+    public void userShouldBeAbleToSeeRulesRuleNameMatchWithSelectedRuleName() {
+        Assert.assertEquals(catalogPriceRulePage.listRuleName(), catalogPriceRulePage.getNameFieldValue());
+
+        System.out.println("Rule name field value is: " + catalogPriceRulePage.getNameFieldValue());
+        System.out.println("Table's rule name is: " + catalogPriceRulePage.listRuleName());
+    }
+
+    @When("User gets the title of the page")
+    public void user_gets_the_title_of_the_page() {
+        title = functionPage.getPageTitle();
+        System.out.println("Page title is: " + title);
+    }
+
+    @Then("Page title should be {string}")
+    public void page_title_should_be(String expectedTitleName) {
+        Assert.assertTrue(title.contains(expectedTitleName));
+    }
+
+    @When("User hovers to click the {string}")
+    public void userHoversOverThe(String text) {
+        FunctionPage functionPage = new FunctionPage(driver);
+        functionPage.hoverToClick(text);
     }
 }
