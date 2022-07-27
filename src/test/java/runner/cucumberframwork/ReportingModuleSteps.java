@@ -30,19 +30,19 @@ public class ReportingModuleSteps extends TestBase {
         loginPage = new ReportingModuleLogin(driver);
         loginPage.login();
     }
-   @After("@MagentoReportingModuleTest")
-   public void tearDown(Scenario scenario){
-       if (scenario.isFailed()){
-           Log4j.error(scenario.getName()+"      Failed");
-           screenshotUtility.takeScreenshot("image",scenario.getName(),driver);
-           byte[] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
-           scenario.attach(sourcePath,"image/png",scenario.getName());
-       }
-       if(!scenario.isFailed()) {
-           Log4j.info(scenario.getName() + "       Passed");
-       }
-       driver.quit();
-   }
+    @After("@MagentoReportingModuleTest")
+    public void tearDown(Scenario scenario){
+        if (scenario.isFailed()){
+            Log4j.error(scenario.getName()+"      Failed");
+            screenshotUtility.takeScreenshot("image",scenario.getName(),driver);
+            byte[] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath,"image/png",scenario.getName());
+        }
+        if(!scenario.isFailed()) {
+            Log4j.info(scenario.getName() + "       Passed");
+        }
+        driver.quit();
+    }
 
     @Given("Reporting Manager at the dashboard page")
     public void reporting_manager_at_the_dashboard_page() {
