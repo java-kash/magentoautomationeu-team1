@@ -128,6 +128,10 @@ public class CreateNewOrderPage{
     public void createOrder(){
         functionPage.waitForElement(store);
         store.click();
+        functionPage.sleep(2);
+        actions.sendKeys(Keys.PAGE_UP).build().perform();
+        actions.sendKeys(Keys.PAGE_UP).build().perform();
+        functionPage.sleep(2);
         functionPage.waitForElement(addProductsButton);
         addProductsButton.click();
         functionPage.waitForElement(productName);
