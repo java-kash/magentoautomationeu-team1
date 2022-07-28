@@ -45,11 +45,11 @@ public class StoreModuleSteps extends TestBase {
 
     }
 
-    @Given("create page object")
-    public void storeManagerAlreadyLoggedIn() {
-
-
-    }
+//    @Given("store manager is on the dashboard page")
+//    public void storeManagerAlreadyLoggedIn() {
+//
+//
+//    }
 
 
 //*************   Nijat   ***************************
