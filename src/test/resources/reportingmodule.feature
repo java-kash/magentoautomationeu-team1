@@ -16,3 +16,17 @@
       Examples:
         |fromDate|toDate|
         | 01/01/2000      |   01/01/2022   |
+
+
+      Scenario: Reporting Manager should be able to see Shopping Cart - Abandoned carts Report
+        Given Reporting Manager at the dashboard page
+        When  see Shopping Cart - Abandoned carts Report
+        Then  verify see Shopping Cart - Abandoned carts Report
+
+      Scenario: Reporting Manager should be able to see Tags - Popular Report
+        Given   Reporting Manager at the dashboard page
+        When    see Tags - Popular Report
+        Then    verify see Tags - Popular Report
+
+
+
