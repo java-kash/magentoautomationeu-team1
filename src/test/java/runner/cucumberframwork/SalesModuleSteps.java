@@ -1,5 +1,6 @@
 package runner.cucumberframwork;
 
+import com.unitedcoder.magentoautomationtest.backend.salesmodule.ManageOrdersPage;
 import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesManagerLogin;
 import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleInvoicesPage;
 import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleManageCustomerPage;
@@ -26,11 +27,13 @@ public class SalesModuleSteps extends TestBase {
     String configFile = "config-qa.properties";
     SalesModuleInvoicesPage salesModuleInvoicesPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
+    ManageOrdersPage manageOrdersPage;
 
     @Before("@SalesModuleFeature")
     public void setUp() {
         browserSetUp(readFromConfigProperties(configFile, "backend_url"));
         salesManagerLogin = new SalesManagerLogin(driver);
+        manageOrdersPage= new ManageOrdersPage(driver);
     salesManagerLogin.login(readFromConfigProperties(configFile,"sales-username"),readFromConfigProperties(configFile,"sales-password"));
     }
     @After("@SalesModuleFeature")
@@ -97,5 +100,15 @@ public class SalesModuleSteps extends TestBase {
     @Then("sales manager should be able to comments to invoices")
     public void salesManagerShouldBeAbleToCommentsToInvoices() {
         Assert.assertTrue(salesModuleInvoicesPage.verifyInvoiceComment());
+    }
+
+    @When("sales manager can create new order")
+    public void salesManagerCanCreateNewOrder(){
+        manageOrdersPage.createOrder();
+    }
+
+    @Then("sales manager should see success massage")
+    public void salesManagerShouldSeeSuccessMassage() {
+        Assert.assertTrue(manageOrdersPage.verifyCreateOrder());
     }
 }
