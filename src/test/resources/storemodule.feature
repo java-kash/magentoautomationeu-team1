@@ -7,21 +7,21 @@ Feature: Magento Store Module Function Test
 
   @CreateNewOrder
   Scenario: Store Manager can create a new order
-    Given   create page object
+    Given   store manager is on the dashboard page
     When    a customer selected
     Then    create a new order
     And     verify create a new order
 
   @EditOrder
   Scenario: Store Manager can edit order
-    Given   create page object
+    Given   store manager is on the dashboard page
     When    a customer select for edit
     Then    edit a new order
     And     verify  edit order
 
   @CancelOrders
   Scenario: Store Manager can cancel order
-    Given   create page object
+    Given   store manager is on the dashboard page
     When    select a customer
     Then    cancel order
     And     verify  cancel order

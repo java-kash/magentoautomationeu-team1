@@ -62,24 +62,10 @@ public class StoreModuleSteps extends TestBase {
         driver.quit();
     }
 
-    @Given("create page object")
-    public void storeManagerAlreadyLoggedIn() {
-
-
-        storeModuleLogin = new StoreModuleLogin(driver);
-        createNewOrderPage=new CreateNewOrderPage(driver);
-        editOrderPage=new EditOrderPage(driver);
-        cancelOrderPage=new CancelOrderPage(driver);
-        createNewOrderPage=new CreateNewOrderPage(driver);
-
-
-    }
-
-
 
 //*************   Nijat   ***************************
 
-    //Create New Order Steps
+//Create New Order Steps
     @When("a customer selected")
     public void aCustomerSelected() {
         createNewOrderPage.selectCustomer();
@@ -143,7 +129,7 @@ public class StoreModuleSteps extends TestBase {
 
     @Given("store manager is on the dashboard page")
     public void storeManagerIsOnTheDashboardPage() {
-        storeModuleLogin = new StoreModuleLogin(driver);
+
         manageStoresPage = new ManageStoresPage(driver);
         createNewOrderPage = new CreateNewOrderPage(driver);
         editOrderPage = new EditOrderPage(driver);
@@ -210,8 +196,6 @@ public class StoreModuleSteps extends TestBase {
     public void store_manager_should_be_able_to_see_the_website_has_been_saved_message() {
         Assert.assertTrue(createWebsitePage.verifyCreateWebsite());
     }
-
-
 
     //*****************************Kadirdan******************************
 
