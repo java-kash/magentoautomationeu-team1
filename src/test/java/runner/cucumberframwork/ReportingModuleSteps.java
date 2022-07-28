@@ -1,8 +1,6 @@
 package runner.cucumberframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.reportingmodule.ReportingModuleDashBoard;
-import com.unitedcoder.magentoautomationtest.backend.reportingmodule.ReportingModuleLogin;
-import com.unitedcoder.magentoautomationtest.backend.reportingmodule.ReportingOrderedReportPage;
+import com.unitedcoder.magentoautomationtest.backend.reportingmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -20,6 +18,8 @@ public class ReportingModuleSteps extends TestBase {
     ReportingModuleLogin loginPage;
     ReportingModuleDashBoard dashBoard;
     ReportingOrderedReportPage orderedReportPage;
+    SeeShoppingCartPage seeShoppingCartPage;
+    SeeTagsPage seeTagsPage;
     ScreenshotUtility screenshotUtility;
     String configFile = "config-qa.properties";
     String url = TestBase.readFromConfigProperties(configFile, "backend_url");
@@ -49,6 +49,8 @@ public class ReportingModuleSteps extends TestBase {
         dashBoard = new ReportingModuleDashBoard(driver);
         orderedReportPage = new ReportingOrderedReportPage(driver);
         dashBoard.clickOnDashBoardLink();
+        seeShoppingCartPage=new SeeShoppingCartPage(driver);
+        seeTagsPage=new SeeTagsPage(driver);
     }
 
     @When("Reporting manager navigate to sales ordered report page")
@@ -72,4 +74,29 @@ public class ReportingModuleSteps extends TestBase {
         dashBoard = new ReportingModuleDashBoard(driver);
         dashBoard.openRefundsPage();
     }
+
+    @When("see Shopping Cart - Abandoned carts Report")
+    public void seeShoppingCartAbandonedCartsReport() {
+        seeShoppingCartPage.viewAbandonedCartsReport();
+    }
+
+    @Then("verify see Shopping Cart - Abandoned carts Report")
+    public void verifyReport() {
+        seeShoppingCartPage.verify();
+    }
+
+    @When("see Tags - Popular Report")
+    public void seeTagsPopularReport() {
+        seeTagsPage.viewPopularReport();
+    }
+
+    @Then("verify see Tags - Popular Report")
+    public void verifySeeTagsPopularReport() {
+        seeTagsPage.verifyReport();
+    }
+
+
+
+
+
 }
