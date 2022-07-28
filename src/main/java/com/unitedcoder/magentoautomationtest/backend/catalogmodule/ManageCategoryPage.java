@@ -47,11 +47,9 @@ public class ManageCategoryPage {
     WebElement successDeleteMsg;
     @FindBy(xpath = "//*[@id=\"group_4meta_title\"]")
     WebElement editPageTitle;
-    @FindBy(xpath = "//*[@id=\"extdd-176\"]")
-    WebElement selectCategory;
     @FindBy(xpath = "//span[text()='Save Category']")
     WebElement editSaveCatButton;
-    @FindBy(xpath = "//*[contains(text(), 'Team1test-Zulfikar')]")
+  @FindBy(xpath = "//*[contains(text(), 'Team1test-Zulfikar')]")
     WebElement allStores;
     @FindBy(xpath = "//span[text()='Add Subcategory']")
     WebElement addSubCategoryLink;
@@ -63,8 +61,6 @@ public class ManageCategoryPage {
     WebElement pageTitleField;
     @FindBy(id = "group_4meta_keywords")
     WebElement metaKeywordsField;
-    @FindBy(css = "#group_4include_in_menu")
-    WebElement includeInNavigationField;
     @FindBy(xpath = "//span[text()='Save Category']")
     WebElement saveCategorySub;
     @FindBy(css = "#messages")
@@ -75,8 +71,6 @@ public class ManageCategoryPage {
     WebElement cmsBlockField;
     @FindBy(xpath = "//span[text()='Delete Category']")
     WebElement deleteCategoryIcon;
-    @FindBy(xpath = "//*[@id='ext-gen322']")
-    WebElement subCategoryButton;
 
 
 
@@ -194,9 +188,8 @@ public class ManageCategoryPage {
 
     }
 
-    public boolean editSubCategory() {
-
-        WebElement subCategoryButton = driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]", TestBase.readFromConfigProperties(configFile, "subcategory_name"))));
+    public boolean editSubCategory(String subcatName) {
+        WebElement subCategoryButton =driver.findElement(By.xpath("//span[text()='"+subcatName+" (0)']"));
         functionPage.waitForElement(subCategoryButton);
         subCategoryButton.click();
       functionPage.sleep(5);
@@ -213,23 +206,24 @@ public class ManageCategoryPage {
             return false;
 
     }
-public boolean deleteSubcategory(){
-    WebElement subCategoryButton = driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]", TestBase.readFromConfigProperties(configFile, "subcategory_name"))));
-    functionPage.waitForElement(subCategoryButton);
-    subCategoryButton.click();
-    functionPage.sleep(5);
-    functionPage.waitForElement(deleteCategoryIcon);
-    deleteCategoryIcon.click();
-    functionPage.waitForAlertPresent();
-Alert alert=driver.switchTo().alert();
-alert.accept();
-functionPage.sleep(3);
 
-    if (successMessageField.getText().contains("The category has been deleted.")){
-        return true;
-    }else
-        return false;
-}
+public boolean deleteSubcategory(String subcatName) {
+    WebElement subCategoryButton =driver.findElement(By.xpath("//span[text()='"+subcatName+" (0)']"));
+        functionPage.sleep(3);
+        functionPage.waitForElement(subCategoryButton);
+        subCategoryButton.click();
+        functionPage.sleep(5);
+        functionPage.waitForElement(deleteCategoryIcon);
+        deleteCategoryIcon.click();
+        functionPage.waitForAlertPresent();
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        functionPage.sleep(3);
+        if (successMessageField.getText().contains("The category has been deleted.")) {
+            return true;
+        } else
+            return false;
+    }
 
 
 

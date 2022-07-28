@@ -5,9 +5,8 @@
         <classes>
             <class name="runner.testngframwork.CatalogModuleRunner">
                 <methods>
-                    <include name="addSubcategoryTest"/>
-                    <include name="editSubCategoryTest"/>
-                    <include name="deleteSubcategoryTest"/>
+                    <include name="editSubCategoryTest"></include>
+                    <include name="deleteSubcategoryTest"></include>
                 </methods>
             </class>
         </classes>

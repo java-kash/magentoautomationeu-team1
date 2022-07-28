@@ -1,13 +1,12 @@
-package runner.cucumberframwork.storemodulesteps;
+package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.storemodule.*;
-import com.unitedcoder.magentoautomationtest.utility.ExcelReader;
-import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
-import com.unitedcoder.magentoautomationtest.utility.TestBase;
+import com.unitedcoder.magentoautomationtest.utility.*;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +14,8 @@ import io.cucumber.java.en.When;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,6 +37,9 @@ public class StoreModuleSteps extends TestBase {
     CategoriesAndNewRootCategoryFormPage formPage;
     FunctionPage functionPage;
     String title;
+    CreateStoreViewPage createStoreViewPage;
+    ScreenshotUtility screenshotUtility=new ScreenshotUtility();
+
 
     @Before("@MagentoStoreModuleFeature")
     public void setUp() {
@@ -44,12 +48,19 @@ public class StoreModuleSteps extends TestBase {
         storeModuleLogin.login();
 
     }
-
-//    @Given("store manager is on the dashboard page")
-//    public void storeManagerAlreadyLoggedIn() {
-//
-//
-//    }
+    @After("@MagentoStoreModuleFeature")
+    public void tearDown(Scenario scenario){
+        if (scenario.isFailed()){
+            Log4j.error(scenario.getName()+"      Failed");
+            screenshotUtility.takeScreenshot("image",scenario.getName(),driver);
+            byte[] sourcePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath,"image/png",scenario.getName());
+        }
+        if(!scenario.isFailed()) {
+            Log4j.info(scenario.getName() + "       Passed");
+        }
+        driver.quit();
+    }
 
 
 //*************   Nijat   ***************************
@@ -72,10 +83,6 @@ public class StoreModuleSteps extends TestBase {
         System.out.println("create order");
     }
 
-    @After("@MagentoStoreModuleFeature")
-    public void tearDown() {
-        driver.quit();
-    }
 
     //Edit order steps
     @When("a customer select for edit")
@@ -116,6 +123,7 @@ public class StoreModuleSteps extends TestBase {
 
     ManageStoresPage manageStoresPage;
     ManageCurrencyRatesPage manageCurrencyRatesPage;
+    ViewAllStorePage viewAllStorePage;
     private String storeName;
     private String websiteCode;
 
@@ -129,6 +137,14 @@ public class StoreModuleSteps extends TestBase {
         formPage = new CategoriesAndNewRootCategoryFormPage(driver);
         functionPage = new FunctionPage(driver);
         manageCurrencyRatesPage = new ManageCurrencyRatesPage(driver);
+        createWebsitePage = new CreateWebsitePage(driver);
+        deleteWebsitePage=new DeleteWebsitePage(driver);
+        createStoreViewPage= new CreateStoreViewPage(driver);
+        viewAllStorePage=new ViewAllStorePage(driver);
+
+
+
+
 
 
     }
@@ -163,6 +179,9 @@ public class StoreModuleSteps extends TestBase {
     // *************************Zohra*****************************
     CreateWebsitePage createWebsitePage;
     EditWebsitePage editWebsitePage;
+
+    DeleteWebsitePage deleteWebsitePage;
+
 
 
     @When("store manager should be able to create website")
@@ -321,6 +340,71 @@ public class StoreModuleSteps extends TestBase {
     public void website_edit_successfully() {
         Assert.assertTrue(editWebsitePage.verifyEditWebsite());
     }
+
+
+    @When("the user delete the website")
+    public void the_user_delete_the_website() throws InterruptedException {
+        storeModuleLogin=new StoreModuleLogin(driver);
+        manageCurrencyRatesPage=new ManageCurrencyRatesPage(driver);
+
+        manageCurrencyRatesPage.clickManageStore();
+        deleteWebsitePage=new DeleteWebsitePage(driver);
+        deleteWebsitePage.deleteWebsite();
+    }
+    @Then("website delete successfully")
+    public void website_delete_successfully() {
+        Assert.assertTrue(deleteWebsitePage.verifyDeleteWebsite());
+    }
+
+    // *************************Abdukerim*****************************
+
+    private String StoreViewName;
+    private String code;
+    private String StoreViewName2;
+    private String code2;
+
+    @When("store manager create new store view  {string} and  {string}")
+    public void storeManagerCreateNewStoreViewAnd(String arg0, String arg1) {
+        manageStoresPage = new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        StoreViewName = arg0;
+        code =arg1;
+        createStoreViewPage.createStoreView(StoreViewName);
+    }
+
+    @Then("verify create new store view")
+    public void verifyCreateNewStoreView() {
+        createStoreViewPage.verifyCreateStoreView();
+
+
+    }
+
+    @When("store manager edit store view  {string} and  {string}")
+    public void storeManagerEditStoreViewAnd(String arg0, String arg1) {
+        manageStoresPage = new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        StoreViewName2= arg0 ;
+        code2=arg1 ;
+        createStoreViewPage.editStoreView(StoreViewName2,code2);
+    }
+
+    @Then("verify edited store view")
+    public void verifyEditedStoreView() {
+        Assert.assertTrue( createStoreViewPage.verifyCreateStoreView());
+    }
+
+    @When("user clicks on manage product under Catalog link")
+    public void userClicksOnManageProductUnderCatalogLink() {
+        viewAllStorePage=new ViewAllStorePage(driver);
+        viewAllStorePage.clickViewStore();
+    }
+
+    @Then("all stores succes display")
+    public void allStoresSuccesDisplay() {
+
+       Assert.assertTrue(viewAllStorePage.verifyStorePage());
+    }
+
 
 
 }

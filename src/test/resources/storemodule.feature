@@ -2,13 +2,6 @@
 
 Feature: Magento Store Module Function Test
 
-#****************     Habiba *****************
-#Login
-#  Background:
-#      Given admin user is already in Magento admin login page
-#      When admin user enter valid username and password
-#      Then admin user able to login successfully
-
 #*****************    Nijat     *******************
 
 
@@ -58,6 +51,35 @@ Feature: Magento Store Module Function Test
     When    store manager should be able to create website
     Then   a new website should be created
 
+
+  @editWebsite
+  Scenario:store manager edit website
+    Given store manager is on the dashboard page
+    When  the user edit the website
+    Then  website edit successfully
+
+
+   @deleteWebsite
+   Scenario:store manager delete website
+     Given store manager is on the dashboard page
+     When  the user delete the website
+     Then  website delete successfully
+
+  @viewAllStores
+  Scenario: Store Manager can view all stores
+    Given store manager is on the dashboard page
+    When user clicks on manage product under Catalog link
+    Then all stores succes display
+
+
+
+
+
+
+
+
+
+
     #*****************    Kadirdan     *******************
   @Kadirdan
   Scenario Outline: test Add , Edit and Delete Product Category functionality
@@ -106,15 +128,29 @@ Feature: Magento Store Module Function Test
     Examples:
       | SheetName                | RowNumber |
       | General_Information_Data | 0         |
-@editWebsite
-    Scenario:store manager edit website
+
+
+
+
+
+
+  @CreateStoreView
+  Scenario Outline: Store manager can create store view
     Given store manager is on the dashboard page
-    When  the user edit the website
-   Then  website edit successfully
+    When store manager create new store view  "<StoreViewName>" and  "<code>"
+    Then verify create new store view
+    Examples:
+  | StoreViewName              | code   |
+  | team122                    | ahhqghswedwe |
 
-
-
-
+  @EditStoreView
+  Scenario Outline: Store manager can edit Store View
+    Given store manager is on the dashboard page
+    When store manager edit store view  "<StoreViewName2>" and  "<code2>"
+    Then verify edited store view
+    Examples:
+      | StoreViewName2            | code2   |
+      | team123                    | agfwde |
 
 
 
