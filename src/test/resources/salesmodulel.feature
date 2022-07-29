@@ -19,8 +19,14 @@ Scenario Outline: Sales Manager should be able to view invoices and add comments
   Examples:
   |commentText|
   |payment completed|
-
+    @Sales-Manager-should-be-able-to-create-a-new-order
    Scenario: Sales Manager should be able to create a new order
      Given sales manager is on the sales dashboard page
      When  sales manager can create new order
      Then sales manager should see success massage
+
+    @SalesManagershouldbeabletocancelorder
+     Scenario: Sales Manager should be able to cancel  order
+       Given sales manager is on the sales dashboard page
+       When sales manager can cancel order
+       Then sales manager should see cancel success massage
