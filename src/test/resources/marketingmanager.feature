@@ -51,3 +51,11 @@ Feature:  Marketing Module Function Test
       Examples:
         |Template Name|Template Content|Template Name|
         |QA Engineer|This is my new Content|QA Engineer|
+
+  Scenario Outline:Marketing manager can delete an existing newsletter template
+    Given Marketing manager on the dashboard page
+    When Marketing manager delete an existing template "<Template Name>"
+    Then Marketing manager can't able to see template "<Template Name>"
+    Examples:
+      |Template Name|Template Name|
+      |QA Engineer|QA Engineer|
