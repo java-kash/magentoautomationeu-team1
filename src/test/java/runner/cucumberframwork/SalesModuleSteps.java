@@ -102,6 +102,8 @@ public class SalesModuleSteps extends TestBase {
         Assert.assertTrue(salesModuleInvoicesPage.verifyInvoiceComment());
     }
 
+
+    //Sales Manager should be able to create a new order-abdukerim
     @When("sales manager can create new order")
     public void salesManagerCanCreateNewOrder(){
         manageOrdersPage.createOrder();
@@ -110,5 +112,16 @@ public class SalesModuleSteps extends TestBase {
     @Then("sales manager should see success massage")
     public void salesManagerShouldSeeSuccessMassage() {
         Assert.assertTrue(manageOrdersPage.verifyCreateOrder());
+    }
+
+    //Sales Manager should be able to cancel  order abdukerim
+    @When("sales manager can cancel order")
+    public void salesManagerCanCancelOrder() {
+        manageOrdersPage.deleteOrder();
+    }
+
+    @Then("sales manager should see cancel success massage")
+    public void salesManagerShouldSeeCancelSuccessMassage() {
+        Assert.assertTrue(manageOrdersPage.verifyCancelOrder());
     }
 }
