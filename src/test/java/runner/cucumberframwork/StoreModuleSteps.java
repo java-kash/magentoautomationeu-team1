@@ -40,6 +40,7 @@ public class StoreModuleSteps extends TestBase {
     CreateStoreViewPage createStoreViewPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
+
     @Before("@MagentoStoreModuleFeature")
     public void setUp() {
         browserSetUp(url);
@@ -61,23 +62,10 @@ public class StoreModuleSteps extends TestBase {
         driver.quit();
     }
 
-    @Given("create page object")
-    public void storeManagerAlreadyLoggedIn() {
-
-
-        storeModuleLogin = new StoreModuleLogin(driver);
-        createNewOrderPage=new CreateNewOrderPage(driver);
-        editOrderPage=new EditOrderPage(driver);
-        cancelOrderPage=new CancelOrderPage(driver);
-        createNewOrderPage=new CreateNewOrderPage(driver);
-
-    }
-
-
 
 //*************   Nijat   ***************************
 
-    //Create New Order Steps
+//Create New Order Steps
     @When("a customer selected")
     public void aCustomerSelected() {
         createNewOrderPage.selectCustomer();
@@ -135,12 +123,13 @@ public class StoreModuleSteps extends TestBase {
 
     ManageStoresPage manageStoresPage;
     ManageCurrencyRatesPage manageCurrencyRatesPage;
+    ViewAllStorePage viewAllStorePage;
     private String storeName;
     private String websiteCode;
 
     @Given("store manager is on the dashboard page")
     public void storeManagerIsOnTheDashboardPage() {
-        storeModuleLogin = new StoreModuleLogin(driver);
+
         manageStoresPage = new ManageStoresPage(driver);
         createNewOrderPage = new CreateNewOrderPage(driver);
         editOrderPage = new EditOrderPage(driver);
@@ -151,6 +140,8 @@ public class StoreModuleSteps extends TestBase {
         createWebsitePage = new CreateWebsitePage(driver);
         deleteWebsitePage=new DeleteWebsitePage(driver);
         createStoreViewPage= new CreateStoreViewPage(driver);
+        viewAllStorePage=new ViewAllStorePage(driver);
+
 
 
 
@@ -206,8 +197,6 @@ public class StoreModuleSteps extends TestBase {
         Assert.assertTrue(createWebsitePage.verifyCreateWebsite());
     }
 
-
-
     //*****************************Kadirdan******************************
 
     @When("user gets the title of the page")
@@ -237,7 +226,6 @@ public class StoreModuleSteps extends TestBase {
 
     @When("user hovers to click the {string}")
     public void userHoversOverThe(String text) {
-        FunctionPage functionPage = new FunctionPage(driver);
         functionPage.hoverToClick(text);
     }
 
@@ -372,6 +360,8 @@ public class StoreModuleSteps extends TestBase {
 
     private String StoreViewName;
     private String code;
+    private String StoreViewName2;
+    private String code2;
 
     @When("store manager create new store view  {string} and  {string}")
     public void storeManagerCreateNewStoreViewAnd(String arg0, String arg1) {
@@ -379,7 +369,7 @@ public class StoreModuleSteps extends TestBase {
         manageCurrencyRatesPage.clickManageStore();
         StoreViewName = arg0;
         code =arg1;
-        createStoreViewPage.createStoreView(StoreViewName,code);
+        createStoreViewPage.createStoreView(StoreViewName);
     }
 
     @Then("verify create new store view")
@@ -388,5 +378,33 @@ public class StoreModuleSteps extends TestBase {
 
 
     }
+
+    @When("store manager edit store view  {string} and  {string}")
+    public void storeManagerEditStoreViewAnd(String arg0, String arg1) {
+        manageStoresPage = new ManageStoresPage(driver);
+        manageCurrencyRatesPage.clickManageStore();
+        StoreViewName2= arg0 ;
+        code2=arg1 ;
+        createStoreViewPage.editStoreView(StoreViewName2,code2);
+    }
+
+    @Then("verify edited store view")
+    public void verifyEditedStoreView() {
+        Assert.assertTrue( createStoreViewPage.verifyCreateStoreView());
+    }
+
+    @When("user clicks on manage product under Catalog link")
+    public void userClicksOnManageProductUnderCatalogLink() {
+        viewAllStorePage=new ViewAllStorePage(driver);
+        viewAllStorePage.clickViewStore();
+    }
+
+    @Then("all stores succes display")
+    public void allStoresSuccesDisplay() {
+
+       Assert.assertTrue(viewAllStorePage.verifyStorePage());
+    }
+
+
 
 }

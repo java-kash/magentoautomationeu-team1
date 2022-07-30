@@ -22,7 +22,6 @@ public class ManageStoresPage {
         PageFactory.initElements(driver, this);
         functionPage = new FunctionPage(driver);
         actions=new Actions(driver);
-
     }
     @FindBy(id= "//*[@id=\"nav\"]/li[3]/a/span")
     WebElement systemTab;

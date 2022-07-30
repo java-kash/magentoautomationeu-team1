@@ -1,8 +1,6 @@
 package runner.cucumberframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesManagerLogin;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleInvoicesPage;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleManageCustomerPage;
+import com.unitedcoder.magentoautomationtest.backend.salesmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
@@ -26,11 +24,14 @@ public class SalesModuleSteps extends TestBase {
     String configFile = "config-qa.properties";
     SalesModuleInvoicesPage salesModuleInvoicesPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
+    ManageOrdersPage manageOrdersPage;
+    EditOrdersWithInStorePickup editOrdersWithInStorePickup;
 
     @Before("@SalesModuleFeature")
     public void setUp() {
         browserSetUp(readFromConfigProperties(configFile, "backend_url"));
         salesManagerLogin = new SalesManagerLogin(driver);
+        manageOrdersPage= new ManageOrdersPage(driver);
     salesManagerLogin.login(readFromConfigProperties(configFile,"sales-username"),readFromConfigProperties(configFile,"sales-password"));
     }
     @After("@SalesModuleFeature")
@@ -70,6 +71,7 @@ public class SalesModuleSteps extends TestBase {
     public void salesManagerIsOnTheSalesDashboardPage() {
         functionPage=new FunctionPage(driver);
         salesModuleInvoicesPage=new SalesModuleInvoicesPage(driver);
+        editOrdersWithInStorePickup=new EditOrdersWithInStorePickup(driver);
 
     }
 
@@ -98,4 +100,43 @@ public class SalesModuleSteps extends TestBase {
     public void salesManagerShouldBeAbleToCommentsToInvoices() {
         Assert.assertTrue(salesModuleInvoicesPage.verifyInvoiceComment());
     }
+
+
+    //Sales Manager should be able to create a new order-abdukerim
+    @When("sales manager can create new order")
+    public void salesManagerCanCreateNewOrder(){
+        manageOrdersPage.createOrder();
+    }
+
+    @Then("sales manager should see success massage")
+    public void salesManagerShouldSeeSuccessMassage() {
+        Assert.assertTrue(manageOrdersPage.verifyCreateOrder());
+    }
+
+    //Sales Manager should be able to cancel  order abdukerim
+    @When("sales manager can cancel order")
+    public void salesManagerCanCancelOrder() {
+        manageOrdersPage.deleteOrder();
+    }
+
+    @Then("sales manager should see cancel success massage")
+    public void salesManagerShouldSeeCancelSuccessMassage() {
+        Assert.assertTrue(manageOrdersPage.verifyCancelOrder());
+    }
+
+    @When("sales manager edit orders with in store pickup")
+    public void salesManagerEditOrdersWithInStorePickup() {
+        editOrdersWithInStorePickup.edit();
+    }
+
+    @Then("verify edit orders success")
+    public void verifyEditOrdersSuccess() {
+        editOrdersWithInStorePickup.editVerify();
+    }
+
+
+
+
+
+
 }

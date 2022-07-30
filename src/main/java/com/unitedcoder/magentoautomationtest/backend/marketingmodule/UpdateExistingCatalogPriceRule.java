@@ -1,6 +1,7 @@
 package com.unitedcoder.magentoautomationtest.backend.marketingmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,9 @@ public class UpdateExistingCatalogPriceRule {
     @FindBy(xpath = "//span[contains(text(),\"Catalog Price Rules\")]")
     WebElement catalogPriceRuleOption;
 
+    @FindBy(css = "#promo_catalog_grid_filter_name")
+    WebElement ruleNameField;
+
     @FindBy(xpath = "//td[contains(text(),\"team1\")]")
     WebElement team1;
 
@@ -48,6 +52,9 @@ public class UpdateExistingCatalogPriceRule {
         promotionsTab.click();
         functionPage.waitForElement(catalogPriceRuleOption);
         catalogPriceRuleOption.click();
+        functionPage.waitForElement(ruleNameField);
+        ruleNameField.sendKeys("team1");
+        ruleNameField.sendKeys(Keys.ENTER);
         functionPage.waitForElement(team1);
         team1.click();
     }
