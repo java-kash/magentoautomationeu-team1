@@ -1,9 +1,6 @@
 package runner.cucumberframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.ManageOrdersPage;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesManagerLogin;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleInvoicesPage;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleManageCustomerPage;
+import com.unitedcoder.magentoautomationtest.backend.salesmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
@@ -28,6 +25,7 @@ public class SalesModuleSteps extends TestBase {
     SalesModuleInvoicesPage salesModuleInvoicesPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     ManageOrdersPage manageOrdersPage;
+    EditOrdersWithInStorePickup editOrdersWithInStorePickup;
 
     @Before("@SalesModuleFeature")
     public void setUp() {
@@ -73,6 +71,7 @@ public class SalesModuleSteps extends TestBase {
     public void salesManagerIsOnTheSalesDashboardPage() {
         functionPage=new FunctionPage(driver);
         salesModuleInvoicesPage=new SalesModuleInvoicesPage(driver);
+        editOrdersWithInStorePickup=new EditOrdersWithInStorePickup(driver);
 
     }
 
@@ -111,4 +110,20 @@ public class SalesModuleSteps extends TestBase {
     public void salesManagerShouldSeeSuccessMassage() {
         Assert.assertTrue(manageOrdersPage.verifyCreateOrder());
     }
+
+    @When("sales manager edit orders with in store pickup")
+    public void salesManagerEditOrdersWithInStorePickup() {
+        editOrdersWithInStorePickup.edit();
+    }
+
+    @Then("verify edit orders success")
+    public void verifyEditOrdersSuccess() {
+        editOrdersWithInStorePickup.editVerify();
+    }
+
+
+
+
+
+
 }
