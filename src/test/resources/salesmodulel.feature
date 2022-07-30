@@ -30,3 +30,16 @@ Scenario Outline: Sales Manager should be able to view invoices and add comments
        Given sales manager is on the sales dashboard page
        When sales manager can cancel order
        Then sales manager should see cancel success massage
+
+
+   Scenario: Sales Manager should be able to edit orders with in store pickup
+     Given   sales manager is on the sales dashboard page
+     When    sales manager edit orders with in store pickup
+     Then    verify edit orders success
+
+
+
+
+
+
+
