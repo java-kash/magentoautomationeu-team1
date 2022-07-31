@@ -1,6 +1,7 @@
 package runner.cucumberframwork;
 
 import com.unitedcoder.magentoautomationtest.backend.reportingmodule.*;
+import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
 import com.unitedcoder.magentoautomationtest.utility.TestBase;
@@ -23,6 +24,8 @@ public class ReportingModuleSteps extends TestBase {
     ScreenshotUtility screenshotUtility;
     String configFile = "config-qa.properties";
     String url = TestBase.readFromConfigProperties(configFile, "backend_url");
+    String title;
+    FunctionPage functionPage;
 
     @Before("@MagentoReportingModuleTest")
     public void setUp() {
@@ -51,6 +54,7 @@ public class ReportingModuleSteps extends TestBase {
         dashBoard.clickOnDashBoardLink();
         seeShoppingCartPage=new SeeShoppingCartPage(driver);
         seeTagsPage=new SeeTagsPage(driver);
+        functionPage = new FunctionPage(driver);
     }
 
     @When("Reporting manager navigate to sales ordered report page")
@@ -96,6 +100,27 @@ public class ReportingModuleSteps extends TestBase {
     }
 
 
+    @When("Reporting gets the title of the page")
+    public void user_gets_the_title_of_the_page() {
+        title = functionPage.getPageTitle();
+        System.out.println("Page title is: " + title);
+    }
+
+    @Then("Reporting module page title should be {string}")
+    public void page_title_should_be(String expectedTitleName) {
+        Assert.assertTrue(title.contains(expectedTitleName));
+    }
+
+    @When("Reporting hovers to click the {string}")
+    public void userHoversOverThe(String text) {
+        functionPage.hoverToClick(text);
+    }
+
+    @Given("Reporting navigates to {string} page")
+    public void userNavigatesToPage(String pageName) {
+        String name = functionPage.getPageNameH3(pageName);
+        System.out.println("Page name is: " + name);
+    }
 
 
 

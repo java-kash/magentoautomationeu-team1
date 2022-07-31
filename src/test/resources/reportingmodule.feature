@@ -30,3 +30,31 @@
 
 
 
+        #*********************************Kadirdan*****************************
+
+    Scenario: user navigates to Order Taxes Report Grouped by Tax Rate page
+      Given Reporting Manager at the dashboard page
+      Then Reporting navigates to "Dashboard" page
+      When Reporting gets the title of the page
+      Then Reporting module page title should be "Dashboard / Magento Admin"
+      When Reporting hovers to click the "Reports"
+      And Reporting hovers to click the "Sales"
+      And Reporting hovers to click the "Tax"
+      Then Reporting navigates to "Order Taxes Report Grouped by Tax Rate" page
+      Given Reporting gets the title of the page
+      Then Reporting module page title should be "Tax / Sales / Reports / Magento Admin"
+
+    Scenario: user navigates to Downloads page
+      Given Reporting Manager at the dashboard page
+      Then Reporting navigates to "Dashboard" page
+      Given Reporting gets the title of the page
+      Then Reporting module page title should be "Dashboard / Magento Admin"
+      When Reporting hovers to click the "Reports"
+      And Reporting hovers to click the "Products"
+      And Reporting hovers to click the "Downloads"
+      Then Reporting navigates to "Downloads" page
+      Given Reporting gets the title of the page
+      Then Reporting module page title should be "Downloads / Products / Reports / Magento Admin"
+
+
+
