@@ -83,3 +83,12 @@ Feature:  Marketing Module Function Test
     And user fills the Rule Name field with made the random rule name
     And user Clicks on Search button
     Then user should be able to see rules Rule Name match with selected Rule Name
+
+
+  Scenario Outline:Marketing manager can delete an existing newsletter template
+    Given Marketing manager on the dashboard page
+    When Marketing manager delete an existing template "<Template Name>"
+    Then Marketing manager can't able to see template "<Template Name>"
+    Examples:
+      |Template Name|Template Name|
+      |QA Engineer|QA Engineer|

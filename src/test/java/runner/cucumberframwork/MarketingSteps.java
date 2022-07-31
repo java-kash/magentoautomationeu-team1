@@ -37,6 +37,7 @@ public class MarketingSteps extends TestBase {
     UpdateAnExistingNewsletterTemplatePage updateAnExistingNewsletterTemplatePage;
     String title;
     ViewAllReviews viewAllReviews;
+    MarketingManagerDeleteTemplate marketingManagerDeleteTemplate;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -71,6 +72,8 @@ public class MarketingSteps extends TestBase {
         updateAnExistingNewsletterTemplatePage=new UpdateAnExistingNewsletterTemplatePage(driver);
         updateExistingReviews = new UpdateExistingReviews(driver);
         viewAllReviews=new ViewAllReviews(driver);
+        marketingManagerDeleteTemplate=new MarketingManagerDeleteTemplate(driver);
+
     }
 
     @When("Click on the Catalog Price Rules")
@@ -259,4 +262,13 @@ public class MarketingSteps extends TestBase {
 
 
 
+    @When("Marketing manager delete an existing template {string}")
+    public void marketingManagerDeleteAnExistingTemplate(String arg0) {
+        marketingManagerDeleteTemplate.deleteNewNewsLetterTemplate(arg0);
+    }
+
+    @Then("Marketing manager can't able to see template {string}")
+    public void marketingManagerCanTAbleToSeeTemplate(String arg0) {
+        marketingManagerDeleteTemplate.verifyNewsletterDeletedSuccessfully(arg0);
+    }
 }
