@@ -76,9 +76,12 @@ Scenario Outline: Sales Manager should be able to view invoices and add comments
 
 
 
-
-
-
-
-
+  Scenario: Sales Manager should be able to add and view new credit memos
+   Scenario Outline: Sales Manager should be able to update( history and tracking information) shipments
+    Given sales manager is on the sales dashboard page
+    When sales manager can update tracking and history information shipments"<CommentText>"
+    Then sales manager should be able to comments to shipments
+    Examples:
+     |CommentText|
+     |shipment delivered|
 

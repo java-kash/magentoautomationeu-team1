@@ -27,6 +27,7 @@ public class SalesModuleSteps extends TestBase {
     SalesModuleInvoicesPage salesModuleInvoicesPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     ManageOrdersPage manageOrdersPage;
+    SalesModuleShipmentPage salesModuleShipmentPage;
     EditOrdersWithInStorePickup editOrdersWithInStorePickup;
     OrdersPage ordersPage;
     CreditMemosPage creditMemosPage;
@@ -201,6 +202,16 @@ public class SalesModuleSteps extends TestBase {
     @Then("Sales should be able to see success message {string}")
     public void salesShouldBeAbleToSeeSuccessMessage(String successMessage) {
         Assert.assertTrue(functionPage.getSuccessMessage(successMessage));
+    }
+
+    @When("sales manager can update tracking and history information shipments{string}")
+    public void salesManagerCanUpdateTrackingAndHistoryInformationShipmentsAnd(String arg0) {
+        salesModuleShipmentPage=new SalesModuleShipmentPage(driver);
+        salesModuleShipmentPage.updateInformation(arg0+System.currentTimeMillis());
+    }
+    @Then("sales manager should be able to comments to shipments")
+    public void salesManagerShouldBeAbleToCommentsToShipments() {
+        salesModuleShipmentPage.verifyShipmentPage();
     }
 
 }
