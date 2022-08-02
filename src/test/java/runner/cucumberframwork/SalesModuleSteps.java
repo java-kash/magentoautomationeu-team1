@@ -1,9 +1,6 @@
 package runner.cucumberframwork;
 
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.ManageOrdersPage;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesManagerLogin;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleInvoicesPage;
-import com.unitedcoder.magentoautomationtest.backend.salesmodule.SalesModuleManageCustomerPage;
+import com.unitedcoder.magentoautomationtest.backend.salesmodule.*;
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
 import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import com.unitedcoder.magentoautomationtest.utility.ScreenshotUtility;
@@ -28,6 +25,7 @@ public class SalesModuleSteps extends TestBase {
     SalesModuleInvoicesPage salesModuleInvoicesPage;
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
     ManageOrdersPage manageOrdersPage;
+    SalesModuleShipmentPage salesModuleShipmentPage;
 
     @Before("@SalesModuleFeature")
     public void setUp() {
@@ -110,5 +108,16 @@ public class SalesModuleSteps extends TestBase {
     @Then("sales manager should see success massage")
     public void salesManagerShouldSeeSuccessMassage() {
         Assert.assertTrue(manageOrdersPage.verifyCreateOrder());
+    }
+
+
+    @When("sales manager can update tracking and history information shipments{string}")
+    public void salesManagerCanUpdateTrackingAndHistoryInformationShipmentsAnd(String arg0) {
+        salesModuleShipmentPage=new SalesModuleShipmentPage(driver);
+        salesModuleShipmentPage.updateInformation(arg0+System.currentTimeMillis());
+    }
+    @Then("sales manager should be able to comments to shipments")
+    public void salesManagerShouldBeAbleToCommentsToShipments() {
+        salesModuleShipmentPage.verifyShipmentPage();
     }
 }
