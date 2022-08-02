@@ -13,6 +13,7 @@ public class ManageOrdersPage {
     WebDriver driver;
     FunctionPage functionPage;
     Actions actions;
+    Select select;
 
     public ManageOrdersPage(WebDriver driver){
         this.driver = driver;
@@ -81,6 +82,22 @@ public class ManageOrdersPage {
     @FindBy(xpath = "(//*[text()='Submit Order'])[2]")
     WebElement submitorder;
 
+    @FindBy(css = "#sales_order_grid_filter_status")
+    WebElement status;
+
+    @FindBy(xpath = "//*[text()='Search']")
+    WebElement search;
+
+    @FindBy(xpath = "//a[contains(text(),\"View\")]")
+    WebElement selsctExistOrder;
+
+    @FindBy(xpath = "(//*[text()='Cancel'])[2]")
+    WebElement cancel;
+
+    @FindBy(xpath = "//span[text()=\"The order has been cancelled.\" ]")
+    WebElement successCancelmsg;
+
+
     public void createOrder(){
         functionPage.waitForElement(salesTeb);
         salesTeb.click();
@@ -136,6 +153,33 @@ public boolean verifyCreateOrder(){
             return false;
 }
 
+public void deleteOrder(){
+    functionPage.waitForElement(salesTeb);
+    salesTeb.click();
+    functionPage.waitForElement(orderesTeb);
+    orderesTeb.click();
+    functionPage.waitForElement(status);
+    select=new Select(status);
+    select.selectByVisibleText("Pending");
+    functionPage.waitForElement(search);
+    search.click();
+    functionPage.waitForElement(selsctExistOrder);
+    functionPage.sleep(3);
+    selsctExistOrder.click();
+    functionPage.waitForElement(cancel);
+    cancel.click();
+    functionPage.alertAccept();
+
+
+
+}
+public boolean verifyCancelOrder(){
+        if (successCancelmsg.isDisplayed()){
+            return true;
+        }else
+            return false;
+
+}
 
 
 

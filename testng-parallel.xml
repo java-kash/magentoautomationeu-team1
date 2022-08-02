@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Magento_UI_Automation" verbose="2" parallel="tests">
+    <test verbose="2" preserve-order="true" name="Customer_Module_Test"  thread-count="3">
+        <classes>
+            <class name="runner.testngframwork.CustomerModuleRunner"/>
+        </classes>
+    </test>
+
+    <test name="Public module Test">
+        <classes>
+            <class name="runner.testngframwork.FrontendRunner"/>
+        </classes>
+    </test>
+    <test name="Catalog Module Test">
+        <classes>
+            <class name="runner.testngframwork.CatalogModuleRunner"/>
+
+
+        </classes>
+    </test>
+</suite>
