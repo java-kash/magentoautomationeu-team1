@@ -16,25 +16,28 @@ public class DataBaseTestSteps {
     Connection connection;
     String configFile = "config-qa.properties";
     VerifyAddCustomers verifyAddCustomers;
+    VerifyAddedStoreView verifyAddedStoreView;
+    VerifyAddedTexRuleAtDB verifyAddedTexRuleAtDB;
 
 
     @Before
-    public void setup(){
-      connectionManager=new ConnectionManager();
-     connection=connectionManager.connectToDatabaseServer();
+    public void setup() {
+        connectionManager = new ConnectionManager();
+        connection = connectionManager.connectToDatabaseServer();
     }
 
 
     @Given("connect to data base server")
     public void connectToDataBaseServer() {
-        verifyAddCustomers=new VerifyAddCustomers();
-
+        verifyAddCustomers = new VerifyAddCustomers();
+        verifyAddedStoreView = new VerifyAddedStoreView();
+        verifyAddedTexRuleAtDB = new VerifyAddedTexRuleAtDB();
     }
 
     @When("is customer exist")
     public boolean isCustomerExist() {
-        String customerEmail= TestBase.readFromConfigProperties(configFile,"public_userEmail");
-        boolean CustomerExist= verifyAddCustomers.getCustomer(customerEmail,connection);
+        String customerEmail = TestBase.readFromConfigProperties(configFile, "public_userEmail");
+        boolean CustomerExist = verifyAddCustomers.getCustomer(customerEmail, connection);
         return CustomerExist;
     }
 
@@ -44,16 +47,30 @@ public class DataBaseTestSteps {
     }
 
     @After
-    public void closeDatabaseConnection(){
+    public void closeDatabaseConnection() {
         connectionManager.closeDatabaseConnection(connection);
-}
+    }
 
 
+    @When("I get store view information")
+    public void iGetStoreViewInformation() {
+        String storeViewName = TestBase.readFromConfigProperties(configFile, "store-view-name");
+        verifyAddedStoreView.getStoreViewInfo(storeViewName, connection);
+    }
 
+    @Then("Store view is visible at database")
+    public void storeViewIsVisibleAtDatabase() {
+        Assert.assertTrue(verifyAddedStoreView.verifyStoreViewIsAdded());
+    }
 
+    @When("I get tax rule information")
+    public void iGetTaxRuleInformation() {
+        String taxRule = TestBase.readFromConfigProperties(configFile, "tax-rule");
+        verifyAddedTexRuleAtDB.getTaxRuleInfo(taxRule, connection);
+    }
 
-
-
-
-
+    @Then("Tax rule is visible at database")
+    public void taxRuleIsVisibleAtDatabase() {
+        Assert.assertTrue(verifyAddedTexRuleAtDB.verifyTexRuleIsAdded());
+    }
 }
