@@ -57,4 +57,11 @@
       Then Reporting module page title should be "Downloads / Products / Reports / Magento Admin"
 
 
+      Scenario: Reporting Manager can see shopping cart Product in carts
+        Given Reporting Manager at the dashboard page
+        When see Shopping cart-Product in cart
+        Then Vrify can see shopping cart-product in carts
+
+
+
 

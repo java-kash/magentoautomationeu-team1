@@ -26,6 +26,7 @@ public class ReportingModuleSteps extends TestBase {
     String url = TestBase.readFromConfigProperties(configFile, "backend_url");
     String title;
     FunctionPage functionPage;
+    ProductInCartsReport productInCartsReport;
 
     @Before("@MagentoReportingModuleTest")
     public void setUp() {
@@ -55,6 +56,7 @@ public class ReportingModuleSteps extends TestBase {
         seeShoppingCartPage=new SeeShoppingCartPage(driver);
         seeTagsPage=new SeeTagsPage(driver);
         functionPage = new FunctionPage(driver);
+        productInCartsReport=new ProductInCartsReport(driver);
     }
 
     @When("Reporting manager navigate to sales ordered report page")
@@ -123,5 +125,14 @@ public class ReportingModuleSteps extends TestBase {
     }
 
 
+    @When("see Shopping cart-Product in cart")
+    public void seeShoppingCartProductInCart() {
+        productInCartsReport.productInCarts();
 
+    }
+
+    @Then("Vrify can see shopping cart-product in carts")
+    public void vrifyCanSeeShoppingCartProductInCarts() {
+        productInCartsReport.verifyproductInCarts();
+    }
 }
