@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 public class StoreModuleSteps extends TestBase {
+    AddUpdateDeleteProductPage addUpdateDeleteProductPage;
 
     //****************************   Habiba   *********************************
     StoreModuleLogin storeModuleLogin;
@@ -41,11 +42,13 @@ public class StoreModuleSteps extends TestBase {
     ScreenshotUtility screenshotUtility=new ScreenshotUtility();
 
 
+
     @Before("@MagentoStoreModuleFeature")
     public void setUp() {
         browserSetUp(url);
         storeModuleLogin = new StoreModuleLogin(driver);
         storeModuleLogin.login();
+        addUpdateDeleteProductPage = new AddUpdateDeleteProductPage(driver);
 
     }
     @After("@MagentoStoreModuleFeature")
@@ -406,5 +409,36 @@ public class StoreModuleSteps extends TestBase {
     }
 
 
+    @Given("store manager is on the manage product page")
+    public void storeManagerIsOnTheManageProductPage() {
+        addUpdateDeleteProductPage.managerProductLink();
+    }
 
+    @When("store manager can add a product {string} {string}{string}{string}{string}{string}")
+    public void storeManagerCanAddAProduct(String name, String description, String shortDescription, String sku, String weight, String price) {
+       addUpdateDeleteProductPage.addProduct(name, description, shortDescription, sku, weight, price);
+    }
+
+    @Then("Verify add new product")
+    public void verifyAddNewProduct() {
+        Assert.assertTrue(addUpdateDeleteProductPage.verifyAddProduct());
+    }
+
+    @When("store manager can update a product {string}")
+    public void storeManagerCanUpdateAProduct(String sku) {
+        addUpdateDeleteProductPage.updateProduct(sku);
+    }
+
+    @When("store manager can delete a product")
+    public void storeManagerCanDeleteAProduct() {
+        addUpdateDeleteProductPage.deleteProduct();
+    }
+
+    @Then("Verify delete a product")
+    public void verifyDeleteAProduct() {
+        Assert.assertTrue(addUpdateDeleteProductPage.verifyDeleteProduct());
+    }
 }
+
+
+

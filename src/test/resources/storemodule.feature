@@ -153,4 +153,33 @@ Feature: Magento Store Module Function Test
       | team123                    | agfwde |
 
 
+  @AddUpdateDeleteProduct
+  Scenario Outline: Store manager can add product
+    Given store manager is on the manage product page
+    When store manager can add a product "<name>" "<description>""<shortDescription>""<sku>""<weight>""<price>"
+    Then Verify add new product
+
+    Examples:
+      | name  | description | shortDescription      | sku    | weight | price |
+      | Levis | Jeans       | Slim Fit Female Jeans | SF0564 | 200    | 500   |
+
+  @UpdateProduct
+  Scenario Outline: Store manager can update product
+    Given store manager is on the manage product page
+    When store manager can update a product "<sku>"
+    Then Verify add new product
+
+    Examples:
+      | sku |
+      | 20  |
+
+    @DeleteProduct
+    Scenario: Store manager can delete product
+      Given store manager is on the manage product page
+      When store manager can delete a product
+      Then Verify delete a product
+
+
+
+
 
