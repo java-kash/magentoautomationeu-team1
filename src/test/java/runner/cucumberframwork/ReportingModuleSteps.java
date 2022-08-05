@@ -164,7 +164,7 @@ public class ReportingModuleSteps extends TestBase {
         productReviewsReportPage.seeProductReviewsReport();
 
     }
-    @Then("verify  see  product reviews report")
+    @Then("verify  product reviews report is visible ")
     public void verify_see_product_reviews_report() {
         productReviewsReportPage.verifyProductReviewsReport();
 
