@@ -234,7 +234,6 @@ public  class FunctionPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
-
     public  void sendKeysWithJS(WebElement element, String text) {
 //        ((JavascriptExecutor) DriverFactory.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + text + "';", element);
