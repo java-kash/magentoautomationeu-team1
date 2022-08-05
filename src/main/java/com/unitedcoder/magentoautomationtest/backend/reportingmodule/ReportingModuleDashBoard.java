@@ -29,6 +29,8 @@ public class ReportingModuleDashBoard {
     @FindBy(xpath = "//span[text()='Dashboard']")
     WebElement dashBoardLink;
 
+
+
 public void clickOnDashBoardLink(){
     functionPage.waitForElement(dashBoardLink);
     dashBoardLink.click();
@@ -42,6 +44,11 @@ public void clickOnDashBoardLink(){
     }
     public void openRefundsPage(){
         openTargetPages(reportsLink,salesLink,refundsLink);
+    }
+
+
+    public void openShowReportPage(){
+
     }
 
 }
