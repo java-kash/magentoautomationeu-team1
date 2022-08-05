@@ -22,7 +22,7 @@ public class ProductReviewsReportPage {
         actions=new Actions(driver);
     }
     @FindBy(xpath = "//span[text()='Reports']")
-    WebElement reports;
+    WebElement reportsLink;
     @FindBy(xpath = "//span[text()='Reviews']")
     WebElement reviewsOption;
     @FindBy(xpath = "//span[text()='Products Reviews']")
@@ -31,8 +31,8 @@ public class ProductReviewsReportPage {
     List<WebElement>  productReviewReportTable;
 
    public void seeProductReviewsReport(){
-       functionPage.waitForElement(reports);
-       reports.click();
+       functionPage.waitForElement(reportsLink);
+       reportsLink.click();
        functionPage.waitForElement(reviewsOption);
        actions.moveToElement(reviewsOption).perform();
        functionPage.waitForElement(productsReviewsOption);
