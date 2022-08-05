@@ -74,7 +74,7 @@
       Examples:
         |fromDate|toDate|
         | 01/01/2021      |   01/01/2022   |
-    @seeProductReviewsReport
+    @ProductReviewsReport
     Scenario: Reporting Manager can see  product reviews report
       Given Reporting Manager at the dashboard page
       When see product reviews report
