@@ -78,4 +78,4 @@
     Scenario: Reporting Manager can see  product reviews report
       Given Reporting Manager at the dashboard page
       When see product reviews report
-      Then  verify  see  product reviews report
+      Then  verify see product reviews report
