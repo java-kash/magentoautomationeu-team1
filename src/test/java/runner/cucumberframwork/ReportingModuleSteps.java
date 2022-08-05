@@ -27,7 +27,7 @@ public class ReportingModuleSteps extends TestBase {
     String title;
     FunctionPage functionPage;
     ProductInCartsReport productInCartsReport;
-
+    ProductsMostViewedReportPage productsMostViewedReportPage;
     @Before("@MagentoReportingModuleTest")
     public void setUp() {
         browserSetUp(url);
@@ -57,6 +57,7 @@ public class ReportingModuleSteps extends TestBase {
         seeTagsPage=new SeeTagsPage(driver);
         functionPage = new FunctionPage(driver);
         productInCartsReport=new ProductInCartsReport(driver);
+        productsMostViewedReportPage=new ProductsMostViewedReportPage(driver);
     }
 
     @When("Reporting manager navigate to sales ordered report page")
@@ -133,6 +134,28 @@ public class ReportingModuleSteps extends TestBase {
 
     @Then("Vrify can see shopping cart-product in carts")
     public void vrifyCanSeeShoppingCartProductInCarts() {
-        productInCartsReport.verifyproductInCarts();
+        Assert.assertTrue(productInCartsReport.verifyproductInCarts());
     }
+
+
+
+
+
+    @When("Reporting manager navigate to  most viewed page")
+    public void reporting_manager_navigate_to_most_viewed_page() {
+        productsMostViewedReportPage.mostViewedPage();
+
+    }
+    @When("Fills in {string} {string} and clicks show report button")
+    public void fills_in_and_clicks_show_report_button(String string, String string2) {
+        productsMostViewedReportPage.showReport(string,string2);
+
+    }
+    @Then("Most viewed report is visible")
+    public void most_viewed_report_is_visible() {
+
+            Assert.assertTrue(productsMostViewedReportPage. mostViewedReportIsVisible());
+
+    }
+
 }
