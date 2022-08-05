@@ -28,6 +28,7 @@ public class ReportingModuleSteps extends TestBase {
     FunctionPage functionPage;
     ProductInCartsReport productInCartsReport;
     ProductsMostViewedReportPage productsMostViewedReportPage;
+    ProductReviewsReportPage productReviewsReportPage;
     @Before("@MagentoReportingModuleTest")
     public void setUp() {
         browserSetUp(url);
@@ -58,6 +59,7 @@ public class ReportingModuleSteps extends TestBase {
         functionPage = new FunctionPage(driver);
         productInCartsReport=new ProductInCartsReport(driver);
         productsMostViewedReportPage=new ProductsMostViewedReportPage(driver);
+        productReviewsReportPage=new ProductReviewsReportPage(driver);
     }
 
     @When("Reporting manager navigate to sales ordered report page")
@@ -155,6 +157,16 @@ public class ReportingModuleSteps extends TestBase {
     public void most_viewed_report_is_visible() {
 
             Assert.assertTrue(productsMostViewedReportPage. mostViewedReportIsVisible());
+
+    }
+    @When("see product reviews report")
+    public void see_product_reviews_report() {
+        productReviewsReportPage.seeProductReviewsReport();
+
+    }
+    @Then("verify  see  product reviews report")
+    public void verify_see_product_reviews_report() {
+        productReviewsReportPage.verifyProductReviewsReport();
 
     }
 
