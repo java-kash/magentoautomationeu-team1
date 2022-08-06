@@ -38,6 +38,7 @@ public class MarketingSteps extends TestBase {
     String title;
     ViewAllReviews viewAllReviews;
     MarketingManagerDeleteTemplate marketingManagerDeleteTemplate;
+    NewsletterSubscribers newsletterSubscribers;
 
     @Before("@MagentoMarketingModuleFeature")
     public void setUp(){
@@ -73,6 +74,7 @@ public class MarketingSteps extends TestBase {
         updateExistingReviews = new UpdateExistingReviews(driver);
         viewAllReviews=new ViewAllReviews(driver);
         marketingManagerDeleteTemplate=new MarketingManagerDeleteTemplate(driver);
+        newsletterSubscribers=new NewsletterSubscribers(driver);
 
     }
 
@@ -270,5 +272,15 @@ public class MarketingSteps extends TestBase {
     @Then("Marketing manager can't able to see template {string}")
     public void marketingManagerCanTAbleToSeeTemplate(String arg0) {
         marketingManagerDeleteTemplate.verifyNewsletterDeletedSuccessfully(arg0);
+    }
+
+    @When("Marketing manager should be able to view newsletter subscribers")
+    public void marketingManagerShouldBeAbleToViewNewsletterSubscribers() {
+        newsletterSubscribers.newslettersSubscribersPage();
+    }
+
+    @Then("Marketing manager should be see the newsletter subscribers page")
+    public void marketingManagerShouldBeSeeTheNewsletterSubscribersPage() {
+        Assert.assertTrue(newsletterSubscribers.verifyNewslettersSubscribersPage());
     }
 }
