@@ -274,6 +274,16 @@ public class MarketingSteps extends TestBase {
         marketingManagerDeleteTemplate.verifyNewsletterDeletedSuccessfully(arg0);
     }
 
+    @When("Marketing manager should be able to view pending reviews")
+    public void marketingManagerShouldBeAbleToViewPendingReviews() {
+        pendingReviewsPage.pendingReviewsPage();
+    }
+
+    @Then("Marketing manager should be see the pending reviews message")
+    public void marketingManagerShouldBeSeeThePendingReviewsMessage() {
+        Assert.assertTrue(pendingReviewsPage.verifyPendingReviewsPage());
+    }
+
     @When("Marketing manager should be able to view newsletter subscribers")
     public void marketingManagerShouldBeAbleToViewNewsletterSubscribers() {
         newsletterSubscribers.newslettersSubscribersPage();

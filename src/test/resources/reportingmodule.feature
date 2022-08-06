@@ -64,4 +64,18 @@
 
 
 
-
+      #*********************************Zohra*****************************
+    @Reporting
+    Scenario Outline: Reporting Manager can see Products Most Viewed Report
+      Given Reporting Manager at the dashboard page
+      When Reporting manager navigate to  most viewed page
+      And Fills in "<fromDate>" "<toDate>" and clicks show report button
+      Then Most viewed report is visible
+      Examples:
+        |fromDate|toDate|
+        | 01/01/2021      |   01/01/2022   |
+    @ProductReviewsReport
+    Scenario: Reporting Manager can see  product reviews report
+      Given Reporting Manager at the dashboard page
+      When see product reviews report
+      Then  verify see product reviews report
