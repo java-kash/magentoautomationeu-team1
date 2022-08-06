@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 public class Log4j {
     private static final Logger log = Logger.getLogger(Log4j.class);
+
     public static void startTestCase (String sTestCaseName){
         log.info   ("-----------------------------------------------------------------------------------------------");
         log.info("**************  "+"\033[42;30;4m"+sTestCaseName+"\033[0m"+"************");

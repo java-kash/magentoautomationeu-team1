@@ -81,8 +81,9 @@ public class CustomerModuleRunner extends TestBase {
     public void addNewAddress(String email) {
         addNewAddressPage.selectCustomer(email);
         addNewAddressPage.addNewAddress();
-        Assert.assertTrue(addNewAddressPage.verifyAddAddress());
+        Assert.assertTrue(false);
         customerDashboardPage.filterReset();
+        //addNewAddressPage.verifyAddAddress()
     }
 
 

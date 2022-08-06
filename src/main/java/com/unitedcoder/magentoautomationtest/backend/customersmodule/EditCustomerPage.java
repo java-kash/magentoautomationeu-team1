@@ -1,6 +1,7 @@
 package com.unitedcoder.magentoautomationtest.backend.customersmodule;
 
 import com.unitedcoder.magentoautomationtest.utility.FunctionPage;
+import com.unitedcoder.magentoautomationtest.utility.Log4j;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,7 +56,9 @@ public class EditCustomerPage {
 
         functionPage.waitForElement(successMessages);
         if(successMessages.isDisplayed()){
+
             return true;
+
 
         }else
             return false;

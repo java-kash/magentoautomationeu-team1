@@ -14,6 +14,8 @@ public class TestNGResultListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         Log4j.error(result.getMethod().getMethodName()+"    Failed");
 
+
+
         screenshotUtility.takeScreenshot("image",result.getMethod().getMethodName(),
                 (WebDriver) result.getTestContext().getAttribute("driver"));
     }
