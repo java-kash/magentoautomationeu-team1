@@ -30,6 +30,7 @@ public class ProductReviewsReportPage {
     @FindAll(@FindBy(css = "table[id=\"gridProducts_table\"]>tbody>tr"))
     List<WebElement>  productReviewReportTable;
 
+
    public void seeProductReviewsReport(){
        functionPage.waitForElement(reportsLink);
        reportsLink.click();
