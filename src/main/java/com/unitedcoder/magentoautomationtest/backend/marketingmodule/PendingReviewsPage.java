@@ -19,6 +19,17 @@ public class PendingReviewsPage {
         functionPage = new FunctionPage(marketingDriver);
     }
 
+    @FindBy(xpath="//span[text()='Catalog']")
+    WebElement catalogButton;
+    @FindBy(xpath="//span[text()='Reviews and Ratings']")
+    WebElement reviewsAndRatingsButton;
+    @FindBy(xpath="//span[text()='Customer Reviews']")
+    WebElement customerReviews;
+    @FindBy(xpath="//span[text()='Pending Reviews']")
+    WebElement pendingReviews;
+    @FindBy(xpath="(//h3[text()='Pending Reviews'])[1]")
+    WebElement pendingReviewsPage;
+
     @FindBy(id = "status_id")
     WebElement statusDropDown;
     @FindBy(xpath = "//*[text()='Save Review']")
@@ -30,6 +41,23 @@ public class PendingReviewsPage {
     @FindBy(xpath = "//td[contains(text(),\"team1\")]")
     WebElement team1;
 
+    public void pendingReviewsPage(){
+        functionPage.waitForElement(catalogButton);
+        catalogButton.click();
+        functionPage.waitForElement(reviewsAndRatingsButton);
+        reviewsAndRatingsButton.click();
+        functionPage.waitForElement(customerReviews);
+        customerReviews.click();
+        functionPage.waitForElement(pendingReviews);
+        pendingReviews.click();
+    }
+    public boolean verifyPendingReviewsPage(){
+        functionPage.waitForElement(pendingReviewsPage);
+        if(pendingReviewsPage.isDisplayed())
+            return true;
+        else
+            return false;
+    }
 
     public void updatePendingReviews() {
         functionPage.waitForElement(nickNameField);

@@ -271,4 +271,14 @@ public class MarketingSteps extends TestBase {
     public void marketingManagerCanTAbleToSeeTemplate(String arg0) {
         marketingManagerDeleteTemplate.verifyNewsletterDeletedSuccessfully(arg0);
     }
+
+    @When("Marketing manager should be able to view pending reviews")
+    public void marketingManagerShouldBeAbleToViewPendingReviews() {
+        pendingReviewsPage.pendingReviewsPage();
+    }
+
+    @Then("Marketing manager should be see the pending reviews message")
+    public void marketingManagerShouldBeSeeThePendingReviewsMessage() {
+        Assert.assertTrue(pendingReviewsPage.verifyPendingReviewsPage());
+    }
 }
