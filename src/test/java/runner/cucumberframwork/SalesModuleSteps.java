@@ -32,6 +32,7 @@ public class SalesModuleSteps extends TestBase {
     OrdersPage ordersPage;
     CreditMemosPage creditMemosPage;
     String title;
+    UpdateShoppingCart updateShoppingCart;
 
     @Before("@SalesModuleFeature")
     public void setUp() {
@@ -39,6 +40,7 @@ public class SalesModuleSteps extends TestBase {
         salesManagerLogin = new SalesManagerLogin(driver);
         manageOrdersPage= new ManageOrdersPage(driver);
     salesManagerLogin.login(readFromConfigProperties(configFile,"sales-username"),readFromConfigProperties(configFile,"sales-password"));
+    updateShoppingCart= new UpdateShoppingCart(driver);
     }
     @After("@SalesModuleFeature")
     public void tearDown(Scenario scenario){
@@ -214,4 +216,18 @@ public class SalesModuleSteps extends TestBase {
         salesModuleShipmentPage.verifyShipmentPage();
     }
 
+    @When("Sales manager is on the customer page")
+    public void salesManagerIsOnTheCustomerPage() {
+        updateShoppingCart.manageCustomersLink();
+    }
+
+    @Then("Sales manager can update an existing shopping cart")
+    public void salesManagerCanUpdateAnExistingShoppingCart() {
+        updateShoppingCart.UpdateShoppingCart();
+    }
+
+    @Then("verify update shopping cart")
+    public void verifyUpdateShoppingCart() {
+        Assert.assertTrue(updateShoppingCart.verifyUpdateShoppingCart());
+    }
 }

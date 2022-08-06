@@ -85,3 +85,11 @@ Scenario Outline: Sales Manager should be able to view invoices and add comments
      |CommentText|
      |shipment delivered|
 
+     @UpdateShoppingCart
+     Scenario: Sales manager should be able to update an existing shopping cart
+       Given sales manager is on the sales dashboard page
+       When Sales manager is on the customer page
+       Then Sales manager can update an existing shopping cart
+       Then verify update shopping cart
+
+
