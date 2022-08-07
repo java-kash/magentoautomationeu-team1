@@ -79,3 +79,11 @@
       Given Reporting Manager at the dashboard page
       When see product reviews report
       Then  verify see product reviews report
+
+      @BestsellersReport
+      Scenario: Reporting manager should be able to see Products Bestsellers Report
+        Given Reporting Manager at the dashboard page
+        When Reporting manager at the bestsellers page
+        Then Reporting manager at the reports page
+        Then Verify products bestsellers reports
+
