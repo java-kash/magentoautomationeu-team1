@@ -97,3 +97,8 @@ Feature:  Marketing Module Function Test
       Given Marketing manager on the dashboard page
       When Marketing manager should be able to view pending reviews
       Then Marketing manager should be see the pending reviews message
+
+    Scenario: Marketing manager can view newsletter subscribers
+      Given Marketing manager on the dashboard page
+      When Marketing manager should be able to view newsletter subscribers
+      Then Marketing manager should be see the newsletter subscribers page
