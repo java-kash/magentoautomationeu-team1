@@ -79,3 +79,8 @@
       Given Reporting Manager at the dashboard page
       When see product reviews report
       Then  verify see product reviews report
+
+      Scenario: Reporting Manager should be able tol see Tags - Customer Report
+        Given Reporting Manager at the dashboard page
+        When See Tags - Customer Report
+        Then Verify Customer Reports Page

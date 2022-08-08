@@ -36,6 +36,15 @@ public class SeeTagsPage {
     @FindAll(@FindBy(css = "table[id=\"grid_table\"]>tbody>tr"))
     List<WebElement> totalPopularTags;
 
+    @FindBy(xpath="//*[@id=\"nav\"]/li[3]/ul/li[5]/ul/li[1]/a/span")
+    WebElement customer;
+
+    @FindBy(xpath="//*[@id=\"grid_table\"]/tbody/tr/td[5]/a")
+    WebElement showTagsLink;
+
+    @FindBy(xpath="//*[@id=\"page:main-container\"]/div[2]/table/tbody/tr/td[1]/h3")
+    WebElement customerReportsPage;
+
     public void viewPopularReport(){
         functionPage.waitForElement(reportsTab);
         reportsTab.click();
@@ -44,12 +53,27 @@ public class SeeTagsPage {
         functionPage.waitForElement(popular);
         popular.click();
     }
+    public void viewCustomerReport(){
+        functionPage.waitForElement(reportsTab);
+        reportsTab.click();
+        functionPage.waitForElement(tagsOption);
+        tagsOption.click();
+        functionPage.waitForElement(customer);
+        customer.click();
+        functionPage.waitForElement(showTagsLink);
+        showTagsLink.click();
+    }
 
     public boolean verifyReport(){
         if (totalPopularTags.size() > 0 );
             return true;
     }
-
-
+    public boolean verifyCustomerReportsPage(){
+        functionPage.waitForElement(customerReportsPage);
+        if(customerReportsPage.isDisplayed())
+            return true;
+        else
+            return false;
+    }
 
 }
