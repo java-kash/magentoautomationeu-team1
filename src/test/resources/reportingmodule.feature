@@ -87,3 +87,9 @@
         Then Reporting manager at the reports page
         Then Verify products bestsellers reports
 
+
+
+      Scenario: Reporting Manager should be able tol see Tags - Customer Report
+        Given Reporting Manager at the dashboard page
+        When See Tags - Customer Report
+        Then Verify Customer Reports Page

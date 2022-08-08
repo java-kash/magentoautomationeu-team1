@@ -186,4 +186,13 @@ public class ReportingModuleSteps extends TestBase {
     public void verifyProductsBestsellersReports() {
         Assert.assertTrue(bestsellersReport.verifyReportsPage());
     }
+    @When("See Tags - Customer Report")
+    public void seeTagsCustomerReport() {
+        seeTagsPage.viewCustomerReport();
+    }
+
+    @Then("Verify Customer Reports Page")
+    public void verifyCustomerReportsPage() {
+        Assert.assertTrue(seeTagsPage.verifyCustomerReportsPage());
+    }
 }
