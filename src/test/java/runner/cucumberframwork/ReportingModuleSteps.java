@@ -29,6 +29,8 @@ public class ReportingModuleSteps extends TestBase {
     ProductInCartsReport productInCartsReport;
     ProductsMostViewedReportPage productsMostViewedReportPage;
     ProductReviewsReportPage productReviewsReportPage;
+    BestsellersReport bestsellersReport;
+
     @Before("@MagentoReportingModuleTest")
     public void setUp() {
         browserSetUp(url);
@@ -60,6 +62,7 @@ public class ReportingModuleSteps extends TestBase {
         productInCartsReport=new ProductInCartsReport(driver);
         productsMostViewedReportPage=new ProductsMostViewedReportPage(driver);
         productReviewsReportPage=new ProductReviewsReportPage(driver);
+        bestsellersReport = new BestsellersReport(driver);
     }
 
     @When("Reporting manager navigate to sales ordered report page")
@@ -169,4 +172,18 @@ public class ReportingModuleSteps extends TestBase {
         productReviewsReportPage.verifyProductReviewsReport();
     }
 
+    @When("Reporting manager at the bestsellers page")
+    public void reportingManagerAtTheBestsellersPage() {
+        bestsellersReport.showBestsellersPage();
+    }
+
+    @Then("Reporting manager at the reports page")
+    public void reportingManagerAtTheReportsPage() {
+        bestsellersReport.reportsPage();
+    }
+
+    @Then("Verify products bestsellers reports")
+    public void verifyProductsBestsellersReports() {
+        Assert.assertTrue(bestsellersReport.verifyReportsPage());
+    }
 }
