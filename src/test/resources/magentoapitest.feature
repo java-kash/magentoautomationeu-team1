@@ -8,3 +8,12 @@
        |customers|
        |customers|
 
+       Scenario Outline: User should be able to update a customer group
+         Given User should be able to send request for update specific "<customer_Group>" information.
+         Then User should get response '<code>' .
+         Examples:
+        | customer_Group|code|
+         |customergroup/110|    204|
+
+
+
