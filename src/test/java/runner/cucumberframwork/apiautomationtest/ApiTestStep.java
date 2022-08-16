@@ -36,14 +36,14 @@ public class ApiTestStep extends TestBase {
     }
 
     @Given("User should be able to send request for update specific {string} information.")
-    public void userShouldBeAbleToSendRequestForUpdateSpecificCustomer_GroupInformation(String arg0) {
+    public void userShouldBeAbleToSendRequestForUpdateSpecificCustomer_GroupInformation(String groupId) {
         response= RestAssured.given().headers("Content-Type","application/json").and().body(PayloadUtility.getCustomerGroupPayload(110,"Ay_Team1",7))
                 .auth().basic(username,password)
-                .when().put(baseURL+":"+port+"/"+arg0);
+                .when().put(baseURL+":"+port+"/"+groupId);
         System.out.println(response.getBody().prettyPrint());
     }
 
-    @Then("User should get response {string} .")
+    @Then("User should get response {int} .")
     public void userShouldGetResponse(int arg1) {
        Assert.assertEquals(response.getStatusCode(),arg1);
     }
