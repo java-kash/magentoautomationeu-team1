@@ -30,6 +30,7 @@ public class ReportingModuleSteps extends TestBase {
     ProductsMostViewedReportPage productsMostViewedReportPage;
     ProductReviewsReportPage productReviewsReportPage;
     BestsellersReport bestsellersReport;
+    SalesTotalOrdered salesTotalOrdered;
 
     @Before("@MagentoReportingModuleTest")
     public void setUp() {
@@ -63,6 +64,7 @@ public class ReportingModuleSteps extends TestBase {
         productsMostViewedReportPage=new ProductsMostViewedReportPage(driver);
         productReviewsReportPage=new ProductReviewsReportPage(driver);
         bestsellersReport = new BestsellersReport(driver);
+        salesTotalOrdered= new SalesTotalOrdered(driver);
     }
 
     @When("Reporting manager navigate to sales ordered report page")
@@ -194,5 +196,23 @@ public class ReportingModuleSteps extends TestBase {
     @Then("Verify Customer Reports Page")
     public void verifyCustomerReportsPage() {
         Assert.assertTrue(seeTagsPage.verifyCustomerReportsPage());
+    }
+
+
+    @When("Open order page")
+    public void openOrderPage() {
+
+        dashBoard.openOrdersPage();
+    }
+
+    @Then("show oredere reports with dates {string} {string}")
+    public void showOredereReportsWithDates(String arg0, String arg1) {
+
+      salesTotalOrdered.showReports(arg0, arg1);
+    }
+
+    @Then("verify table")
+    public void verifyTable() {
+        Assert.assertTrue(salesTotalOrdered.orderedReportIsVisible());;
     }
 }

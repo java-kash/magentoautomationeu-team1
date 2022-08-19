@@ -93,3 +93,14 @@
         Given Reporting Manager at the dashboard page
         When See Tags - Customer Report
         Then Verify Customer Reports Page
+
+
+    Scenario Outline: Reporting Manager should be able to see  Sales - Total Ordered Report
+      Given Reporting Manager at the dashboard page
+      When  Open order page
+      Then  show oredere reports with dates "<fromDate>" "<toDate>"
+      Then verify table
+
+      Examples:
+        | fromDate   | toDate     |
+        | 01/01/2021 | 01/01/2022 |
