@@ -104,3 +104,13 @@
       Examples:
         | fromDate   | toDate     |
         | 01/01/2021 | 01/01/2022 |
+
+      Scenario Outline:Reporting Manager should be able to see Customers - Customers by number of orders Report
+        Given Reporting Manager at the dashboard page
+        When openCustomersReportPage
+        Then Show the table with dates "<fromDate>" "<toDate>"
+        Then  verify the table
+
+        Examples:
+          | fromDate   | toDate     |
+          | 01/01/2021 | 01/01/2022 |

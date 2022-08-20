@@ -28,7 +28,10 @@ public class ReportingModuleDashBoard {
     WebElement refundsLink;
     @FindBy(xpath = "//span[text()='Dashboard']")
     WebElement dashBoardLink;
-
+    @FindBy(xpath = "(//span[text()='Customers'])[1]")
+    WebElement CustomersLink;
+    @FindBy(xpath = "//span[text()='Customers by number of orders']")
+    WebElement numOfOrdersLink;
 
 
 public void clickOnDashBoardLink(){
@@ -47,7 +50,7 @@ public void clickOnDashBoardLink(){
     }
 
 
-    public void openShowReportPage(){
+    public void openCustomersReportPage(){openTargetPages(reportsLink,CustomersLink,numOfOrdersLink);
 
 
     }
