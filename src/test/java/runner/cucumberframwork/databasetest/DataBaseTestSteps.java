@@ -18,6 +18,7 @@ public class DataBaseTestSteps {
     VerifyAddCustomers verifyAddCustomers;
     VerifyAddedStoreView verifyAddedStoreView;
     VerifyAddedTexRuleAtDB verifyAddedTexRuleAtDB;
+    VerifyAddNewOrder verifyAddNewOrder;
 
 
     @Before
@@ -32,6 +33,7 @@ public class DataBaseTestSteps {
         verifyAddCustomers = new VerifyAddCustomers();
         verifyAddedStoreView = new VerifyAddedStoreView();
         verifyAddedTexRuleAtDB = new VerifyAddedTexRuleAtDB();
+        verifyAddNewOrder= new VerifyAddNewOrder();
     }
 
     @When("is customer exist")
@@ -72,5 +74,17 @@ public class DataBaseTestSteps {
     @Then("Tax rule is visible at database")
     public void taxRuleIsVisibleAtDatabase() {
         Assert.assertTrue(verifyAddedTexRuleAtDB.verifyTexRuleIsAdded());
+    }
+
+    @When("The newly added order is exist")
+    public boolean theNewlyAddedOrderIsExist() {
+        int entity_id= Integer.parseInt(TestBase.readFromConfigProperties(configFile,"entity_id"));
+       boolean OrderExist=verifyAddNewOrder.getOrder(entity_id,connection);
+        return OrderExist;
+    }
+
+    @Then("Verify Newly added order in database server")
+    public void verifyNewlyAddedOrderInDatabaseServer() {
+        Assert.assertTrue(theNewlyAddedOrderIsExist());
     }
 }
