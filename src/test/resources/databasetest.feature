@@ -18,3 +18,10 @@ Feature: Data Base Test
     When I get tax rule information
     Then Tax rule is visible at database
 
+    @VerifyNewlyAddedOrder
+    Scenario: Verify that newly added orders should be in the database
+      Given connect to data base server
+      When The newly added order is exist
+      Then Verify Newly added order in database server
+
+
