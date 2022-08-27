@@ -49,4 +49,14 @@ public class ApiTestStep extends TestBase {
     }
 
 
+
+
+    @Then("User Should be get information about the categories")
+    public void userShouldBeGetInformationAboutTheCategories() {
+
+        int responseCode=response.getStatusCode();
+        Assert.assertEquals(responseCode,200);
+    }
+
+
 }
