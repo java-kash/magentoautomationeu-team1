@@ -25,8 +25,15 @@ Feature: Data Base Test
     Then Verify Newly added order in database server
 
 
+
+
   Scenario: Verify that newly added sub categories should be in the database
     Given connect to data base server
     When I get sub category information
     Then sub category is visible at database
 
+  @VerifyNewlyAddedStock
+  Scenario: verify-that-newly-added-stock-should-be-in-the-database-abdukerim
+    Given connect to data base server
+    When  I Got stock information
+    Then Verify Newly Added stock in database
