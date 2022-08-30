@@ -130,7 +130,6 @@ public class DataBaseTestSteps {
         String rootCategoryName = TestBase.readFromConfigProperties(configFile, "root_category_name");
         verifyAddedRootCategory.getRootCategoryInfo(rootCategoryName, connection);
 
-
     }
     @Then("root category is visible at database")
     public void root_category_is_visible_at_database() {
