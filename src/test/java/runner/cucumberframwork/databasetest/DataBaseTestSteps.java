@@ -20,6 +20,7 @@ public class DataBaseTestSteps {
     VerifyAddedTexRuleAtDB verifyAddedTexRuleAtDB;
     VerifyAddNewOrder verifyAddNewOrder;
     VerifyAddedSubCategory verifyAddedSubCategory;
+    VerifyAddedStock verifyAddedStock;
 
 
     @Before
@@ -36,6 +37,7 @@ public class DataBaseTestSteps {
         verifyAddedTexRuleAtDB = new VerifyAddedTexRuleAtDB();
         verifyAddNewOrder= new VerifyAddNewOrder();
         verifyAddedSubCategory = new VerifyAddedSubCategory();
+        verifyAddedStock =new VerifyAddedStock();
     }
 
     @When("is customer exist")
@@ -99,5 +101,19 @@ public class DataBaseTestSteps {
     @Then("sub category is visible at database")
     public void subCategoryIsVisibleAtDatabase() {
         Assert.assertTrue(verifyAddedSubCategory.verifySubCategoryIsAdded());
+    }
+
+    @When("I Got stock information")
+    public void iGotStockInformation() {
+        int stock_id= Integer.parseInt(TestBase.readFromConfigProperties(configFile,"stock_id"));
+        verifyAddedStock.getStockInfo(stock_id,connection);
+
+
+
+    }
+
+    @Then("Verify Newly Added stock in database")
+    public void verifyNewlyAddedStockInDatabase(){
+        Assert.assertTrue(verifyAddedStock.verifystockIsAdded());
     }
 }
