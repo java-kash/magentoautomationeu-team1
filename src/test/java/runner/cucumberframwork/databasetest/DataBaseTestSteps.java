@@ -127,7 +127,7 @@ public class DataBaseTestSteps {
 
     @When("I get root category information")
     public void i_get_root_category_information() {
-        String rootCategoryName = TestBase.readFromConfigProperties(configFile, "sub_category_name");
+        String rootCategoryName = TestBase.readFromConfigProperties(configFile, "root_category_name");
         verifyAddedRootCategory.getRootCategoryInfo(rootCategoryName, connection);
 
 
