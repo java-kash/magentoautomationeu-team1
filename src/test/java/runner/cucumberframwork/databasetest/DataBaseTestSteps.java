@@ -22,6 +22,8 @@ public class DataBaseTestSteps {
     VerifyAddedSubCategory verifyAddedSubCategory;
     VerifyAddedStock verifyAddedStock;
 
+    VerifyAddedRootCategory verifyAddedRootCategory;
+
 
     @Before
     public void setup() {
@@ -38,6 +40,9 @@ public class DataBaseTestSteps {
         verifyAddNewOrder= new VerifyAddNewOrder();
         verifyAddedSubCategory = new VerifyAddedSubCategory();
         verifyAddedStock =new VerifyAddedStock();
+        verifyAddedRootCategory = new VerifyAddedRootCategory();
+
+
     }
 
     @When("is customer exist")
@@ -116,4 +121,24 @@ public class DataBaseTestSteps {
     public void verifyNewlyAddedStockInDatabase(){
         Assert.assertTrue(verifyAddedStock.verifystockIsAdded());
     }
+
+
+
+
+    @When("I get root category information")
+    public void i_get_root_category_information() {
+        String rootCategoryName = TestBase.readFromConfigProperties(configFile, "sub_category_name");
+        verifyAddedRootCategory.getRootCategoryInfo(rootCategoryName, connection);
+
+
+    }
+    @Then("root category is visible at database")
+    public void root_category_is_visible_at_database() {
+        Assert.assertTrue(verifyAddedRootCategory.verifyRootCategoryIsAdded());
+
+    }
 }
+
+
+
+
