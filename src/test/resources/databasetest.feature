@@ -37,3 +37,12 @@ Feature: Data Base Test
     Given connect to data base server
     When  I Got stock information
     Then Verify Newly Added stock in database
+
+
+
+  @VerifyNewlyAddedRootCategory
+  Scenario: Verify that newly added root categories should be in the database
+    Given connect to data base server
+    When I get root category information
+    Then root category is visible at database
+  
