@@ -17,14 +17,21 @@ Feature: Get Post Put request Api Test For Magento Application controller
       | customergroup/110 | 204  |
 
 
- @GetAllCategories
- Scenario Outline: User should be able to Get All Categories information
-   Given User Should be able Get Request information
-   When User Should be able to send request get"<categories>" information
-   Then User Should be get information about the categories
-   Examples:
-     | categories |
-     | categories |
+  @GetAllCategories
+  Scenario Outline: User should be able to Get All Categories information
+    Given User Should be able Get Request information
+    When User Should be able to send request get"<categories>" information
+    Examples:
+      | categories |
+      | categories |
+
+  Scenario Outline: User should be able to create a customer group
+    Given User should be able to create a customer group
+    When User sends request for create a customer group
+    Then User should get response <status>
+    Examples:
+      | status |
+      | 200    |
 
 
 
